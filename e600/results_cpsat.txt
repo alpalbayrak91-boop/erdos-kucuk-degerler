@@ -1,0 +1,8 @@
+n=3 status=OPTIMAL T=1 bound=1 edges=3 e(n,2)=4 verified=True time=0.0s sol=[(0, 1, 2)]
+n=4 status=OPTIMAL T=1 bound=1 edges=3 e(n,2)=4 verified=True time=0.0s sol=[(0, 1, 2)]
+n=5 status=OPTIMAL T=2 bound=2 edges=6 e(n,2)=7 verified=True time=0.0s sol=[(0, 1, 2), (0, 3, 4)]
+n=6 status=OPTIMAL T=2 bound=2 edges=6 e(n,2)=7 verified=True time=0.0s sol=[(0, 1, 2), (0, 4, 5)]
+n=7 status=OPTIMAL T=3 bound=3 edges=9 e(n,2)=10 verified=True time=0.0s sol=[(0, 1, 2), (2, 3, 4), (4, 5, 6)]
+n=8 status=OPTIMAL T=4 bound=4 edges=12 e(n,2)=13 verified=True time=0.0s sol=[(0, 1, 2), (0, 3, 6), (2, 5, 7), (4, 6, 7)]
+n=9 status=OPTIMAL T=6 bound=6 edges=18 e(n,2)=19 verified=True time=0.1s sol=[(0, 1, 2), (0, 5, 6), (1, 4, 7), (2, 3, 8), (3, 4, 5), (6, 7, 8)]
+n=10 status=OPTIMAL T=6 bound=6 edges=18 e(n,2)=19 verified=True time=0.7s sol=[(0, 1, 2), (0, 8, 9), (1, 5, 7), (2, 4, 6), (3, 5, 6), (4, 7, 9)]
