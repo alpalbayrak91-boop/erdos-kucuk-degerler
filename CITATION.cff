@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use these values or scripts, please cite them as below."
+title: "Small values of Erdős problems (#600, #642, #934, #983): data and scripts"
+type: software
+authors:
+  - family-names: Albayrak
+    given-names: Alp
+    # orcid: "https://orcid.org/0000-0000-0000-0000"   # <- Alp's real ORCID iD
+version: "1.0.0"
+date-released: "2026-11-23"
+license: MIT
+repository-code: "https://github.com/alpalbayrak91-boop/erdos-kucuk-degerler"
+# doi: "10.5281/zenodo.XXXXXXX"   # <- add the concept DOI Zenodo assigns after the first GitHub release
+keywords:
+  - Erdős problems
+  - Ruzsa–Szemerédi problem
+  - locally linear graphs
+  - extremal graph theory
+  - integer sequences
+abstract: >-
+  Exact small values for several problems from erdosproblems.com, with self-contained
+  scripts. For problem #600, e(n,2) = 3T(n)+1 for n = 3..14, where T(n) is the maximum
+  number of triangles in an n-vertex graph in which every edge lies in exactly one triangle.
+  Computations were assisted by AI agents; all values were re-checked by an independent
+  exact solver (see README, "Method and AI disclosure").
