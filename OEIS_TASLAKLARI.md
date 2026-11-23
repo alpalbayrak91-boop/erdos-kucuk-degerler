@@ -1,5 +1,7 @@
 # OEIS gönderim taslakları
 
+> Superseded for #600 by [`e600/THEORY.md`](e600/THEORY.md) (values up to n=14) and OEIS draft [A400028](https://oeis.org/draft/A400028).
+
 OEIS'e gönderim, kayıtlı bir OEIS hesabıyla (oeis.org/Submit.html) elle yapılır. Aşağıdaki metinler
 oraya yapıştırılmak için hazır. Göndermeden önce her diziyi oeis.org'da son kez arayın: buradaki kontrol
 Ocak 2026 kesitine karşı yapıldı.

@@ -1,5 +1,7 @@
 # erdosproblems.com forum taslakları (gönderim Alp'te)
 
+> Superseded for #600 by [`e600/THEORY.md`](e600/THEORY.md) (values up to n=14) and OEIS draft [A400028](https://oeis.org/draft/A400028).
+
 ## #642
 Small values, by exhaustive search over all graphs on n vertices (Python script linked): f(n) for n = 0..7 is
 0, 0, 1, 3, 6, 9, 11, 14. Code and method: https://github.com/alpalbayrak91-boop/erdos-kucuk-degerler
