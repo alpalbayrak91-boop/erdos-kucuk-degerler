@@ -10,7 +10,11 @@ version: "1.0.0"
 date-released: "2026-11-23"
 license: MIT
 repository-code: "https://github.com/alpalbayrak91-boop/erdos-kucuk-degerler"
-# doi: "10.5281/zenodo.XXXXXXX"   # <- add the concept DOI Zenodo assigns after the first GitHub release
+doi: "10.5281/zenodo.24457110"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24457110"
+    description: "Zenodo DOI for release v1.0.0."
 keywords:
   - Erdős problems
   - Ruzsa–Szemerédi problem

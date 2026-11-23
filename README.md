@@ -1,5 +1,7 @@
 # Erdős problemleri — küçük değerler (AlpLab)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24457110.svg)](https://doi.org/10.5281/zenodo.24457110)
+
 Bu depo, [erdosproblems.com](https://www.erdosproblems.com) problemlerinin
 [google-deepmind/formal-conjectures](https://github.com/google-deepmind/formal-conjectures)
 deposundaki Lean tanımlarına göre hesapladığımız küçük değerleri yayımlar. Her sayı kaba kuvvetle
@@ -65,7 +67,7 @@ Hazırlayan: AlpLab (Alp Albayrak) — hesaplar Claude ve Gemini ajanlarıyla, d
 - n = 10..13: CP-SAT (OR-tools) proved optimality (`e600/cpsat_T.py`); every witness graph is re-checked (its triangles are exactly the chosen triples).
 - n = 14: CP-SAT found a witness with 12 triangles; optimality follows from the elementary bound T(n) ≤ ⌊n·⌊(n+3)/2⌋/9⌋ (proof in `e600/THEORY.md`), which equals 12 at n = 14.
 - n = 3..10 agree with the independent table in the [Erdős Problem a Day report #600](https://erdosproblemaday.com/report/600) (July 2026). n = 11..14 are new here.
-- OEIS: no match for T(n), 3T(n) or e(n,2) on oeis.org (searched 22 Nov 2026).
+- OEIS: draft [A400028](https://oeis.org/draft/A400028), status: submitted for editor review. No match for T(n), 3T(n) or e(n,2) on oeis.org when searched on 22 Nov 2026.
 
 **Method and AI disclosure.** The computations, scripts and texts were produced with the help of AI agents (Claude, Gemini, Grok Bot); Alp Albayrak is responsible for the content.
 
@@ -77,6 +79,6 @@ Hazırlayan: AlpLab (Alp Albayrak) — hesaplar Claude ve Gemini ajanlarıyla, d
 
 (Tablo yukarıdakiyle aynı.)
 
-**Nasıl doğrulandı:** n ≤ 9 kaba kuvvet ve ayrı bir CP-SAT modeli; n = 10–13 CP-SAT en iyilik kanıtı; n = 14 için 12 üçgenli örnek + basit üst sınır T(n) ≤ ⌊n·⌊(n+3)/2⌋/9⌋ = 12. n = 3–10 değerleri Temmuz 2026 tarihli bağımsız raporla aynı; n = 11–14 burada ilk kez veriliyor. OEIS'te eşleşme yok (22 Kasım 2026).
+**Nasıl doğrulandı:** n ≤ 9 kaba kuvvet ve ayrı bir CP-SAT modeli; n = 10–13 CP-SAT en iyilik kanıtı; n = 14 için 12 üçgenli örnek + basit üst sınır T(n) ≤ ⌊n·⌊(n+3)/2⌋/9⌋ = 12. n = 3–10 değerleri Temmuz 2026 tarihli bağımsız raporla aynı; n = 11–14 burada ilk kez veriliyor. OEIS taslağı [A400028](https://oeis.org/draft/A400028), durum: editör incelemesine gönderildi (submitted for editor review). 22 Kasım 2026 aramasında eşleşme yoktu.
 
 **Yapay zekâ beyanı.** Hesaplar, betikler ve metinler yapay zekâ ajanlarının yardımıyla üretildi; sorumluluğu Alp Albayrak'a aittir.
