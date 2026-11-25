@@ -1,3 +1,12 @@
+"""OEIS A400041 — Erdos Problem #642 (Hamburger and Szegedy).
+
+a(n) = maximum number of edges in a simple graph on n vertices in which
+every simple cycle has strictly more vertices than chords.
+Exact values for n = 0..7: 0, 0, 1, 3, 6, 9, 11, 14 (extended to n = 8..9 -> 17, 20 in e642/).
+Usage:
+  python3 betikler/e642_kaba_kuvvet.py          # prints n=0..6 quickly
+  python3 betikler/e642_kaba_kuvvet.py 0 8      # prints n=0..7
+"""
 import itertools, sys
 def cycles(n, adj):
     # enumerate simple cycles (as vertex lists) with smallest vertex first, direction canonical
@@ -24,5 +33,8 @@ def f(n):
         for E in itertools.combinations(allE,m):
             if ok(n,E): return m
     return 0
-for n in range(int(sys.argv[1]), int(sys.argv[2])):
-    print(n, f(n), flush=True)
+if __name__ == "__main__":
+    lo = int(sys.argv[1]) if len(sys.argv) > 1 else 0
+    hi = int(sys.argv[2]) if len(sys.argv) > 2 else 7
+    for n in range(lo, hi):
+        print(n, f(n), flush=True)
