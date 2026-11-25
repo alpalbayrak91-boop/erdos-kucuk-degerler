@@ -1,0 +1,79 @@
+{
+  "problem": 642,
+  "definition": "FormalConjectures/ErdosProblems/642.lean (Erdos642.maxEdges)",
+  "n_range": [0, 9],
+  "f_seq_0_to_9": [0, 0, 1, 3, 6, 9, 11, 14, 17, 20],
+  "f_seq_2_to_9": [1, 3, 6, 9, 11, 14, 17, 20],
+  "witnesses": [
+    {
+      "n": 0,
+      "f_n": 0,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_0",
+      "edges": []
+    },
+    {
+      "n": 1,
+      "f_n": 0,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_1",
+      "edges": []
+    },
+    {
+      "n": 2,
+      "f_n": 1,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_2",
+      "edges": [[0, 1]]
+    },
+    {
+      "n": 3,
+      "f_n": 3,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_3",
+      "edges": [[0, 1], [0, 2], [1, 2]]
+    },
+    {
+      "n": 4,
+      "f_n": 6,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_4",
+      "edges": [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]]
+    },
+    {
+      "n": 5,
+      "f_n": 9,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_5 - e (equivalently K_2 + K_3)",
+      "edges": [[0, 2], [0, 3], [0, 4], [1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]
+    },
+    {
+      "n": 6,
+      "f_n": 11,
+      "unlabeled_optimal_count": 8,
+      "structure": "One of 8 non-isomorphic 11-edge extremal graphs (K_{3,3} + P_3 also attains 11)",
+      "edges": [[0, 1], [0, 2], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 4], [3, 5], [4, 5]]
+    },
+    {
+      "n": 7,
+      "f_n": 14,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_{4,3} + P_3 (unique up to isomorphism)",
+      "edges": [[0, 4], [0, 5], [0, 6], [1, 4], [1, 5], [1, 6], [2, 4], [2, 5], [2, 6], [3, 4], [3, 5], [3, 6], [4, 6], [5, 6]]
+    },
+    {
+      "n": 8,
+      "f_n": 17,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_{5,3} + P_3 (unique up to isomorphism)",
+      "edges": [[0, 5], [0, 6], [0, 7], [1, 5], [1, 6], [1, 7], [2, 5], [2, 6], [2, 7], [3, 5], [3, 6], [3, 7], [4, 5], [4, 6], [4, 7], [5, 7], [6, 7]]
+    },
+    {
+      "n": 9,
+      "f_n": 20,
+      "unlabeled_optimal_count": 1,
+      "structure": "K_{6,3} + P_3 (unique up to isomorphism)",
+      "edges": [[0, 6], [0, 7], [0, 8], [1, 6], [1, 7], [1, 8], [2, 6], [2, 7], [2, 8], [3, 6], [3, 7], [3, 8], [4, 6], [4, 7], [4, 8], [5, 6], [5, 7], [5, 8], [6, 8], [7, 8]]
+    }
+  ]
+}

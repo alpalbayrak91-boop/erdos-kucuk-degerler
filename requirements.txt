@@ -1,2 +1,4 @@
 ortools
 networkx
+z3-solver
+pytest

@@ -1,0 +1,25 @@
+{
+  "title": "Small values of Erdős problems (#600, #642, #934, #983) and even-cycle-free extremal audit (A032766 vs A380408): data, solvers, and Lean 4 proofs",
+  "version": "1.1.0",
+  "upload_type": "software",
+  "publication_date": "2026-11-25",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Albayrak, Alp"
+    }
+  ],
+  "keywords": [
+    "Erdős problems",
+    "extremal graph theory",
+    "Ruzsa-Szemerédi problem",
+    "locally linear graphs",
+    "cycles with chords",
+    "smooth numbers",
+    "Z3 SMT solver",
+    "Lean 4",
+    "OEIS",
+    "integer sequences"
+  ],
+  "description": "Exact small-n values, explicit combinatorial witnesses, exact solvers (C canonical enumeration, OR-Tools CP-SAT, Z3 CEGAR, pure Python), and standalone Lean 4 proofs for problems from erdosproblems.com aligned with google-deepmind/formal-conjectures: #600 (n <= 14), #642 (n <= 9), #934 (t = 2), #983 (n <= 46), plus a formal Lean 4 audit of even-cycle-free extremal edge counts (OEIS A032766) disambiguated from OEIS A380408 and Erdős #151."
+}

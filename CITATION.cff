@@ -1,13 +1,13 @@
 cff-version: 1.2.0
-message: "If you use these values or scripts, please cite them as below."
-title: "Small values of Erdős problems (#600, #642, #934, #983): data and scripts"
+message: "If you use these values, witnesses, or scripts, please cite them as below."
+title: "Small values of Erdős problems (#600, #642, #934, #983) and A032766/A380408 Lean 4 audit: data and scripts"
 type: software
 authors:
   - family-names: Albayrak
     given-names: Alp
     # orcid: "https://orcid.org/0000-0000-0000-0000"   # <- Alp's real ORCID iD
-version: "1.0.0"
-date-released: "2026-11-23"
+version: "1.1.0"
+date-released: "2026-11-25"
 license: MIT
 repository-code: "https://github.com/alpalbayrak91-boop/erdos-kucuk-degerler"
 doi: "10.5281/zenodo.24457110"
@@ -20,10 +20,16 @@ keywords:
   - Ruzsa–Szemerédi problem
   - locally linear graphs
   - extremal graph theory
+  - cycles with chords
+  - Z3 SMT solver
+  - Lean 4
   - integer sequences
 abstract: >-
-  Exact small values for several problems from erdosproblems.com, with self-contained
-  scripts. For problem #600, e(n,2) = 3T(n)+1 for n = 3..14, where T(n) is the maximum
-  number of triangles in an n-vertex graph in which every edge lies in exactly one triangle.
-  Computations were assisted by AI agents; all values were re-checked by an independent
-  exact solver (see README, "Method and AI disclosure").
+  Exact small values, certified witnesses, and self-contained verification suites for several
+  problems from erdosproblems.com aligned with google-deepmind/formal-conjectures: #600 (e(n,2)
+  for n = 3..14 via CP-SAT), #642 (f(n) for n = 0..9 via canonical graph enumeration and
+  branch-and-bound, with general 3n - 7 lower bound), #934 (t = 2 closed form), #983
+  (f(pi(n)+1, n) for n = 2..46 via Z3 CEGAR under both |S| <= r and |S| == r), and a standalone
+  Lean 4 audit of even-cycle-free extremal edge counts (floor(3(n-1)/2) = OEIS A032766,
+  diverging from A380408 at index 24 and disambiguated from Erdős #151). Computations were
+  assisted by AI agents; all values are checked by independent verifiers.
