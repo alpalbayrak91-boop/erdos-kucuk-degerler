@@ -18,7 +18,7 @@ deposundaki Lean tanımlarına göre hesapladığımız küçük değerleri yay�
 | #600 | T(n), n = 3..14 | 1, 1, 2, 2, 3, 4, 6, 6, 7, 9, 10, 12 | Hesaplandı | Aynı bölüm (`e600/results_cpsat.txt`, `e600/results_cpsat_11plus.txt`) |
 | [#642](https://www.erdosproblems.com/642) | f(n), n = 0..7 | 0, 0, 1, 3, 6, 9, 11, 14 | Hesaplandı | Tüm graflar; her döngüde köşe sayısı > kiriş sayısı. `e642_kaba_kuvvet.py` |
 | [#934](https://www.erdosproblems.com/934) | h₂(d) − 1, d = 1..12 | 1, 5, 10, 20, 29, 45, 58, 80, 97, 125, 146, 180 | Bilinen teorem | t = 2 hâli indüklenmiş 2K₂ içermeyen graflardır; kapalı form Chung–Gyárfás–Tuza–Trotter (1990). d ≤ 8 ayrıca ajan hesaplarıyla tutarlı. `e934_cgtt.py` |
-| [#983](https://www.erdosproblems.com/983) | f(π(n)+1, n), n = 2..16 | 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4 | Hesaplandı | Tüm k-alt kümeler × tüm asal kümeleri. Lean tanımında 1 her S için sayılır, bu yüzden n = 2, 3 için değer 0. `e983_kaba_kuvvet.py` |
+| [#983](https://www.erdosproblems.com/983) | f(π(n)+1, n), n = 2..22 | 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5 | Hesaplandı | `python3 betikler/e983_sabit_r.py 22` her r için bütün A kümelerini sınar. Asal kümesi S, A’ya göre değişebilir ve tam r elemanlıdır. 1 her S için sayılır. |
 
 ### Kısmi / açık
 
@@ -45,7 +45,7 @@ Gönderim taslakları: [`OEIS_TASLAKLARI.md`](OEIS_TASLAKLARI.md).
 
 Small values of several Erdős problems, computed by exhaustive search against the Lean definitions in
 google-deepmind/formal-conjectures. #600: e(n,2) for n = 3..14 (section below; scripts in `e600/`). #642: f(n) for n = 0..7.
-#983: f(π(n)+1, n) for n = 2..16 (note f = 0 for n = 2, 3 since 1 is S-smooth for every S).
+#983: f(π(n)+1, n) for n = 2..22 (note f = 0 for n = 2, 3 since 1 is S-smooth for every S).
 #934 (t = 2) follows the Chung–Gyárfás–Tuza–Trotter closed form and is listed for completeness.
 #600 (T(n), 3T(n), e(n,2)) had no match on oeis.org (searched 22 Nov 2026). The other sequences were not found in the January 2026 OEIS snapshot. Scripts are self-contained.
 
