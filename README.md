@@ -121,4 +121,10 @@ Exact prime-covering thresholds $f(\pi(n)+1, n)$ (`Erdos983.f` in `formal-conjec
 
 [`formal/Erdos151EvenCycleA032766Audit.lean`](formal/Erdos151EvenCycleA032766Audit.lean) and [`e151_audit/THEORY.md`](e151_audit/THEORY.md) formally verify that even-cycle-free $n$-vertex simple graphs have maximum edge count $\lfloor 3(n-1)/2 \rfloor$ (`0, 1, 3, 4, 6, 7, 9, 10` for $n = 1 \dots 8$), prove exact bijection with OEIS `A032766`, prove that OEIS `A380408` diverges from `A032766` at 0-based index 24 (`37 != 36`), and explicitly separate this extremal cycle formula from the open Erdős–Gallai–Tuza clique transversal conjecture ([Erdős #151](https://www.erdosproblems.com/151)).
 
+---
+
+## Erdős #1033 — `variants.three_halves` Disproof (`n = 23`)
+
+[`e1033/Erdos1033ThreeHalves.lean`](e1033/Erdos1033ThreeHalves.lean) formally disproves `erdos_1033.variants.three_halves` in Lean `v4.33.1` (`lean --trust=0` and C++ `leanchecker`, standard axioms `[Classical.choice, Quot.sound, propext]`, `0 sorry`, `0 native_decide`) via the explicit `n = 23` Erdős–Laskar graph `G23` (`|A| = 9` independent set, `|B| = 14` 7-edge perfect matching, complete bipartite edges between `A` and `B`, `133` total edges, `4 * 133 = 532 > 529 = 23^2`, max triangle degree sum `34`, `2 * 34 = 68 < 69 = 3 * 23`). Standalone exhaustive verification over all `C(23, 3) = 1771` triples (`63` triangles) is in [`e1033/verify_erdos1033_n23.py`](e1033/verify_erdos1033_n23.py).
+
 **Yapay zekâ beyanı.** Hesaplar, betikler ve metinler yapay zekâ ajanlarının yardımıyla üretildi; sorumluluğu Alp Albayrak'a aittir.
