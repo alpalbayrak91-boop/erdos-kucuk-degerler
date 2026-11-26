@@ -24,6 +24,12 @@ degree d <= floor(2m/n); deleting it leaves a valid (n-1)-vertex graph with m-d 
 - witnesses K_{3,n-3} plus a path P_3 on the 3-side: 23 edges (n=10) and 26 edges (n=11), both valid.
 Independently confirmed by a separate exhaustive search (min-degree vertex deletion). Run time ~13 s.
 
+### a(12) = 29 (ladder, `a400041_merdiven.py 12`)
+Generalised vertex extension: V[n][m] = all valid graphs (up to isomorphism, `nauty-labelg`) with n vertices, m edges,
+built from V[n-1][m-d] for every d <= floor(2m/n). Measured: V[9][17..20] = 22016, 247, 12, 1; V[10][21..24] = 287, 12, 1, 0;
+V[11][25..27] = 12, 1, 0; V[12][30] = 0. So a(12) <= 29, and K_{3,9} + P_3 (29 edges) is valid, hence a(12) = 29.
+The data are consistent with a(n) = 3n - 7 for 8 <= n <= 12 (observation only, not proved).
+
 ## A400042 (Erdős #983): terms for n = 2..28
 `betikler/e983_kaba_kuvvet.py 28` (exhaustive search) agrees term by term with the Z3 computation in
 `e983/e983_exact_46.json` for n = 2..28:
