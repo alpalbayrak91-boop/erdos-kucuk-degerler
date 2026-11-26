@@ -1,0 +1,53 @@
+# Erdos #642 core checks (26 Nov 2026). Tools: nauty geng/labelg, core/good_check.c.
+# Command per row: geng -q -d4 n (3n-7):(3n-7) | good_check -q   (min degree >= 4, exactly 3n-7 edges)
+# base: all graphs on 7 vertices with 14 and 15 edges
+total=65 good=1
+total=41 good=0
+# Core(8): min degree >= 4, exactly 17 edges
+total=24 good=0
+# Lemma 2 at n=8: degree-3 and degree-4 extensions of the extremal graph on 7 vertices
+good degree-3 extensions up to isomorphism: 1
+total=35 good=0
+# Core(9): min degree >= 4, exactly 20 edges
+total=714 good=0
+# Lemma 2 at n=9: degree-3 and degree-4 extensions of the extremal graph on 8 vertices
+good degree-3 extensions up to isomorphism: 1
+total=70 good=0
+# Core(10): min degree >= 4, exactly 23 edges
+total=35225 good=0
+# Lemma 2 at n=10: degree-3 and degree-4 extensions of the extremal graph on 9 vertices
+good degree-3 extensions up to isomorphism: 1
+total=126 good=0
+# Core(11): min degree >= 4, exactly 26 edges
+total=2505044 good=0
+# Lemma 2 at n=11: degree-3 and degree-4 extensions of the extremal graph on 10 vertices
+good degree-3 extensions up to isomorphism: 1
+total=210 good=0
+# Core(12): min degree >= 4, exactly 29 edges (geng split into 4 residue classes)
+r=0/4 total=65395275 good=0
+r=1/4 total=57424185 good=0
+r=2/4 total=59591931 good=0
+r=3/4 total=51340087 good=0
+sum: total=233751478 good=0
+# cross-check: 5-regular graphs on 12 vertices (geng -d5 -D5 12 30:30)
+total=7849 good=0
+# cross-check: min degree >= 4 with 3n-6 edges
+n=9 e=21 total=1754 good=0
+n=10 e=24 total=87016 good=0
+n=11 e=27 total=6383349 good=0
+n=12 e=30 total=625721423 good=0
+# all good graphs with min degree >= 4, by edge count
+n=9 e=18 total=16 good=0
+n=9 e=19 total=154 good=0
+n=10 e=20 total=60 good=0
+n=10 e=21 total=1188 good=0
+n=10 e=22 total=9005 good=0
+n=11 e=22 total=266 good=1   (J?ouPjI{@i?)
+n=11 e=23 total=10398 good=0
+n=11 e=24 total=121011 good=0
+n=11 e=25 total=696229 good=0
+n=12 e=24 total=1547 good=2   (K?b@`cr]EWX_  KCOcbQUdbWLG)
+n=12 e=25 total=102026 good=0
+n=12 e=26 total=1687824 good=0
+n=12 e=27 total=13461855 good=0
+n=12 e=28 total=66707786 good=0
