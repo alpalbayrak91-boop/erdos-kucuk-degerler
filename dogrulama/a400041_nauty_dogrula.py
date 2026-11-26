@@ -28,11 +28,12 @@ def ok(n,adj):
                 elif w>s and w not in seen:
                     stack.append((w,path+[w],seen|{w}))
     return True
-n=int(sys.argv[1]); m=int(sys.argv[2])
-p=subprocess.Popen(['nauty-geng','-q',str(n),f'{m}:{m}'],stdout=subprocess.PIPE,text=True)
-toplam=gecen=0
-for line in p.stdout:
-    toplam+=1
-    nn,adj=g6_decode(line)
-    if ok(nn,adj): gecen+=1
-print(f"n={n} m={m} graf={toplam} gecen={gecen}", flush=True)
+if __name__ == "__main__":
+    n=int(sys.argv[1]); m=int(sys.argv[2])
+    p=subprocess.Popen(['nauty-geng','-q',str(n),f'{m}:{m}'],stdout=subprocess.PIPE,text=True)
+    toplam=gecen=0
+    for line in p.stdout:
+        toplam+=1
+        nn,adj=g6_decode(line)
+        if ok(nn,adj): gecen+=1
+    print(f"n={n} m={m} graf={toplam} gecen={gecen}", flush=True)
