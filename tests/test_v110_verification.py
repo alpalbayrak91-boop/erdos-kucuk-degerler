@@ -126,14 +126,23 @@ def test_e151_even_cycle_audit_and_lean4_proof() -> None:
 
     lean_bin = shutil.which("lean") or str(Path.home() / ".elan" / "bin" / "lean")
     assert Path(lean_bin).exists(), f"Lean 4 binary not found at {lean_bin}"
-    proc = subprocess.run(
-        [lean_bin, "--trust=0", str(lean_file)],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    assert proc.returncode == 0, proc.stdout + proc.stderr
-    assert "sorryAx" not in proc.stdout
+    for lf in (
+        lean_file,
+        ROOT / "formal" / "Erdos23BlowupPositivstellensatz.lean",
+    ):
+        lsrc = lf.read_text(encoding="utf-8")
+        nb = re.sub(r"/-.*?-/", "", lsrc, flags=re.DOTALL)
+        nc = re.sub(r"--.*$", "", nb, flags=re.MULTILINE)
+        assert re.search(r"\bsorry\b", nc) is None
+        assert re.search(r"\baxiom\b", nc) is None
+        proc = subprocess.run(
+            [lean_bin, "--trust=0", str(lf)],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert proc.returncode == 0, proc.stdout + proc.stderr
+        assert "sorryAx" not in proc.stdout
 
 
 def test_metadata_and_opsec_cleanliness() -> None:

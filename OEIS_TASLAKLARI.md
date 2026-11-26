@@ -1,16 +1,16 @@
-# OEIS Gönderim Durumu ve Düzeltilmiş Taslaklar (25 Kasım 2026)
+# OEIS Gönderim Durumu ve Onay Kuyruğu (26 Kasım 2026)
 
-OEIS Style Sheet kuralı uyarınca `LINKS` satırları **yazar soyadına göre alfabetik** (`Albayrak` -> `Bloom` -> `Wikipedia`) sıralanmıştır. Canlı durumlar `alplab_dis_basvuru_ve_oeis_bekcisi.py` tarafından otomatik izlenir.
+OEIS Style Sheet kuralı uyarınca `LINKS` satırları **yazar soyadına göre alfabetik** (`Albayrak` -> `Bloom` -> `Wikipedia`) sıralanmış ve `CROSSREFS` karşılıklı bağlantıları eklenmiştir. Canlı durumlar `alplab_dis_basvuru_ve_oeis_bekcisi.py` tarafından otomatik izlenir.
 
 ---
 
-## Canlı OEIS Taslak Durumu (25 Kasım 2026)
+## Canlı OEIS Taslak Durumu (26 Kasım 2026 — 3/3 `proposed`)
 
 | Dizi | Erdős Problemi | Durum | Editör Yorumu & Yapılacak İşlem |
 |---|---|---|---|
 | **[A400028](https://oeis.org/draft/A400028)** | **#600** (`r=2`, `T(n)`, `n=0..14`) | **`proposed`** (İncelemede) | Jason Yuen (24 Kas) `Szemerédi` aksanlarını düzeltti ve `proposed` kuyruğuna aldı. **Dokunma — yayına hazır.** |
-| **[A400041](https://oeis.org/draft/A400041)** | **#642** (Hamburger–Szegedy) | **`editing`** (45 sn Düzeltme) | Sean A. Irvine (24 Kas): `"Links needs to be alphabetical"`. Aşağıdaki `LINKS` bloğunu yapıştırıp `Submit changes for review` tıkla. |
-| **[A400042](https://oeis.org/draft/A400042)** | **#983** (Erdős–Straus) | **`editing`** (45 sn Düzeltme) | Sean A. Irvine (24 Kas): `"Links needs to be alphabetical"`. Aşağıdaki `LINKS` bloğunu yapıştırıp `Submit changes for review` tıkla. |
+| **[A400041](https://oeis.org/draft/A400041)** | **#642** (Hamburger–Szegedy) | **`proposed`** (İncelemede) | Sean A. Irvine alfabetik `LINKS` + Stefano Spezia `CROSSREFS` düzeltmeleri tamamlanıp `proposed` kuyruğuna alındı. **Dokunma — yayına hazır.** |
+| **[A400042](https://oeis.org/draft/A400042)** | **#983** (Erdős–Straus) | **`proposed`** (İncelemede) | Sean A. Irvine alfabetik `LINKS` + Stefano Spezia `CROSSREFS` düzeltmeleri tamamlanıp `proposed` kuyruğuna alındı. **Dokunma — yayına hazır.** |
 
 ---
 

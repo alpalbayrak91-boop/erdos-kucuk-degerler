@@ -20,6 +20,7 @@ doğrulama betiklerini yayımlar (`v1.1.0`). Betikler `betikler/`, `e600/`, `e64
 | [#934](https://www.erdosproblems.com/934) | h₂(d) − 1, d = 1..12 | 1, 5, 10, 20, 29, 45, 58, 80, 97, 125, 146, 180 | Bilinen teorem | t = 2 hâli indüklenmiş 2K₂ içermeyen graflardır; kapalı form Chung–Gyárfás–Tuza–Trotter (1990). `betikler/e934_cgtt.py` |
 | [#983](https://www.erdosproblems.com/983) | f(π(n)+1, n), n = 2..46 | 0, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4(×7), 5(×13), 6(×12) | Hesaplandı | Z3 CEGAR (`n = 2..46`, hem $\|S\| \le r$ hem $\|S\| = r$ tanımlarında özdeş) + kaba kuvvet çapraz kontrolü (`n = 2..16`). `e983/e983_exact_z3.py`, `e983/e983_exact_46.json`, `e983/THEORY.md`, `betikler/e983_kaba_kuvvet.py` |
 | Denetim (OEIS `A032766` vs `A380408`; #151'den ayrım) | $\mathrm{ex}(n, \{C_{2k}\})$, n = 1..8 | 0, 1, 3, 4, 6, 7, 9, 10 (`⌊3(n−1)/2⌋`) | Bilinen teorem + Lean 4 kanıtı | Çift döngü içermeyen grafların ekstremal kenar sayısı = OEIS `A032766`; `A380408` dizisinden indis 24'te (`37 ≠ 36`) ayrılır ve Erdős–Gallai–Tuza klik kesen sanısından (#151) farklı bir problemdir. `formal/Erdos151EvenCycleA032766Audit.lean`, `e151_audit/THEORY.md` |
+| [#23](https://www.erdosproblems.com/23) | C₅[n] sıkılık + n = 1 | b_Δ(5) = 1; her n ≥ 1 için ≥ n² | Lean 4 kanıtı (`--trust=0`) | 5 köşeli tüm üçgensiz graflar (1024 graf simetri indirgemesi) + her n ≥ 1 için dengeli C₅[n] şişirmesinde kesilmesi gereken kenar sayısının en az n² olduğunun 3. derece Positivstellensatz cebirsel kanıtı. `formal/Erdos23BlowupPositivstellensatz.lean` |
 
 ### Kısmi / açık
 
@@ -51,6 +52,7 @@ Exact small values, explicit combinatorial witnesses, and machine-checked audits
 - **#983** (`e983/`): $f(\pi(n)+1, n)$ for $n = 2 \dots 46$ via Z3 CEGAR (`e983/e983_exact_z3.py`, `e983/e983_exact_46.json`), verifying exact agreement between $|S| \le r$ and $|S| = r$ across $2 \le n \le 46$ and cross-checked against brute force on $n = 2 \dots 16$.
 - **#934** (`betikler/e934_cgtt.py`): $t = 2$ closed form of Chung–Gyárfás–Tuza–Trotter (1990), listed for completeness.
 - **Even-Cycle-Free Audit (`e151_audit/`, `formal/Erdos151EvenCycleA032766Audit.lean`)**: Standalone Lean 4 (`lean --trust=0`, `0 sorry`) and Python audit of extremal edge counts of even-cycle-free graphs $\mathrm{ex}(n, \{C_4, C_6, \dots\}) = \lfloor 3(n-1)/2 \rfloor$ (`n = 1..8 -> 0, 1, 3, 4, 6, 7, 9, 10` = OEIS `A032766`), proving that the 24-term prefix match OEIS `A380408` diverges at index 24 (`37 != 36`) and explicitly distinguishing this classical extremal cycle sequence from the Erdős–Gallai–Tuza clique transversal conjecture (Erdős #151).
+- **Erdős #23 Tightness & n = 1 (`formal/Erdos23BlowupPositivstellensatz.lean`)**: Standalone Lean 4 (`lean --trust=0`, `0 sorry`, zero external dependencies) verification of the 5-vertex case (`b_Delta(5) = 1`) and an exact degree-3 Positivstellensatz algebraic certificate proving that every 2-coloring of the balanced 5-cycle blow-up `C_5[n]` spans at least `n^2` monochromatic edges for all `n >= 1`.
 
 Run the full verification test suite with:
 ```bash
