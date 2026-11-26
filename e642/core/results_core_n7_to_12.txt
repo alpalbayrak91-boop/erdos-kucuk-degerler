@@ -35,6 +35,7 @@ total=7849 good=0
 n=9 e=21 total=1754 good=0
 n=10 e=24 total=87016 good=0
 n=11 e=27 total=6383349 good=0
+n=12 e=30 total=625721423 good=0
 # all good graphs with min degree >= 4, by edge count
 n=9 e=18 total=16 good=0
 n=9 e=19 total=154 good=0
@@ -45,3 +46,8 @@ n=11 e=22 total=266 good=1   (J?ouPjI{@i?)
 n=11 e=23 total=10398 good=0
 n=11 e=24 total=121011 good=0
 n=11 e=25 total=696229 good=0
+n=12 e=24 total=1547 good=2   (K?b@`cr]EWX_  KCOcbQUdbWLG)
+n=12 e=25 total=102026 good=0
+n=12 e=26 total=1687824 good=0
+n=12 e=27 total=13461855 good=0
+n=12 e=28 total=66707786 good=0

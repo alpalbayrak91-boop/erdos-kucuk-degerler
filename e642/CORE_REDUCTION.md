@@ -147,11 +147,21 @@ Searching all edge counts from $2n$ upwards:
 | 9 | none (edge counts 18–20 checked) |
 | 10 | none (20–23 checked) |
 | 11 | exactly one: $4$-regular, 22 edges, graph6 `J?ouPjI{@i?` (two copies of $K_5 - e$ joined through a cut vertex); none with 23–26 edges |
+| 12 | exactly two, both $4$-regular (24 edges): `K?b@`cr]EWX_`, `KCOcbQUdbWLG`; none with 25–30 edges |
 
-So for $n \le 11$ a good graph of minimum degree $\ge 4$ has at most $2n$ edges, well below $3n-7$.
-**Question.** Is there a constant $c < 3$ such that every good graph of minimum degree $\ge 4$ on $n$
-vertices has at most $cn$ edges? By the remark after Corollary 4 a positive answer would settle the
-exact value of $f(n)$ up to a finite check.
+So for $n \le 12$ every good graph of minimum degree $\ge 4$ is $4$-regular and has $2n$ edges, well
+below $3n-7$. This is a small-$n$ phenomenon and not the general picture:
+
+**Remark (density $7/3$ is attainable).** A graph is good iff each of its blocks is good, because a
+cycle and all its chords lie in one block. Take $T_m$ ($m \ge 3$) and, for every $b \in B$, a new copy
+of $K_5 - e$ whose two vertices of degree $3$ are joined to $b$. The blocks are $T_m$ and $m$ copies of
+"$K_5 - e$ plus a vertex joined to its two non-adjacent vertices" ($6$ vertices, $11$ edges, good by
+the $n=6$ data). The result is good, has minimum degree $4$, $n = 6m+3$ vertices and $14m+2$ edges, so
+$e/n \to 7/3$.
+
+**Question.** Let $c^\ast$ be the supremum of $e(G)/|G|$ over good graphs of minimum degree $\ge 4$.
+The remark gives $c^\ast \ge 7/3$. Is $c^\ast < 3$? By the remark after Corollary 4 that would settle
+the exact value of $f(n)$ up to a finite check, and $c^\ast < \infty$ is exactly Erdős's question.
 
 ## References
 
