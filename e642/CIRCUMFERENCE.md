@@ -1,16 +1,20 @@
 # Erdős #642: a circumference refinement, $3n - c - 1$
 
-*Status (27 Nov 2026).* This note records a conjecture, a proved lower bound that makes it sharp,
-exhaustive data for $n \le 10$, and a reduction. The upper bound is **not** proved. We did not find
-the statement in Draganić–Methuku–Munhá Correia–Sudakov or in Draganić–Girão; the
-erdosproblems.com forum thread could not be re-read on the day of writing, so "not found" is the
-honest status, not "new".
+**Correction (27 Nov 2026, later the same day): Conjecture C below is FALSE.** A counterexample on 13 vertices was
+found by an automated search and verified here with both checkers of this repository: a good graph with $n = 13$,
+circumference $c = 12$ and $27$ edges, while $3n - c - 1 = 26$. See the section "Counterexample" at the end. What
+survives: Theorem 1 (the value $3n-c-1$ is attained, so it is a lower bound for the maximum), the exhaustive data for
+$n \le 10$ (equality there), Lemma 2 as a statement about counterexamples, and $f(13) = 32$. The counterexample has
+$e - 3n = -12$, far below $-7$, so it says nothing against $f(n) = 3n - 7$.
+
+*Original status line.* This note records a conjecture, a proved lower bound, exhaustive data for $n \le 10$, and a
+reduction. We did not find the statement in Draganić–Methuku–Munhá Correia–Sudakov or in Draganić–Girão.
 
 Notation as in [`THEORY.md`](THEORY.md) and [`CORE_REDUCTION.md`](CORE_REDUCTION.md): a graph is
 **good** if every cycle has more vertices than chords, equivalently $e(G[S]) \le 2|S| - 1$ whenever
 $G[S]$ is Hamiltonian. The **circumference** $c(G)$ is the length of a longest cycle.
 
-## Conjecture C
+## Conjecture C (refuted, see the correction above)
 
 > A good graph on $n$ vertices with circumference $c \ge 6$ has at most $3n - c - 1$ edges.
 
@@ -112,6 +116,28 @@ The core check of `CORE_REDUCTION.md` for $n = 13$ finished: 27,472,319,548 grap
 degree at least $4$ and $32$ edges, none good
 ([`core/results_core_n13.txt`](core/results_core_n13.txt)). By Theorem 3 there, $f(13) = 32$ and
 $K_{1,2,10}$ is the unique extremal graph.
+
+## Counterexample to Conjecture C
+
+$n = 13$. Vertices $0, \dots, 12$. The cycle $C = 0\,1\,2 \dots 11\,0$; the vertex $x = 12$ is joined to
+$0, 4, 8, 10$; the chords of $C$ are
+
+$$07,\ 09,\ 1\,10,\ 26,\ 2\,10,\ 3\,10,\ 47,\ 49,\ 4\,11,\ 58,\ 8\,11 .$$
+
+This graph (graph6 `LhCHKSDaJ_pDaI`) has $12 + 4 + 11 = 27$ edges. It is not Hamiltonian:
+$\{1,3,5,7,9,11,12\}$ is an independent set of size $7 > 13/2$. Both `core/good_check.c` and
+`circumference/circumference_check.c` report it good, with circumference $12$. So a good graph with $c = n - 1$ can
+have $2n + 1$ edges; the "first open case" above is false as stated, already for $d(x) = 4$ with $C$ spanning $2c - 1$
+edges. Adding a vertex joined to $0, 4, 8$ gives a good graph with $n = 14$, $c = 12$, $30$ edges
+(`MhCHKSDaJ_pDaIaG?`), again one more than $3n - c - 1$.
+
+The counterexample was reported by a web-agent run on task `E642-01` of this project (27 Nov 2026), which also claims
+an infinite family with $c = n - 1$ and $2n + 1$ edges for all $n \ge 13$; that family has not been verified here.
+
+**Open now.** Let $M(n,c)$ be the maximum number of edges of a good graph on $n$ vertices with circumference $c$.
+Then $M(n,c) \ge 3n - c - 1$ for $n \ge c \ge 6$, with equality for $n \le 10$ (and for $n = 11$ by a further
+exhaustive run), and $M(13,12) \ge 27$. How large can $M(n,c) - (3n - c - 1)$ be? If it could reach $c - 5$ for some
+$c$, then $f(n) > 3n - 7$ for large $n$.
 
 ## References
 

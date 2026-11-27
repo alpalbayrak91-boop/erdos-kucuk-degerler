@@ -1,3 +1,10 @@
+# DO NOT POST: point 2 and the question below are wrong as written
+
+Conjecture C was refuted on 27 Nov 2026 (see `CIRCUMFERENCE.md`, section "Counterexample"). Point 1 ($f(13) = 32$)
+stands. The draft is kept only as a record and must be rewritten before any use.
+
+---
+
 # Draft comment for erdosproblems.com/642 (not posted)
 
 Before posting: re-read the thread and search it for "circumference" and "longest cycle".
