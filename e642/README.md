@@ -11,3 +11,26 @@ This directory contains the exact canonical-enumeration solver, independent pure
 - [`core/`](core): `good_check.c` (direct test of the cycle–chord property), `extend.py`, `run_core_check.sh`, and the raw results `results_core_n7_to_12.txt`.
 - [`CIRCUMFERENCE.md`](CIRCUMFERENCE.md): Conjecture C (a good graph with circumference $c \ge 6$ has at most $3n-c-1$ edges; **refuted** at $n = 13$, see the file), a proof that the value is attained for all $n \ge c \ge 6$, exhaustive data for $n \le 10$, and $f(13) = 32$.
 - [`circumference/`](circumference): `circumference_check.c`, `family.py`, raw results.
+
+## Replay the n = 13 result and circumference witnesses
+
+From the repository root, run `python3 e642/reproduce.py` (Python 3.10+).
+It directly checks every simple cycle of the four published circumference
+counterexamples and of the 32-edge witness \(K_{1,2,10}\). It also checks the
+recorded shard coverage and counts against `core/results_core_n13.txt`.
+That log contains 27,472,319,548 candidate graphs and zero good graphs.
+
+For a fresh upper-bound replay, use 64-bit Linux with a C compiler and nauty's
+`geng` (also found as `nauty-geng` on some distributions):
+
+```sh
+python3 e642/reproduce.py --shard 0
+python3 e642/reproduce.py --all-shards
+```
+
+Shards 0 through 15 can also be replayed separately. Use `--all-shards` or run
+all 16 shard commands for full coverage. The enumeration takes hours of CPU
+time. The n = 13 upper bound uses the induction in [CORE_REDUCTION.md](CORE_REDUCTION.md)
+and its n = 12 premise. The n = 14 circumference witness has 30 edges and
+addresses the refuted circumference conjecture. The package leaves the exact
+value of \(f(14)\) outside the replay scope.
