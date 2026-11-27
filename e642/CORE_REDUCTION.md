@@ -133,9 +133,9 @@ degree-3 extension up to isomorphism, no good degree-4 extension. Raw output:
 [`core/results_core_n7_to_12.txt`](core/results_core_n7_to_12.txt). Reproduce with
 `core/run_core_check.sh 11` (about ten seconds) or `core/run_core_check.sh 12` (about ten CPU-minutes).
 
-Core(13) means about $2 \times 10^{10}$ graphs (estimate from a $1/20000$ sample: 982,888 graphs,
-none good); that run was started on 26 Nov 2026 and is **not finished**, so no claim for $n = 13$ is
-made here.
+Core(13) has since been checked: 27,472,319,548 graphs with minimum degree at least $4$ and $32$ edges, none
+good ([`core/results_core_n13.txt`](core/results_core_n13.txt)). Hence $f(13) = 32$ with unique extremal graph
+$K_{1,2,10}$; see [`CIRCUMFERENCE.md`](CIRCUMFERENCE.md).
 
 ## How sparse are good graphs of minimum degree $\ge 4$?
 
