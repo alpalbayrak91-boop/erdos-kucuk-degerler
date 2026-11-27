@@ -1,0 +1,17 @@
+# Core(13): geng -q -d4 13 32:32 r/16 | good_check  (min degree >= 4, exactly 32 edges), 27 Nov 2026
+r=00/16 total=1774921812 good=0
+r=01/16 total=1832003755 good=0
+r=02/16 total=1757321610 good=0
+r=03/16 total=1706087703 good=0
+r=04/16 total=1571275320 good=0
+r=05/16 total=1496333426 good=0
+r=06/16 total=1526515422 good=0
+r=07/16 total=1261486878 good=0
+r=08/16 total=1460328000 good=0
+r=09/16 total=1629863584 good=0
+r=10/16 total=1920065482 good=0
+r=11/16 total=2139800776 good=0
+r=12/16 total=1837950993 good=0
+r=13/16 total=1509801047 good=0
+r=14/16 total=1907195141 good=0
+r=15/16 total=2141368599 good=0
