@@ -134,6 +134,24 @@ edges. Adding a vertex joined to $0, 4, 8$ gives a good graph with $n = 14$, $c 
 The counterexample was reported by a web-agent run on task `E642-01` of this project (27 Nov 2026), which also claims
 an infinite family with $c = n - 1$ and $2n + 1$ edges for all $n \ge 13$; that family has not been verified here.
 
+**Larger excess (27 Nov 2026).** Two further good graphs, listed in
+[`circumference/counterexamples_excess.g6`](circumference/counterexamples_excess.g6):
+
+| graph6 | $n$ | $e$ | $c$ | $e - (3n - c - 1)$ |
+|---|---|---|---|---|
+| `OhCHKSDaJ_pDaI?aOCK@A` | 16 | 35 | 14 | 2 |
+| `` RIckIQPGkaqI@C_OoGP__`?AO?K_?O `` | 19 | 43 | 16 | 3 |
+
+(The second graph6 string contains a backtick; the file holds the exact strings.) Verification:
+
+```
+gcc -O2 -o circumference_check circumference/circumference_check.c
+./circumference_check < circumference/counterexamples_excess.g6
+```
+
+Both lines are printed with `excess=2` and `excess=3`. These graphs were found by automated search, verified with
+the checker in this repository; no extremality is claimed.
+
 **Open now.** Let $M(n,c)$ be the maximum number of edges of a good graph on $n$ vertices with circumference $c$.
 Then $M(n,c) \ge 3n - c - 1$ for $n \ge c \ge 6$, with equality for $n \le 10$ (and for $n = 11$ by a further
 exhaustive run), and $M(13,12) \ge 27$. How large can $M(n,c) - (3n - c - 1)$ be? If it could reach $c - 5$ for some
