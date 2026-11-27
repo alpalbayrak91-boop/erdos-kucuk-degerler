@@ -1,0 +1,304 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{conjecture}{Conjecture C}
+\newtheorem*{corecon}{Core conjecture}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\Tm}[1]{T_{#1}}
+\title{A circumference refinement for a problem of Hamburger and Szegedy on cycles with many chords}
+\author{Alp Albayrak}
+\date{27 November 2026 (draft)}
+
+\begin{document}
+
+\begin{abstract}
+A graph is \emph{good} if every cycle has strictly more vertices than chords. Let $f(n)$ be the maximum number of edges of a good graph on $n$ vertices (Erd\H{o}s Problem 642). The graph $K_{1,2,n-3}$ shows $f(n)\ge 3n-7$. We reduce the exact formula $f(n)=3n-7$, with uniqueness of the extremal graph, to graphs of minimum degree at least $4$; we state a conjecture bounding the number of edges of a good graph in terms of its circumference $c$ by $3n-c-1$, and prove that this bound is attained for all $n\ge c\ge 6$; we verify the conjecture by computer for $n\le 11$; and we prove partial results for $c=n-1$. The upper bound $f(n)=O(n)$ remains open.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A \emph{chord} of a cycle $C$ in a graph $G$ is an edge of $G$ joining two non-consecutive vertices of $C$. Hamburger and Szegedy asked (Erd\H{o}s Problem 642~\cite{EP642}) whether $f(n)=O(n)$, where $f(n)$ is the maximum number of edges of an $n$-vertex graph in which every cycle has strictly more vertices than chords. Chen, Erd\H{o}s and Staton~\cite{CES96} proved $f(n)\ll n^{3/2}$; Dragani\'c, Methuku, Munh\'a Correia and Sudakov~\cite{DMMS24} proved $f(n)\ll n(\log n)^8$. See also Dragani\'c and Gir\~ao~\cite{DG26}. Boris Alexeev reported, in a comment of 28 January 2026 on the forum thread of~\cite{EP642} (computer search), the values $f(n)=3n-7$ for $6\le n\le 12$ together with uniqueness of the extremal graph for $7\le n\le 12$.
+
+\emph{The upper bound $f(n)=O(n)$ is open, and nothing in this note proves it.} What this note does:
+\begin{enumerate}
+\item[(a)] It reduces the exact formula $f(n)=3n-7$ with uniqueness to a statement about graphs of minimum degree at least $4$ (Section~3), and records $f(13)=32$ obtained from this reduction by computer.
+\item[(b)] It states Conjecture~C: a good graph on $n$ vertices with circumference $c\ge 6$ has at most $3n-c-1$ edges (Section~4).
+\item[(c)] It proves that Conjecture~C is sharp: for all $n\ge c\ge 6$ there is a good graph with circumference $c$ and exactly $3n-c-1$ edges (Theorem~\ref{thm:sharp}).
+\item[(d)] It verifies Conjecture~C for $n\le 11$ by exhaustive computer search (Section~7).
+\item[(e)] It proves partial inequalities for the first open case $c=n-1$ (Section~6).
+\end{enumerate}
+To our knowledge the circumference refinement (Conjecture~C and its sharpness) is not in the literature: we have not found it in the literature cited above; the forum thread should be consulted for possible overlap. The reduction in (a) is elementary and may well be folklore.
+
+\section{Preliminaries}
+
+All graphs are finite and simple. A graph is \emph{good} if every cycle has strictly more vertices than chords, and \emph{bad} otherwise. The \emph{circumference} $c(G)$ is the length of a longest cycle; for an acyclic graph it is undefined and the graph is excluded wherever $c$ is used. For $S\subseteq V(G)$ let $e(G[S])$ be the number of edges of the induced subgraph.
+
+If $C$ is a cycle with vertex set $S$, $|S|=L$, then $C$ has $e(G[S])-L$ chords, so $C$ has at least $L$ chords iff $e(G[S])\ge 2L$. For $L=3$ and $L=4$ one has $\binom L2\le 2L-1$, so such cycles never violate the condition. Hence:
+\begin{itemize}
+\item[(F1)] Subgraphs of good graphs are good; adding edges to a bad graph keeps it bad.
+\item[(F2)] $G$ is bad if and only if some $S\subseteq V(G)$ with $|S|\ge5$ has $G[S]$ Hamiltonian and $e(G[S])\ge 2|S|$.
+\end{itemize}
+Moreover a cycle and all its chords lie in a single block, so a graph is good iff each of its blocks is good.
+
+Let $\Tm m=K_{1,2,m}$ denote the graph with a centre $z$, a non-adjacent pair $p,q$ and an independent set $B$ of size $m$, where every vertex of $B$ is joined to $z,p,q$, and $z$ is joined to $p,q$. It has $m+3$ vertices and $3m+2$ edges; with $n=m+3$ this is $3n-7$ edges.
+
+\begin{proposition}\label{prop:lower}
+For $n\ge3$, $\Tm{n-3}$ is good; hence $f(n)\ge 3n-7$.
+\end{proposition}
+\begin{proof}
+Let $A=\{z,p,q\}$. Let $C$ be a cycle with $a=|V(C)\cap A|\le 3$ and $b=|V(C)\cap B|$. Since $B$ is independent, mapping each vertex of $V(C)\cap B$ to its successor on $C$ is an injection into $V(C)\cap A$, so $b\le a\le3$; also $b\ge1$ since $A$ induces a path. So $|V(C)|\le 6$. If $|V(C)|\le4$ the cycle cannot violate the condition. If $|V(C)|=5$ then $a=3,b=2$ and $e=3\cdot2+2=8\le 9$. If $|V(C)|=6$ then $a=b=3$ and $e=3\cdot 3+2=11\le 11$. In all cases $e(G[V(C)])\le 2|V(C)|-1$.
+\end{proof}
+
+\section{The reduction to minimum degree at least 4}
+
+\begin{lemma}[peeling]\label{lem:peel}
+Let $n\ge7$ and assume $f(n-1)\le 3(n-1)-7$.
+\begin{enumerate}
+\item A good graph on $n$ vertices with exactly $3n-6$ edges has minimum degree at least $4$.
+\item If $G$ is good on $n$ vertices with exactly $3n-7$ edges and $\deg v\le 3$, then $\deg v=3$ and $G-v$ has exactly $3(n-1)-7$ edges.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+$G-v$ is good on $n-1$ vertices. In (1), $\deg v\le3$ would give $e(G-v)\ge 3n-9>3(n-1)-7$. In (2), $e(G-v)=3n-7-\deg v\le 3n-10$ forces $\deg v\ge3$.
+\end{proof}
+
+\begin{lemma}[one-vertex extensions of $\Tm m$]\label{lem:ext}
+Let $m\ge3$ and let $G$ be obtained from $\Tm m$ by adding a new vertex $v$ whose neighbourhood $N$ has $|N|\ge3$. Then $G$ is good if and only if $N=\{z,p,q\}$, in which case $G=\Tm{m+1}$.
+\end{lemma}
+\begin{proof}
+If $N=\{z,p,q\}$ then $G=\Tm{m+1}$, which is good. Otherwise $N$ meets $B$. By (F1) it suffices to treat $|N|=3$: keep three neighbours of $v$, at least one in $B$. Let $j=|N\cap B|\in\{1,2,3\}$ and choose $T\subseteq B$, $|T|=3$, with $N\cap B\subseteq T$. Put $S=\{z,p,q,v\}\cup T$, so $|S|=7$ and
+\[
+e(G[S])=2+9+3=14=2|S|.
+\]
+A Hamiltonian cycle of $G[S]$ is given by:
+\begin{itemize}
+\item $j=1$, $N=\{b,h_1,h_2\}$ with $h_1,h_2\in\{z,p,q\}$, $T=\{b,b_1,b_2\}$: $v\,b\,x\,b_1\,y\,b_2\,w\,v$ with $\{x,y,w\}=\{z,p,q\}$ and $w=h_1$;
+\item $j=2$, $N=\{b,b',h\}$, $T=\{b,b',b_1\}$: $v\,b\,q\,b_1\,p\,z\,b'\,v$;
+\item $j=3$, $N=T=\{b,b',b''\}$: $v\,b\,q\,b''\,p\,z\,b'\,v$.
+\end{itemize}
+Every consecutive pair is an edge, so $G$ is bad by (F2).
+\end{proof}
+
+\begin{theorem}[inductive step]\label{thm:ind}
+Let $n\ge8$. Assume
+\begin{enumerate}
+\item[(i)] $f(n-1)=3(n-1)-7$ and $\Tm{n-4}$ is the unique extremal graph on $n-1$ vertices;
+\item[(ii)] $\mathrm{Core}(n)$: no good graph on $n$ vertices has minimum degree $\ge4$ and exactly $3n-7$ edges.
+\end{enumerate}
+Then $f(n)=3n-7$ and $\Tm{n-3}$ is the unique extremal graph on $n$ vertices.
+\end{theorem}
+\begin{proof}
+Suppose a good graph on $n$ vertices has at least $3n-6$ edges; deleting edges gives a good $G'$ with exactly $3n-6$ edges. By Lemma~\ref{lem:peel}(1), $\delta(G')\ge4$. The degree sum is $6n-12<6n$, so a vertex $v$ of minimum degree has degree $4$ or $5$. If $\deg v=4$, then $G'-v$ is good with $3(n-1)-7$ edges, so $G'-v\cong\Tm{n-4}$ by (i), and $G'$ extends $\Tm{n-4}$ by a vertex of degree $4$, contradicting Lemma~\ref{lem:ext} ($n-4\ge4$). So $\delta(G')\ge5$, and deleting any edge leaves a good graph with $3n-7$ edges and minimum degree $\ge4$, contradicting (ii). Hence $f(n)\le 3n-7$, with equality by $\Tm{n-3}$.
+
+Now let $G$ be good with exactly $3n-7$ edges. By (ii), $\delta(G)\le3$. By Lemma~\ref{lem:peel}(2) a vertex $v$ of degree $\le 3$ has degree $3$ and $G-v$ is extremal, so $G-v\cong\Tm{n-4}$ by (i), and Lemma~\ref{lem:ext} gives $G\cong\Tm{n-3}$.
+\end{proof}
+
+\begin{corollary}[equivalence]\label{cor:equiv}
+Let $N\ge8$. Given the base case $n=7$ ($f(7)=14$, unique extremal graph $\Tm4$), the following are equivalent: (1) $f(n)=3n-7$ and $\Tm{n-3}$ is the unique extremal graph, for all $7\le n\le N$; (2) $\mathrm{Core}(n)$ holds for all $8\le n\le N$.
+\end{corollary}
+\begin{proof}
+($\Leftarrow$) Induction with Theorem~\ref{thm:ind}. ($\Rightarrow$) A good graph with $3n-7$ edges and minimum degree $\ge4$ would be extremal and not isomorphic to $\Tm{n-3}$, whose minimum degree is $3$.
+\end{proof}
+
+Thus the sharp form of the problem is equivalent, together with uniqueness, to the following.
+
+\begin{corecon}
+For $n\ge8$, every graph on $n$ vertices with minimum degree at least $4$ and exactly $3n-7$ edges contains a cycle with at least as many chords as vertices.
+\end{corecon}
+
+\begin{remark}
+The hypotheses cannot be weakened to minimum degree $3$ ($\Tm{n-3}$), nor can the edge count drop to $2n$: a connected $4$-regular graph is good iff it is non-Hamiltonian, and such graphs exist (see Section~7). By peeling vertices of degree $\le3$, $f(n)=O(n)$ is equivalent to a linear bound for good graphs of minimum degree $\ge4$.
+\end{remark}
+
+\begin{proposition}[Dirac remark]\label{prop:dirac}
+$\mathrm{Core}(8)$ holds. More generally, a counterexample to $\mathrm{Core}(n)$ is non-Hamiltonian.
+\end{proposition}
+\begin{proof}
+A graph on $8$ vertices with minimum degree $\ge4=n/2$ is Hamiltonian by Dirac's theorem~\cite{Dir52}, and with $17\ge16$ edges $S=V$ is a witness in (F2). In general a Hamiltonian good graph has at most $2n-1$ edges, while $3n-7\ge 2n$ for $n\ge7$.
+\end{proof}
+
+\begin{remark}[density $7/3$ is attainable]
+Take $\Tm m$ ($m\ge3$) and, for every $b\in B$, a new copy of $K_5-e$ whose two vertices of degree $3$ are joined to $b$. The blocks are $\Tm m$ and $m$ copies of ``$K_5-e$ plus a vertex joined to its two non-adjacent vertices'' ($6$ vertices, $11$ edges, good by the exhaustive $n=6$ data). The result is good, has minimum degree $4$, $6m+3$ vertices and $14m+2$ edges, so $e/n\to7/3$. If $c^\ast$ denotes the supremum of $e(G)/|G|$ over good graphs of minimum degree $\ge4$, then $c^\ast\ge7/3$; $c^\ast<\infty$ is exactly Erd\H{o}s's question, and if $c^\ast<3$ then $\mathrm{Core}(n)$ would hold for all $n>7/(3-c^\ast)$.
+\end{remark}
+
+\section{Conjecture C and its sharpness}
+
+\begin{conjecture}
+A good graph on $n$ vertices with circumference $c\ge6$ has at most $3n-c-1$ edges.
+\end{conjecture}
+
+A longest cycle spans at most $2c-1$ edges and each of the $n-c$ remaining vertices ``adds'' at most $3$. For $c=n$ the bound is the trivial $2n-1$; for $c=6$ it is $3n-7$. Since $3n-c-1\le3n-7$ for $c\ge6$, and good graphs of circumference at most $5$ have fewer edges (by Kopylov's theorem~\cite{Kop77} for $2$-connected graphs, block by block; we have not re-derived this step), Conjecture~C would imply $f(n)\le3n-7$ for $n\ge6$, hence a positive answer to Problem~642.
+
+\begin{theorem}[sharpness]\label{thm:sharp}
+For all integers $n\ge c\ge6$ there is a good graph on $n$ vertices with circumference $c$ and exactly $3n-c-1$ edges.
+\end{theorem}
+
+\begin{proof}
+Let $t=c-5\ge1$ and $m=n-c+2\ge2$. The graph $G(m,t)$ has three hubs $z,p,q$ with edges $zp$, $zq$; an independent set $B$ of $m$ vertices, each joined to $z,p,q$; and a path $u_1u_2\dots u_t$ with every $u_i$ joined to $p$, and in addition $u_1z$ and $u_tq$. It has $m+t+3=n$ vertices and
+\[
+2+3m+(t-1)+t+2=3m+2t+3=3n-c-1
+\]
+edges. For $t=1$ it is $K_{1,2,m+1}$.
+
+Deleting the hubs leaves the isolated vertices of $B$ and the path $u_1\dots u_t$. A cycle $Z$ with $h$ hubs therefore splits, after removing them, into at most $h$ \emph{segments}, each a single vertex of $B$ or an interval of the path. Let $j$ be the number of $B$-vertices on $Z$, $s$ the number of path vertices on $Z$, $\rho$ the number of maximal path intervals they form, and $S=V(Z)$, so $|S|=h+j+s$.
+
+\emph{Circumference.} With three hubs there are at most three segments. If some segment is a path interval, at most two are $B$-vertices, so $|Z|\le 3+2+t$; with two or three path segments the count is smaller; with at most two hubs $|Z|\le 2+t+1$. The cycle $z\,u_1\dots u_t\,q\,b\,p\,b'\,z$ has length $t+5$. Hence $c(G(m,t))=t+5=c$.
+
+\emph{Goodness.} We bound $e(G[S])$ against $2|S|-1=2(h+j+s)-1$. The path spans $s-\rho$ edges inside $S$.
+\begin{itemize}
+\item $h=3$: $e(G[S])=2+3j+(s-\rho)+s+\varepsilon$, where $\varepsilon\le2$ counts $u_1z$ and $u_tq$. The claim $e(G[S])\le 2|S|-1$ reads $j-\rho+\varepsilon\le3$. If $s=0$ then $\rho=\varepsilon=0$ and $j\le3$. If $s>0$ then $\rho\ge1$ and one segment is a path interval, so $j\le2$.
+\item $h=2$: $e(G[S])\le 1+2j+(s-\rho)+s+1\le 3+2j+2s=2|S|-1$.
+\item $h=1$: then $j=0$ and $e(G[S])\le (s-\rho)+s+1\le 2s+1=2|S|-1$.
+\end{itemize}
+The case $h=0$ is impossible (the path is acyclic and $B$ is independent).
+\end{proof}
+
+\section{Minimal counterexamples}
+
+\begin{lemma}\label{lem:min}
+Let $G$ be a counterexample to Conjecture~C with the fewest vertices, and then the fewest edges; let $n=|G|$ and $c=c(G)\ge6$. Then
+\begin{enumerate}
+\item $G$ is not Hamiltonian, and $e(G)=3n-c$;
+\item for every longest cycle $C$, every vertex outside $C$ has degree at least $4$;
+\item if $T\subseteq V(G)$ and $G-T$ has circumference $c'$, then at least $3|T|+1-(c-c')$ edges meet $T$. In particular, if $G-T$ is Hamiltonian, at least $n-c+2|T|+1$ edges meet $T$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) A Hamiltonian good graph has at most $2n-1=3n-c-1$ edges. Deleting an edge off a longest cycle keeps the graph good with the same circumference, so by minimality $e(G)=3n-c$. (2) Deleting a vertex $x\notin C$ of degree at most $3$ gives a good graph with circumference $c$ and at least $3(n-1)-c$ edges, a smaller counterexample. (3) Apply minimality to $G-T$ (when $c'\ge6$), or the Hamiltonian bound $2(n-|T|)-1$ otherwise; subtract from $e(G)\ge 3n-c$.
+\end{proof}
+
+Condition (2) is weaker than minimum degree $\ge4$, so Conjecture~C is stronger than the core conjecture.
+
+\begin{remark}
+In (3), the minimality argument applied to $G-T$ is available when $c'\ge6$; otherwise one uses the Hamiltonian bound when $G-T$ is Hamiltonian. We use (3) below only for $G-T$ Hamiltonian with $|T|=1$.
+\end{remark}
+
+Writing $\varphi(S)=2|S|-e(G[S])-1$, which is submodular, a graph is good iff $\varphi(S)\ge0$ for all Hamiltonian $S$ (with $|S|\ge5$). For a connected good graph, with cyclomatic number $\beta=e-n+1$, Conjecture~C is equivalent to the inequality
+\[
+c+\beta\le 2n,
+\]
+that is, to $\varphi(V)\ge-(n-c)$. (This is a restatement: $e\le 3n-c-1$ iff $c+(e-n+1)\le 2n$.)
+
+\section{The case $c=n-1$}
+
+\emph{Setup.} Let $G$ be good, not Hamiltonian, and suppose $G-x$ has a Hamiltonian cycle $C$, so $c=n-1$. Let $d=\deg x\ge4$ and let $a_1,\dots,a_d$ be the neighbours of $x$ in cyclic order on $C$. Let $I_i$ be the open gap between $a_i$ and $a_{i+1}$ and $g_i=|I_i|$. Let $k$ be the number of chords of $C$, so $e(G[C])=c+k$ and $e(G)=c+k+d$. The claim in this case is $k+d\le c+2$, i.e.\ $e(G)\le 2n$. All gaps are non-empty, since an empty gap would yield a Hamiltonian cycle through $x$.
+
+Assume $G$ is a counterexample, so $e(G)\ge 2n+1$, i.e.\ $k+d=c+3+s$ with $s\ge0$ (for a minimal counterexample $s=0$, but the inequalities below hold for every $s\ge0$). Consider the cycle $W_i=C-I_i+x$, of length $c-g_i+1$. Let $T_i$ be the number of chords of $C$ with an endpoint in $I_i$.
+
+\begin{enumerate}
+\item[(b)] \emph{Gap inequality.} Goodness of $W_i$ gives $c+k-(g_i+1+T_i)+d\le 2(c-g_i+1)-1$, i.e.
+\[
+T_i\ \ge\ k+d-2-c+g_i\ =\ g_i+1+s .
+\]
+\item[(c)] \emph{Arc inequality} (recorded in our notes without a written proof). For an arc $A$ of $C$ between two neighbours of $x$ containing $d_A$ neighbours of $x$, the number of chords inside $A$ is at most $|A|+2-d_A$.
+\item[(d)] \emph{Counting identity.} Let $X$ be the number of chords joining two different gaps and $Y$ the number of chords joining two neighbours of $x$. A chord is counted in $\sum_iT_i$ once if it meets exactly one gap or lies inside one gap, twice if it joins two different gaps, and not at all if it joins two neighbours of $x$. Hence
+\[
+\sum_i T_i=k+X-Y .
+\]
+\end{enumerate}
+
+Summing (b) over all $d$ gaps and using $\sum g_i=c-d$ gives $k+X-Y\ge c-d+d+ds=c+ds$. With $k=c+3+s-d$ this yields
+\begin{equation}\label{eq:XY}
+X\ \ge\ Y+(d-3)+(d-1)s .
+\end{equation}
+
+\begin{proposition}\label{prop:gaps}
+In the setting above, if $X\le Y+d-4$ then $k+d\le c+2$.
+\end{proposition}
+\begin{proof}
+If $k+d\ge c+3$, then \eqref{eq:XY} holds with some $s\ge0$ and gives $X\ge Y+d-3>Y+d-4$.
+\end{proof}
+
+\begin{corollary}[all gaps of size one]\label{cor:one}
+In a minimal counterexample as above (so $s=0$), not all gaps have size one.
+\end{corollary}
+\begin{proof}
+Suppose every gap is a single vertex, so $x$ is adjacent to every second vertex of $C$, $d=c/2$. Each gap vertex $u$ has $G-u$ Hamiltonian (route through $x$), so by Lemma~\ref{lem:min}(3) with $T=\{u\}$ it has degree at least $4$ ($n-c+2\cdot 1+1=4$ edges meet $u$ since $n-c=1$). The gap vertices are pairwise non-adjacent (a gap vertex adjacent to $a_j^+$ or $a_j^-$ would give a Hamiltonian cycle) and not adjacent to $x$. So the $c/2$ gap vertices send at least $4\cdot c/2=2c$ edges into $V(C)$, and $e(G[C])\ge 2c>2c-1$, contradicting goodness of the Hamiltonian cycle $C$.
+\end{proof}
+
+\emph{What is missing.} Inequality~\eqref{eq:XY} shows that the entire case $c=n-1$ reduces to an upper bound for $X$, the number of chords joining two different gaps: one needs $X\le Y+d-4$. Without information that $C$ is a \emph{longest} cycle, the inequalities (b) and (c) leave slack exactly one, so this step must use maximality of $C$. For $n=9,10$ the measurement ($d=4$) always gave $X\le Y$, but there the gaps have size at most $(1,1,1,2)$ and $X=0$ is forced, so these values are not informative; the first real test is $n=11$.
+
+\section{Computations}
+
+\subsection*{Methods}
+Graphs were generated with \texttt{geng} from nauty~\cite{MP14} and tested by direct checkers written in C: for the core checks, a program testing (F2) on all vertex subsets with Hamiltonicity by depth-first search; for the circumference data, a program computing, for each graph, whether it is good and its circumference. The values $f(n)$ for $n\le 9$ were also obtained by an independent canonical-enumeration solver and re-proved for $n\le8$ by a pure-Python verifier. Sources, raw outputs and scripts are in the repository \texttt{alpalbayrak91-boop/erdos-kucuk-degerler}, directory \texttt{e642/}. The raw output of the $n=11$ circumference run is not yet stored there.
+
+\subsection*{Core checks}
+For $n\ge 8$ we ran \texttt{geng -d4 $n$ $(3n-7){:}(3n-7)$} through the checker; no good graph occurred (Table~\ref{tab:core}). Together with the base case ($n=7$: all $65$ graphs with $14$ edges, exactly one good; all $41$ with $15$ edges, none good) and Corollary~\ref{cor:equiv} this gives $f(n)=3n-7$ with unique extremal graph $\Tm{n-3}$ for $7\le n\le13$. Lemma~\ref{lem:ext} was also checked by machine for $n=8,\dots,11$: exactly one good degree-$3$ extension up to isomorphism, no good degree-$4$ extension. The value $n=13$ goes one step beyond the reported $n\le12$.
+
+\begin{table}[h]
+\caption{Core checks: graphs with $\delta\ge4$ and exactly $3n-7$ edges; none is good.}\label{tab:core}
+\begin{tabular}{rrrr}
+\toprule
+$n$ & edges $3n-7$ & graphs with $\delta\ge4$ & good\\
+\midrule
+8 & 17 & 24 & 0\\
+9 & 20 & 714 & 0\\
+10 & 23 & 35,225 & 0\\
+11 & 26 & 2,505,044 & 0\\
+12 & 29 & 233,751,478 & 0\\
+13 & 32 & 27,472,319,548 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Good graphs of minimum degree $\ge4$ are rare for small $n$: none for $n\le10$; for $n=11$ exactly one, $4$-regular with $22$ edges (graph6 \texttt{J?ouPjI\{@i?}); for $n=12$ exactly two, both $4$-regular with $24$ edges. (Edge counts from $2n$ to $3n-7$ were searched.)
+
+\subsection*{Circumference data}
+For $7\le n\le10$ the search covered all graphs on $n$ vertices; for $n=11$ all graphs with $21$--$26$ edges ($370{,}673{,}916$ graphs, of which $13{,}180{,}371$ are good). Table~\ref{tab:circ} lists, for each $c$, the maximum number of edges of a good graph with circumference exactly $c$. Every entry equals $3n-c-1$ and no good graph exceeds it. Hence Conjecture~C holds for $n\le11$. For $n=11$ this uses that a counterexample with circumference $c\ge7$ would have at least $3n-c\le26$ edges, which lies in the searched range, while for $c=6$ a counterexample would have at least $27=3n-6$ edges and is excluded by $f(11)=26$ (Table~\ref{tab:core}). For $n=10$ the numbers of extremal graphs for $c=6,\dots,10$ are $1,9,239,3983,425039$. For $c\le5$ the maxima are smaller (for $c=5$: $12,15,18,19$ for $n=7,\dots,10$).
+
+\begin{table}[h]
+\caption{Maximum number of edges of a good graph with circumference $c$.}\label{tab:circ}
+\begin{tabular}{rrrrrrrr}
+\toprule
+$n$ & $c=6$ & $7$ & $8$ & $9$ & $10$ & $11$ & good graphs / graphs searched\\
+\midrule
+7 & 14 & 13 & & & & & 871 / 1,044\\
+8 & 17 & 16 & 15 & & & & 8,014 / 12,346\\
+9 & 20 & 19 & 18 & 17 & & & 106,325 / 274,668\\
+10 & 23 & 22 & 21 & 20 & 19 & & 1,896,677 / 12,005,168\\
+11 & 26 & 25 & 24 & 23 & 22 & 21 & 13,180,371 / 370,673,916 (21--26 edges)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Reproducibility}
+The commands are of the form \texttt{geng -q $n$ | circumference\_check} and \texttt{geng -q -d4 $n$ $(3n-7){:}(3n-7)$ | good\_check} (see \texttt{e642/circumference/} and \texttt{e642/core/} in the repository). The family $G(m,t)$ of Theorem~\ref{thm:sharp} was also generated by \texttt{circumference/family.py} for $2\le m\le7$, $2\le t\le11$, $n\le17$ (50 graphs), and each was found good with the stated circumference and edge count.
+
+\section{Formal verification}
+
+The Chen--Erd\H{o}s--Staton bound $f(n)\le 2(\lfloor\sqrt n\rfloor+1)n$ has been formalized in Lean~4 at \url{https://github.com/alpalbayrak91-boop/erdos642-ces}.
+
+\section*{Acknowledgements and disclosure}
+
+The mathematics, code and text of this note were produced by an AI system (Claude, Anthropic) working under the direction of the author; computations were checked by independent programs where stated. The author takes responsibility for the content. We thank the maintainers of \texttt{erdosproblems.com} and the authors of nauty.
+
+\begin{thebibliography}{99}
+
+\bibitem{CES96} G.~Chen, P.~Erd\H{o}s, W.~Staton, \emph{Proof of a conjecture of Bollob\'as on nested cycles}, J.\ Combin.\ Theory Ser.\ B \textbf{66} (1996), 38--43.
+
+\bibitem{DMMS24} N.~Dragani\'c, A.~Methuku, D.~Munh\'a Correia, B.~Sudakov, \emph{Cycles with many chords}, Random Structures Algorithms \textbf{64} (2024), 3--16; arXiv:2306.09157.
+
+\bibitem{DG26} N.~Dragani\'c, A.~Gir\~ao, \emph{Cycles with almost linearly many chords}, arXiv:2601.08769.
+
+\bibitem{Kop77} G.~N.~Kopylov, \emph{Maximal paths and cycles in a graph}, Dokl.\ Akad.\ Nauk SSSR \textbf{234} (1977), 19--21.
+
+\bibitem{MP14} B.~D.~McKay, A.~Piperno, \emph{Practical graph isomorphism, II}, J.\ Symbolic Comput.\ \textbf{60} (2014), 94--112.
+
+\bibitem{EP642} \emph{Erd\H{o}s Problem 642}, \url{https://www.erdosproblems.com/642}; see also the forum thread \url{https://www.erdosproblems.com/forum/thread/642}.
+
+\bibitem{Dir52} G.~A.~Dirac, \emph{Some theorems on abstract graphs}, Proc.\ London Math.\ Soc.\ (3) \textbf{2} (1952), 69--81.
+
+\end{thebibliography}
+
+\end{document}

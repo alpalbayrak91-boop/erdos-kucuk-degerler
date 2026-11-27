@@ -1,7 +1,7 @@
 # Erdős #642: a circumference refinement, $3n - c - 1$
 
 *Status (27 Nov 2026).* This note records a conjecture, a proved lower bound that makes it sharp,
-exhaustive data for $n \le 10$, and a reduction. The upper bound is **not** proved. We did not find
+exhaustive data for $n \le 11$ (edge counts 21–26 for $n = 11$), and a reduction. The upper bound is **not** proved. We did not find
 the statement in Draganić–Methuku–Munhá Correia–Sudakov or in Draganić–Girão; the
 erdosproblems.com forum thread could not be re-read on the day of writing, so "not found" is the
 honest status, not "new".
@@ -71,13 +71,12 @@ of a good graph with circumference exactly $c$.
 | 8 | 17 | 16 | 15 | | | 8,014 / 12,346 |
 | 9 | 20 | 19 | 18 | 17 | | 106,325 / 274,668 |
 | 10 | 23 | 22 | 21 | 20 | 19 | 1,896,677 / 12,005,168 |
+| 11 | 26 | 25 | 24 | 23 | 22 (c=11: 21) | 13,180,371 good among the 370,673,916 graphs with 21–26 edges |
 
-Every entry equals $3n - c - 1$ and no good graph exceeds it. For $n = 10$ the numbers of extremal
+Every entry (and the c = 11 value for n = 11) equals $3n - c - 1$ and no good graph exceeds it. For $n = 10$ the numbers of extremal
 graphs are $1, 9, 239, 3983, 425039$ for $c = 6, \dots, 10$. For $c \le 5$ the maxima are smaller and
 follow a different pattern ($c = 5$: $12, 15, 18, 19$). Raw output:
-[`circumference/results_n7_to_10.txt`](circumference/results_n7_to_10.txt). A run for $n = 11$
-(edge counts 21–26) was in progress at the time of writing: five of eight residue classes had
-finished, with maxima $26, 25, 24, 23, 22, 21$ and no excess; it is not claimed as complete.
+[`circumference/results_n7_to_10.txt`](circumference/results_n7_to_10.txt). The run for $n = 11$ is complete (27 Nov 2026): all 370,673,916 graphs with 21–26 edges were scanned, 13,180,371 of them good; the maxima for $c = 6, \dots, 11$ are $26, 25, 24, 23, 22, 21 = 3n - c - 1$, with no excess. (In the $n = 11$ row of the table the six maxima are $c = 6, \dots, 11$; the columns stop at $c = 10$, so $c = 11$ is given in brackets. The raw output of this run is not yet stored in the repository.)
 
 ## Lemma 2 (shape of a minimal counterexample)
 
