@@ -1,0 +1,5 @@
+# geng -q n | circumference_check   (ALL graphs on n vertices); per circumference c: max edges of a good graph, count of graphs attaining it
+n=7: total=1044 good=871 max_excess=0;  c=0 maxe=6 (count 11);  c=3 maxe=9 (count 2);  c=4 maxe=12 (count 1);  c=5 maxe=12 (count 3);  c=6 maxe=14 (count 1);  c=7 maxe=13 (count 72);
+n=8: total=12346 good=8014 max_excess=0;  c=0 maxe=7 (count 23);  c=3 maxe=10 (count 7);  c=4 maxe=13 (count 6);  c=5 maxe=15 (count 2);  c=6 maxe=17 (count 1);  c=7 maxe=16 (count 9);  c=8 maxe=15 (count 1042);
+n=9: total=274668 good=106325 max_excess=0;  c=0 maxe=8 (count 47);  c=3 maxe=12 (count 4);  c=4 maxe=15 (count 6);  c=5 maxe=18 (count 3);  c=6 maxe=20 (count 1);  c=7 maxe=19 (count 9);  c=8 maxe=18 (count 191);  c=9 maxe=17 (count 19039);
+n=10: total=12005168 good=1896677 max_excess=0;  c=0 maxe=9 (count 106);  c=3 maxe=13 (count 21);  c=4 maxe=18 (count 2);  c=5 maxe=19 (count 20);  c=6 maxe=23 (count 1);  c=7 maxe=22 (count 9);  c=8 maxe=21 (count 239);  c=9 maxe=20 (count 3983);  c=10 maxe=19 (count 425039);
