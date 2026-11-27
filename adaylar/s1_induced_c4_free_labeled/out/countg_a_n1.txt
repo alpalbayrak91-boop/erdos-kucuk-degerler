@@ -1,0 +1,2 @@
+          1 graphs : groupsize=1
+ 1 graphs altogether; cpu=0.00 sec

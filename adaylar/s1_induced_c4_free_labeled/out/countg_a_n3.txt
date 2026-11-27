@@ -1,0 +1,3 @@
+          2 graphs : groupsize=2
+          2 graphs : groupsize=6
+ 4 graphs altogether; cpu=0.00 sec

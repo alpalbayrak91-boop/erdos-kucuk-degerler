@@ -1,0 +1,15 @@
+          4 graphs : groupsize=1
+         27 graphs : groupsize=2
+         21 graphs : groupsize=4
+          7 graphs : groupsize=6
+          9 graphs : groupsize=8
+          2 graphs : groupsize=10
+         13 graphs : groupsize=12
+          2 graphs : groupsize=16
+          2 graphs : groupsize=24
+          2 graphs : groupsize=36
+          6 graphs : groupsize=48
+          1 graphs : groupsize=72
+          2 graphs : groupsize=120
+          2 graphs : groupsize=720
+ 100 graphs altogether; cpu=0.00 sec

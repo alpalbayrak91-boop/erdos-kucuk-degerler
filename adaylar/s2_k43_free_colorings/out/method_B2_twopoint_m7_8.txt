@@ -1,0 +1,8 @@
+m=6 colourings: 118784 (generated 118784)
+S6-orbits: 226, orbit-size sum 118784
+7 153010788
+8 638804584320
+
+real	0m9,696s
+user	0m9,076s
+sys	0m0,048s

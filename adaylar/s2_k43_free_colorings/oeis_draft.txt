@@ -1,0 +1,13 @@
+%N Number of 2-colorings of the 3-subsets of an n-set such that no 4-subset has all four of its 3-subsets of the same color.
+%D 1, 1, 2, 14, 512, 118784, 153010788, 638804584320
+%O 1,3
+%C Labeled R(4,4;3)-good colorings (the two colors are distinguished).
+%C a(n) = 0 for n >= 13 since the hypergraph Ramsey number R(4,4;3) = 13 (McKay and Radziszowski, 1991); a(9)..a(12) are positive.
+%C The numbers of isomorphism classes (complements counted separately) for n = 3..8 are 2, 3, 12, 226, 31060, 15854385 (McKay, 2016, Table 1).
+%H B. D. McKay and S. P. Radziszowski, The first classical Ramsey number for hypergraphs is computed, Proc. 2nd ACM-SIAM SODA (1991).
+%H B. D. McKay, A class of Ramsey-extremal hypergraphs, arXiv:1608.07762 [math.CO], 2016.
+%e a(4) = 2^4 - 2 = 14: the four triples of a 4-set may be colored arbitrarily except all red or all blue.
+%e a(3) = 2: a single triple, no 4-subset.
+%o (C) /* see adaylar/s2_k43_free_colorings/s2_direct.c (n <= 7) and s2_onepoint.c, s2_twopoint.c (n = 8) */
+%K nonn,fini,more
+%A
