@@ -1,13 +1,16 @@
 %N Number of labeled graphs on n nodes with no induced cycle of length 4.
-%D 1, 2, 8, 61, 834, 19258, 711359, 40091516, 3310769148, 387102675123, 62257972139056
+%S 1, 2, 8, 61, 834, 19258, 711359, 40091516, 3310769148, 387102675123, 62257972139056
 %O 1,2
 %C Equivalently (by complementation), the number of labeled 2K2-free graphs on n nodes.
 %C The unlabeled version is A352068.
+%C a(n) >= A058862(n) (labeled chordal graphs), with equality exactly for n <= 4; a(5) - A058862(5) = 12 counts the labeled 5-cycles.
+%C Prömel and Steger proved that almost all graphs with no induced 4-cycle are split graphs, so a(n) ~ A179534(n) ~ A047863(n) as n -> oo. The convergence is slow: a(11)/A179534(11) = 62.3 and the ratio is still increasing at n = 11.
+%D H. J. Prömel and A. Steger, Excluding induced subgraphs: quadrilaterals, Random Structures Algorithms 2 (1991), 55-71.
 %F a(n) = Sum_{G} n!/|Aut(G)|, summed over the A352068(n) isomorphism classes G.
 %e a(4) = 2^6 - 3 = 61: of the 64 labeled graphs on 4 nodes, exactly 3 are 4-cycles.
 %e a(3) = 8: no graph on 3 nodes contains a 4-cycle.
 %o (C) /* see adaylar/s1_induced_c4_free_labeled/s1_direct.c: depth-first enumeration, n <= 8 */
 %o (Shell) nauty-geng -q n | ./s1_filter | nauty-countg -q --a   # then a(n) = Sum k*n!/groupsize
-%Y Cf. A352068 (unlabeled), A079566 (unlabeled connected), A345249 (labeled, no 4-cycle subgraph), A006125.
+%Y Cf. A352068 (unlabeled), A079566 (unlabeled connected), A058862 (labeled chordal), A179534 (labeled split), A047863, A345249 (labeled, no 4-cycle subgraph), A006125.
 %K nonn,more
 %A
