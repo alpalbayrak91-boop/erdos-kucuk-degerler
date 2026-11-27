@@ -67,3 +67,9 @@ Related but different: A345249 (labeled graphs with no 4-cycle as a subgraph:
 
 The sequence came from submissions attached to Erdős problems 558 and 1111; it is not implied
 by either problem statement.
+
+## Independent recomputation (27 Nov 2026)
+
+The definition (without our terms) was given to separate agent accounts, each asked to compute the first terms with its own code.
+Of 5 deliveries, 3 gave a machine-readable term list and all 3 matched our terms for n = 1..7 exactly; the other 2 gave no term list. No mismatch.
+No delivery reported a matching OEIS entry or a literature source for the sequence itself.

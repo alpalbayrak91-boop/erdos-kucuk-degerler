@@ -62,3 +62,9 @@ Reproduce: `./run.sh` (A, B, B1, B2 about 2 CPU minutes; C about 5 CPU minutes, 
 
 The sequence came from submissions attached to Erdős problems 562 and 564 (hypergraph Ramsey
 numbers); it is the labeled counting version of the R(4,4;3) problem.
+
+## Independent recomputation (27 Nov 2026)
+
+The definition (without our terms) was given to separate agent accounts, each asked to compute the first terms with its own code.
+Of 5 deliveries, 4 gave a machine-readable term list and all 4 matched our terms for m = 1..6 exactly; the other 1 gave no term list. No mismatch.
+No delivery reported a matching OEIS entry or a literature source for the sequence itself.
