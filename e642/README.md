@@ -9,5 +9,5 @@ This directory contains the exact canonical-enumeration solver, independent pure
 - [`results_exact_n2_to_9.txt`](results_exact_n2_to_9.txt): Exact solver log for $n = 2 \dots 9$.
 - [`CORE_REDUCTION.md`](CORE_REDUCTION.md): reduction of "$f(n) = 3n-7$ with unique extremal graph $K_{1,2,n-3}$" to graphs of minimum degree $\ge 4$ (Lemmas 1–2, Theorem 3, Corollary 4), with the core check for $n \le 12$.
 - [`core/`](core): `good_check.c` (direct test of the cycle–chord property), `extend.py`, `run_core_check.sh`, and the raw results `results_core_n7_to_12.txt`.
-- [`CIRCUMFERENCE.md`](CIRCUMFERENCE.md): Conjecture C (a good graph with circumference $c \ge 6$ has at most $3n-c-1$ edges), a proof that the bound is attained for all $n \ge c \ge 6$, exhaustive data for $n \le 10$, and $f(13) = 32$.
+- [`CIRCUMFERENCE.md`](CIRCUMFERENCE.md): Conjecture C (a good graph with circumference $c \ge 6$ has at most $3n-c-1$ edges; **refuted** at $n = 13$, see the file), a proof that the value is attained for all $n \ge c \ge 6$, exhaustive data for $n \le 10$, and $f(13) = 32$.
 - [`circumference/`](circumference): `circumference_check.c`, `family.py`, raw results.
