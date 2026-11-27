@@ -1,0 +1,8 @@
+m=6 valid 118784, S6-representatives 226
+candidates 284688, S7-classes 31060
+7 153010788
+8 638804584320
+
+real	1m38,528s
+user	1m11,352s
+sys	0m0,389s
