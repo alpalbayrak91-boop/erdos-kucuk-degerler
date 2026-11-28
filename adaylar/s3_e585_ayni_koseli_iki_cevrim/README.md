@@ -21,7 +21,7 @@ independent code. **New in this work:**
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
   maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 14);
 - **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, a(18) >= 62,
-  a(n) >= 66, 69, 74, 77, 82, 85 for n = 19..24, and a(n) >= 94, 98, 103, 107, 112, 116, 121, 125
+  a(n) >= 66, 70, 74, 77, 82, 88 for n = 19..24, and a(n) >= 94, 99, 103, 108, 112, 117, 122, 126
   for n = 25..32. So the identity above fails at n = 14;**
 - **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
   proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
@@ -305,8 +305,8 @@ except w. It has n = 4m + 3 vertices and 17m + 2 edges, that is 4.25 n - 10.75.
 - Adding a third chord at every outer vertex (F with 3m edges; nine choices of the three steps were
   tried for m = 9 and m = 11) always produced a 4-regular subgraph. These trials are not in the log.
 
-So a(4m + 3) >= r(4m + 3) >= 17m + 2 for m = 7 and 9 <= m <= 18. At n = 31 this equals the value
-found by the search; together with the two simple steps below the table it gives the best bound
+So a(4m + 3) >= r(4m + 3) >= 17m + 2 for m = 7 and 9 <= m <= 18. At n = 31 this gives 121 (the
+search later found 122); together with the two simple steps below the table it gives the best bound
 known here for 35 <= n <= 71 (the triple systems of the Proposition give the same value at n = 72
 and more from n = 73 on). Witnesses: `tanik/kubik_m<m>_n<n>_e<edges>.g6`.
 
@@ -317,9 +317,10 @@ whether a denser F can work.
 
 | n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 128 | 131 | 135 | 140 | 145 | 150 | 155 | 158 | 162 | 167 | 172 |
+| a(n) >= | **44** | 48 | 53 | 58 | 62 | 66 | 70 | 74 | 77 | 82 | 88 | 94 | 99 | 103 | 108 | 112 | 117 | 122 | 126 | 129 | 132 | 135 | 140 | 145 | 150 | 155 | 158 | 162 | 167 | 172 |
 
-The values for n = 14 and 16..32 come from the search below; n = 15 from the join construction.
+The value for n = 14 is exact (section "a(14) = 44"). The values for n = 15..32 come from the search below (n = 15
+is also given by the join construction).
 For n >= 33 there are no search witnesses yet, and the values come from the cubic family (section
 "Cubic family", checked by computer for m <= 18, no proof): a(4m + 3) >= 17m + 2 for m = 7 and
 9 <= m <= 18, so a(39) >= 155, a(43) >= 172, a(47) >= 189, a(51) >= 206, a(55) >= 223,
@@ -360,6 +361,13 @@ classes after canonical labelling.
 
 Witnesses: `tanik/arama_n<n>_m<m>.g6`.
 
+**Third round (28 Nov, evening).** The search kept running against the table. New values:
+n = 20: 70, n = 24: 88, n = 26: 99, n = 28: 108, n = 30: 117, n = 31: 122, n = 32: 126. The eleven
+new witness graphs (these, and five classes with 48 edges for n = 15) were checked with
+`dort_duzenli.py` and with `capraz_denetim.py` (CP-SAT: all; CBC: all but one, which reached the
+time limit); none has a 4-regular subgraph. The tables above show the first two rounds; the table
+"Best lower bounds known here" has the current values.
+
 - **The identity a(n) = 2n - 3 + A006856(n - 2) fails at n = 14.** It holds for 2 <= n <= 13.
 - **a(14) = 44** (section "a(14) = 44" below). The averaging bound alone gives a(14) <= 45: every
   13 vertices span at most a(13) = 39 edges, and every edge lies in 12 of the 14 such sets, so
@@ -377,8 +385,9 @@ Witnesses: `tanik/arama_n<n>_m<m>.g6`.
   (cycle family)").
 - No graph beating 48 at n = 15 was submitted. At n = 18 the later round gave 62, one more than the
   joins and the cycle family.
-- **n = 25..32 (observation, not a proof).** In this range the witnesses have
-  4n - 8 + floor((n - 21)/2) edges, which is 4 to 8 more than the cycle family. They have the same
+- **n = 25..32 (observation, not a proof).** In this range the witnesses of the second round have
+  4n - 8 + floor((n - 21)/2) edges, which is 4 to 8 more than the cycle family (the third round
+  added one more edge for n = 26, 28, 30, 31, 32). They have the same
   skeleton as the graphs above: u1 universal, u2 adjacent to everything except one vertex, and
   R = G - {u1, u2} triangle-free with e(R) = 2|R| + 2, ..., 2|R| + 5 (it contains 11 to 15
   4-cycles). The n = 18 witnesses have the same skeleton with e(R) = 2|R| - 2. No general

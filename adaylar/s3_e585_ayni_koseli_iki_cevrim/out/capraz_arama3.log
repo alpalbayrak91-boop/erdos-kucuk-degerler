@@ -1,0 +1,17 @@
+# third round witnesses | capraz_denetim.py 120
+n=15 m=48 cpsat=YOK (0.1 s) cbc=YOK (0.7 s)
+n=15 m=48 cpsat=YOK (0.1 s) cbc=YOK (0.3 s)
+n=15 m=48 cpsat=YOK (0.1 s) cbc=YOK (0.4 s)
+n=15 m=48 cpsat=YOK (0.0 s) cbc=YOK (0.5 s)
+n=15 m=48 cpsat=YOK (0.1 s) cbc=YOK (1.0 s)
+n=20 m=70 cpsat=YOK (0.5 s) cbc=YOK (2.9 s)
+n=24 m=88 cpsat=YOK (0.6 s) cbc=YOK (6.9 s)
+n=28 m=108 cpsat=YOK (1.7 s) cbc=YOK (60.9 s)
+n=28 m=108 cpsat=YOK (1.2 s) cbc=YOK (26.9 s)
+n=31 m=122 cpsat=YOK (1.9 s) cbc=YOK (46.5 s)
+n=31 m=122 cpsat=YOK (1.4 s) cbc=BILINMIYOR(Not Solved) (120.1 s)
+# n26_m99, n30_m117, n32_m126 (two graphs)
+n=26 m=99 cpsat=YOK cbc=YOK
+n=30 m=117 cpsat=YOK cbc=YOK
+n=32 m=126 cpsat=YOK cbc=YOK
+n=32 m=126 cpsat=YOK cbc=YOK

@@ -39,3 +39,19 @@ arama_n29_m112.g6:       2 n=29 m=112 four_regular_subgraph=0
 arama_n30_m116.g6:       3 n=30 m=116 four_regular_subgraph=0
 arama_n31_m121.g6:       3 n=31 m=121 four_regular_subgraph=0
 arama_n32_m125.g6:       3 n=32 m=125 four_regular_subgraph=0
+# third round, 28 Nov 2026: tanik/arama_n15_m48 n20_m70 n24_m88 n26_m99 n28_m108 n30_m117 n31_m122 n32_m126
+n=26 m=99 four_regular_subgraph=0
+n=30 m=117 four_regular_subgraph=0
+n=32 m=126 four_regular_subgraph=0
+n=32 m=126 four_regular_subgraph=0
+n=15 m=48 four_regular_subgraph=0
+n=15 m=48 four_regular_subgraph=0
+n=15 m=48 four_regular_subgraph=0
+n=15 m=48 four_regular_subgraph=0
+n=15 m=48 four_regular_subgraph=0
+n=20 m=70 four_regular_subgraph=0
+n=24 m=88 four_regular_subgraph=0
+n=28 m=108 four_regular_subgraph=0
+n=28 m=108 four_regular_subgraph=0
+n=31 m=122 four_regular_subgraph=0
+n=31 m=122 four_regular_subgraph=0
