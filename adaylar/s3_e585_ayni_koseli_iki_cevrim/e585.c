@@ -14,6 +14,8 @@
  *       -g  print only the graph6 strings of good graphs (filter)
  *       -b  print only the graph6 strings of bad graphs (filter)
  *       -q  no per-graph output; summary only (stderr)
+ *       -c  certificate: for each BAD graph one line "graph6 S C1 C2"
+ *           (checkable by sertifika_dogrula.py without this program)
  *       -l  only test sets S containing the last vertex n-1 (sound only if
  *           G - (n-1) is known to be good; used by the extension ladder)
  *   e585 extend M
@@ -196,6 +198,7 @@ int main(int argc, char **argv) {
             if (!strcmp(argv[i], "-g")) mode = 1;
             else if (!strcmp(argv[i], "-b")) mode = 2;
             else if (!strcmp(argv[i], "-q")) mode = 3;
+            else if (!strcmp(argv[i], "-c")) mode = 4;
             else if (!strcmp(argv[i], "-l")) lastonly = 1;
             else { fprintf(stderr, "bad option %s\n", argv[i]); return 2; }
         }
@@ -212,6 +215,7 @@ int main(int argc, char **argv) {
                 printf("\n");
             } else if (mode == 1 && g) puts(line);
             else if (mode == 2 && !g) puts(line);
+            else if (mode == 4 && !g) { fputs(line, stdout); print_witness(stdout); putchar('\n'); }
         }
     } else if (!strcmp(argv[1], "extend")) {
         if (argc < 3) return 2;

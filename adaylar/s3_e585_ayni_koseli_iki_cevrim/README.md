@@ -100,6 +100,26 @@ geng.
 - Run with t_11 = 30. The class counts are 1, 1, 2, 4, 13, 46, 287, 2115, 25398, 29979, 1788 for
   n = 1..11. The largest edge count in L_n is a(n) for every n.
 
+**Certified upper bounds (`e585 check -c`, `sertifika_dogrula.py`).**
+- For every bad graph, `check -c` prints one line `graph6 S C1 C2`, where C1 and C2 are vertex
+  sequences.
+- `sertifika_dogrula.py` is about 40 lines and imports nothing from `e585.c`. It checks three
+  things:
+  1. C1 and C2 are cycles whose edges are all in the graph.
+  2. C1 and C2 have the same vertex set S.
+  3. C1 and C2 have no common edge.
+- With the graph6 file passed as an argument, it also checks that every generated graph has a
+  certificate.
+- Results (`out/sertifika.log`):
+  - n = 10, 28 edges: 395166 graphs, 395166 valid certificates, 0 errors.
+  - n = 11, `-d5 11 32:32`: 2173681 graphs, 2173681 valid certificates, 0 errors.
+  - The two runs took 33 s and 154 s.
+- So a(10) <= 27 and a(11) <= 31 depend only on three things: the completeness of nauty-geng, the
+  minimum-degree argument, and this short verifier. The certificates are not stored, because they
+  can be regenerated in a few minutes.
+- The lower bounds rest on explicit good graphs in `tanik/`. Their goodness is confirmed by
+  `e585_ref.py`.
+
 **Shared parts.** Methods (a) and (b) share the Hamiltonian-cycle routine of `e585.c`. For n <= 8,
 that routine is checked against `e585_ref.py`.
 
@@ -138,6 +158,7 @@ nauty-geng -q 10 28:28 | ./e585 check -q            # graphs=395166 good=0 -> a(
 nauty-geng -q -d5 11 32:32 | ./e585 check -q        # graphs=2173681 good=0 -> a(11) <= 31
 ./e585 check < tanik/uc_n11_m31.g6                  # 8 lines iyi=1 kenar=31
 python3 e585_ref.py < tanik/uc_n11_m31.g6           # same, independent checker (about 1 min per graph)
+nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertifika_dogrula.py m32.g6   # valid=2173681 errors=0 missing=0
 ./yontem_b.sh /tmp/ladder 11 30 && cat /tmp/ladder/yontem_b.log
 ```
 
@@ -145,6 +166,7 @@ python3 e585_ref.py < tanik/uc_n11_m31.g6           # same, independent checker 
 
 - `e585.c`: checker and extension (`check`, `extend`).
 - `e585_ref.py`: independent reference checker.
+- `sertifika_dogrula.py`: independent certificate verifier.
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
 - `yontem_b.sh`: method (b).
