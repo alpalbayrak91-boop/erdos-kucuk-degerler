@@ -22,4 +22,9 @@ for M in 32 31 30; do ./f11_tarama.sh "$W/f11_m$M" "$M"; done
 grep "F(11) taramasi" "$W/DURUM.md" > out/f11_tarama.log
 # method (b), ladder up to n = 11 with threshold 30
 ./yontem_b.sh "$W/b11" 11 30 && cp "$W/b11/yontem_b.log" out/yontem_b_n11_t30.log
+# certified upper bounds
+for spec in "10 28:28" "-d5 11 32:32"; do
+  nauty-geng -q $spec > "$W/cert.g6"
+  ./e585 check -c < "$W/cert.g6" | python3 sertifika_dogrula.py "$W/cert.g6"
+done
 cat out/yontem_a.log out/f11_tarama.log out/yontem_b_n11_t30.log

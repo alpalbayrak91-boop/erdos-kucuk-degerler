@@ -1,0 +1,4 @@
+# Certified upper bounds (2026-11-28). Certificates: e585 check -c ; verifier: sertifika_dogrula.py (independent of e585.c)
+# leak test: 3 hand-made lines (1 correct, 1 non-disjoint, 1 with a non-edge) -> valid=1 errors=2
+n=10 m=28  nauty-geng -q 10 28:28     graphs=395166  certificates=395166 valid=395166 errors=0 missing=0 sec=33
+n=11 m=32  nauty-geng -q -d5 11 32:32 graphs=2173681 certificates=2173681 valid=2173681 errors=0 missing=0 sec=154
