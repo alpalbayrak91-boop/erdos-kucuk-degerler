@@ -19,7 +19,8 @@ independent code. **New in this work:**
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
   maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 13);
 - a second construction, K_2 joined with the incidence graph of a linear triple system, gives
-  a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157.
+  a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157 (useful for moderate n only: for large n the
+  known bound c n log log n is larger).
 
 ## Definition
 
@@ -60,9 +61,9 @@ construction.
 
 - Method (a) scans every graph with the given number of edges.
 - Method (b) builds every good graph above a threshold, so it gives the maximum edge count directly.
-- For every n, the two methods give the same graph6 list of extremal graphs after canonical
+- For every n <= 11, the two methods give the same graph6 list of extremal graphs after canonical
   labelling with `nauty-labelg`. The lists are in `tanik/uc_n<n>_m<a(n)>.g6`.
-- For n <= 10, a(n) - a(n-1) is 3 or 4.
+- For 4 <= n <= 10, a(n) - a(n-1) is 3 or 4.
 - a(11) = 31 is one more than the bound a(11) >= 30 in the report.
 - Good 11-vertex graphs with exactly 30 edges: 1780 classes, by both methods. Method (a) uses
   `geng -d3 11 30:30`, 68718688 graphs; minimum degree >= 30 - 27 = 3 by the argument below. The
@@ -117,21 +118,26 @@ this contradicts the hypothesis. If t <= 3, then |S| = 5, so U = K_5 and T spans
 - **n >= 17.** For every k >= 15 there is a graph H_k on k vertices with 2k - 5 edges that satisfies
   the hypothesis. So a(n) >= 2n - 3 + 2(n - 2) - 5 = 4n - 12 for n >= 17.
   - H_15 is the extremal graph of girth >= 5 on 15 vertices (26 edges) minus one edge.
-  - H_{k+1} is H_k plus a new vertex joined to two vertices at distance >= 3. Such a pair exists,
-    because a graph of girth >= 5 and diameter <= 2 is a star or a Moore graph, and none of these
-    has k >= 15 vertices and 2k - 5 edges. The new vertex creates no 3-cycle and no 4-cycle, and a
-    set of t >= 5 vertices containing it spans at most 2(t - 1) - 5 + 2 = 2t - 5 edges.
+  - H_{k+1} is H_k plus a new vertex joined to two vertices at distance >= 3 (or in different
+    components). By induction H_k has no 3-cycle and no 4-cycle. So such a pair exists unless H_k
+    is connected with diameter <= 2, and a graph of diameter <= 2 with no 3-cycle and no 4-cycle
+    is a star or a Moore graph (C_5, Petersen, Hoffman–Singleton, or a 57-regular graph on 3250
+    vertices). A star has k - 1 edges, and the Moore graphs with 2k - 5 edges are C_5 and Petersen
+    only, so none of these has k >= 15 vertices and 2k - 5 edges.
+  - The new vertex creates no 3-cycle and no 4-cycle, and a set of t >= 5 vertices containing it
+    spans at most 2(t - 1) - 5 + 2 = 2t - 5 edges. So H_{k+1} satisfies the hypothesis.
   - For comparison, adding vertices of degree 3 gives only 3n - 6 (the lower bound in the report).
-- **The bound 2t - 5 is sharp at t = 15.** A006856(15) = 26 = 2 * 15 - 4, and the join of K_2 with
+- **The hypothesis cannot be weakened to 2t - 4 at t = 15.** A006856(15) = 26 = 2 * 15 - 4, and the join of K_2 with
   the unique extremal graph on 15 vertices is bad: all 17 vertices carry two edge-disjoint
   Hamiltonian cycles (`tanik/birlesim_n17_m57_kotu.txt`, checked by `sertifika_dogrula.py`). So
   this construction gives a(17) >= 56, not 57.
 - **n = 18.** A006856(16) = 28 = 2 * 16 - 4, and there are 22 extremal graphs. Let H be one of them
-  with minimum degree 3 and a vertex x of degree >= 5 (3 of the 22). Then K_2 v H is good, so
-  a(18) >= 33 + 28 = 61:
+  with minimum degree 3 and a vertex x of degree >= 5 (3 of the 22). Then K_2 v H has no 4-regular
+  subgraph, so a(18) >= 33 + 28 = 61. Follow the proof of the Lemma:
   - a set T of at most 14 vertices spans at most 2t - 5 edges;
-  - a set of 15 vertices spans at most 28 - 3 = 25 < 26 edges;
-  - if T is all of H, then U must contain all 28 edges of H, and x gets degree >= 5 in U.
+  - a set of 15 vertices spans at most 28 - 3 = 25 = 2t - 5 edges;
+  - if T is all of H, at least 2t - 2j = 32 - 2j edges of U lie inside T, and H has only 28 edges.
+    So j = 2 and U contains all 28 edges of H. Then x has degree >= 5 in U.
 - The equality cannot continue for large n: A006856(k) grows like k^(3/2), while
   a(n) <= n (log n)^O(1) by Chakraborti, Janzer, Methuku and Montgomery. Whether equality holds
   for n = 14, 15, 16 is not known. At n = 17 the construction is one short of the formula.
@@ -183,6 +189,8 @@ m >= 2(a + b) - 2j >= 2a + 2b - 4. Every edge of U inside T joins A to B.
   b = a(a - 1)/6.
 - For every n, taking the least a with a + D(a) >= n - 2 gives a(n) >= 5n - 9 - 3a, which is
   5n - O(sqrt(n)).
+- This is a statement for small and moderate n. For large n the graphs of Pyber, Rödl and
+  Szemerédi have no 4-regular subgraph and c n log log n edges, which is more.
 - This is better than 4n - 12 for n = 34 and for every n >= 37 (equal for n = 30, 33, 36).
   Examples: a(41) >= 157 from STS(13) and a(78) >= 324 from STS(19).
 - Checks: `e585` finds the joins good for the largest packings on 3..7 points (n <= 16) and for 75
