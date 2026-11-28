@@ -1,0 +1,33 @@
+{
+ "hukum": "GECTI",
+ "sinif": "",
+ "durum": "KABUL_GERCEK_TRUST0",
+ "cikis_kodu": 0,
+ "aksiyomlar": {
+  "Green24.variants.upper_trivial": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "Green24.variants.twelve_mul_sq_le": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "Green24.variants.lower_HL": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "notlar": [
+  "IFADE_DENETIMI:upstream_imza_uyumlu"
+ ],
+ "ortam": "lean_sandbox_v437",
+ "sure_sn": 2.7,
+ "teoremler": [
+  "Green24.variants.upper_trivial",
+  "Green24.variants.twelve_mul_sq_le",
+  "Green24.variants.lower_HL"
+ ]
+}
