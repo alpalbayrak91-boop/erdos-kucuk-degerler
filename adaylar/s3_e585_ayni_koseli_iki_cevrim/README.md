@@ -1,14 +1,21 @@
 # S3. Erdős #585: no two edge-disjoint cycles on the same vertex set
 
-**Status: candidate (ADAY_YENI); not submitted anywhere.** Computed 2026-11-28.
+**Status: candidate (ADAY_YENI).** Computed 2026-11-28. Reported in
+[teorth/erdosproblems issue #563](https://github.com/teorth/erdosproblems/issues/563); not submitted to the OEIS.
 
 **Credit.** The values a(1)..a(10) = 0, 1, 3, 6, 9, 12, 16, 19, 23, 27 were already published in
 the working report "Erdős Problem #585: Same-vertex-set cycles — working report"
 (https://erdosproblemaday.com/report/585, 2026-07-28; built by Patrick White with Claude). That
 report also gives the lower bound a(11) >= 30. Here those ten values were recomputed with
-independent code. **New in this work:** a(11) = 31, computed by two methods; a(12) = 36 and 39 <= a(13) <= 40, both
-from the certified ladder (method (c)); and the number of extremal graphs (isomorphism classes) for
-n <= 12.
+independent code. **New in this work:**
+- a(11) = 31, computed by two methods;
+- a(12) = 36, from the certified ladder (method (c));
+- a(13) = 39: the upper bound is method (d), the lower bound is the construction below;
+- the number of extremal graphs (isomorphism classes) for n <= 12;
+- the structure of the extremal graphs: for 2 <= n <= 13, a(n) = 2n - 3 + A006856(n - 2), and the
+  join of K_2 with an extremal graph of girth >= 5 is extremal (section "Structure");
+- lower bounds from that construction: a(14) >= 43, a(15) >= 48, a(16) >= 52, a(17) >= 56,
+  a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17.
 
 ## Definition
 
@@ -42,9 +49,10 @@ Some easy facts:
 | 10 | 27 | 596191 / 7 | 395166 / 0 | 27 | 7 |
 | 11 | **31** | 27749332 (min degree >= 4) / 8 | 2173681 (min degree >= 5) / 0 | 31 | 8 |
 | 12 | **36** | – | – | 36 (method (c)) | 1 (method (c)) |
-| 13 | **39 or 40** | – | – | 40 is an upper bound only; 39 is reached | ? |
+| 13 | **39** | – | – | 39: reached by K_2 v H (section "Structure"); 40 edges excluded by method (d) | not classified; at least 126 |
 
-The n = 12 and n = 13 rows come only from method (c).
+The n = 12 row comes only from method (c). The n = 13 row comes from method (d) and the join
+construction.
 
 - Method (a) scans every graph with the given number of edges.
 - Method (b) builds every good graph above a threshold, so it gives the maximum edge count directly.
@@ -58,6 +66,80 @@ The n = 12 and n = 13 rows come only from method (c).
 - Running times on this machine (8 cores, shared, 3 parallel parts): n <= 10 takes seconds. At
   n = 11 the 32-edge scan takes 25 s, the 31-edge scan 4 min and the 30-edge scan 7 min. The
   ladder takes about 70 s.
+
+## Structure: two universal vertices plus a graph of girth at least 5
+
+Write K_2 v H for the join: two new adjacent vertices, each joined to every vertex of H. Write
+A006856(k) for the maximum number of edges of a graph on k vertices with no 3-cycle and no 4-cycle
+([OEIS A006856](https://oeis.org/A006856); set A006856(0) = 0).
+
+**Observation.** For 2 <= n <= 13,
+
+    a(n) = 2n - 3 + A006856(n - 2).
+
+- For 2 <= n <= 12, `yapi.py` reads the extremal graphs in `tanik/` and finds graphs of the form
+  K_2 v H, with H free of 3-cycles and 4-cycles, among them: 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1 classes
+  for n = 2..12. These are the numbers of extremal graphs of girth >= 5 on 0..10 vertices
+  ([OEIS A159847](https://oeis.org/A159847)). So for these n, K_2 v H is extremal for every
+  extremal H.
+- At n = 7 the extremal graph is K_2 v C_5. The report describes it as K_7 minus a 5-cycle, which
+  is the same graph.
+- At n = 12 the only extremal graph is K_2 v Petersen. The check is by canonical labelling:
+  `nauty-geng -tf 10 15:15 | python3 yapi.py --join | nauty-labelg` gives `tanik/uc_n12_m36.g6`.
+- For 6 <= n <= 11 there are also extremal graphs that are not of this form (1, 0, 10, 7, 6, 7
+  classes).
+- At n = 13 the value 39 = 23 + 16 is reached by K_2 v H for the 3 extremal graphs H on 11
+  vertices (`tanik/birlesim_n13_m39.g6`).
+
+**Lemma.** Let H be a triangle-free graph in which every set of t >= 4 vertices spans at most
+2t - 5 edges. Then K_2 v H is good.
+
+*Proof.* Let u, v be the two joined vertices. Suppose two edge-disjoint cycles have the same vertex
+set S, and let U be their union. U is 4-regular on S, so it has 2|S| edges and |S| >= 5. Put
+T = S \ {u, v}, t = |T| and j = |S ∩ {u, v}|. At most 4j edges of U meet {u, v}. So at least
+2(t + j) - 4j = 2t - 2j >= 2t - 4 edges of U lie inside T, and these are edges of H. If t >= 4,
+this contradicts the hypothesis. If t <= 3, then |S| = 5, so U = K_5 and T spans a triangle of H. ∎
+
+**Consequences.**
+- The case t = 4 of the hypothesis says that H has no 4-cycle. For 4 <= t <= 14 the values
+  A006856(t) = 3, 5, 6, 8, 10, 12, 15, 16, 18, 21, 23 are all at most 2t - 5. So every graph of
+  girth >= 5 on at most 14 vertices satisfies the hypothesis, and for 3 <= n <= 16
+
+      a(n) >= 2n - 3 + A006856(n - 2).
+
+  This gives a(13) >= 39, a(14) >= 43, a(15) >= 48 and a(16) >= 52.
+- K_2 v K_3 = K_5 and K_2 v C_4 are bad. So on at most 16 vertices, the good graphs with two
+  adjacent universal vertices are exactly the graphs K_2 v H with H of girth >= 5.
+- **n >= 17.** For every k >= 15 there is a graph H_k on k vertices with 2k - 5 edges that satisfies
+  the hypothesis. So a(n) >= 2n - 3 + 2(n - 2) - 5 = 4n - 12 for n >= 17.
+  - H_15 is the extremal graph of girth >= 5 on 15 vertices (26 edges) minus one edge.
+  - H_{k+1} is H_k plus a new vertex joined to two vertices at distance >= 3. Such a pair exists,
+    because a graph of girth >= 5 and diameter <= 2 is a star or a Moore graph, and none of these
+    has k >= 15 vertices and 2k - 5 edges. The new vertex creates no 3-cycle and no 4-cycle, and a
+    set of t >= 5 vertices containing it spans at most 2(t - 1) - 5 + 2 = 2t - 5 edges.
+  - For comparison, adding vertices of degree 3 gives only 3n - 6 (the lower bound in the report).
+- **The bound 2t - 5 is sharp at t = 15.** A006856(15) = 26 = 2 * 15 - 4, and the join of K_2 with
+  the unique extremal graph on 15 vertices is bad: all 17 vertices carry two edge-disjoint
+  Hamiltonian cycles (`tanik/birlesim_n17_m57_kotu.txt`, checked by `sertifika_dogrula.py`). So
+  this construction gives a(17) >= 56, not 57.
+- **n = 18.** A006856(16) = 28 = 2 * 16 - 4, and there are 22 extremal graphs. Let H be one of them
+  with minimum degree 3 and a vertex x of degree >= 5 (3 of the 22). Then K_2 v H is good, so
+  a(18) >= 33 + 28 = 61:
+  - a set T of at most 14 vertices spans at most 2t - 5 edges;
+  - a set of 15 vertices spans at most 28 - 3 = 25 < 26 edges;
+  - if T is all of H, then U must contain all 28 edges of H, and x gets degree >= 5 in U.
+- The equality cannot continue for large n: A006856(k) grows like k^(3/2), while
+  a(n) <= n (log n)^O(1) by Chakraborti, Janzer, Methuku and Montgomery. Whether equality holds
+  for n = 14, 15, 16 is not known. At n = 17 the construction is one short of the formula.
+
+**Computer checks of the lemma (`birlesim.sh`, `out/birlesim.log`).**
+- k = 3..11: K_2 v H is good for every graph H of girth >= 5 (3, 6, 11, 23, 48, 114, 293, 869 and
+  2963 graphs).
+- k = 12, 13, 14: K_2 v H is good for every extremal H (7, 1 and 4 graphs).
+- k = 15: K_2 v H is bad for the extremal H (see above). K_2 v (H - e) is good for every edge e
+  (9 classes, `tanik/birlesim_n17_m56.g6`).
+- k = 16: the 3 joins with 61 edges are good (`tanik/birlesim_n18_m61.g6`, about 3 minutes per
+  graph).
 
 ## Methods
 
@@ -146,14 +228,32 @@ which no "bad" verdict is trusted.
   All 792 are certified bad, so a(13) <= 40 (`out/yontem_c_n13_t41.log`).
   - Lower bound: extending L_12 to 39 edges gives 126 good classes,
     `tanik/n13_m39_iyi_altsinir.g6`. These are witnesses only, not a classification.
-  - Deciding 40 needs the full L_12(34) and so the chain t_13 = 39 (or 40). That chain needs
-    L_10(23) (1083603 classes) and L_11(28) (22009718 candidates). It was stopped to stay within
-    the time budget. a(13) is open between 39 and 40.
+  - The ladder alone would need the full L_12(34) to decide 40. Method (d) below decides it in
+    another way.
 - **Independent check of the lower bounds.** `e585_ref2.py` is pure Python: it does a DFS
   enumeration of all Hamiltonian cycles per vertex set and tests every pair.
   - It agrees with `e585.c` on all graphs with n <= 8.
   - It confirms the 8 extremal graphs at n = 11, the extremal graph at n = 12 and all 126 39-edge
     witnesses at n = 13 (`out/ref2.txt`).
+
+**Method (d): no good graph on 13 vertices has 40 edges (`yontem_d.sh`).** Let G be good on 13
+vertices with 40 edges, and let v be a vertex of minimum degree d. Then d <= floor(80/13) = 6, and
+G - v is good on 12 vertices with 40 - d <= a(12) = 36 edges. So d is 4, 5 or 6.
+- **d = 4 or 5.** G - v has 36 or 35 edges, so it is one of the 29 graphs of L_12(35) from
+  method (c). G is obtained from it by adding a vertex of minimum degree (`e585 extend 40 -a`).
+  This gives 10093 candidates: 9301 with 40 edges and 792 with 41 edges. All 10093 have a valid
+  certificate.
+- **d = 6.** Every degree is at least 6 and the degree sum is 80, so every degree is at most 8.
+  These graphs are generated by `nauty-geng -d6 -D8 13 40:40`, in 256 parts: 23489426 graphs.
+  All have a valid certificate (0 errors, 0 missing).
+- So a(13) <= 39 (`out/yontem_d.log`). With the lower bound from K_2 v H this gives **a(13) = 39**.
+- The d = 6 part depends on the completeness of nauty-geng, as method (a) does. The d = 4, 5 part
+  depends on L_12(35) from the certified ladder.
+- Check of the generator: `nauty-geng -d6 -D6 13 39:39` gives 367860 graphs, the known number of
+  6-regular graphs on 13 vertices ([OEIS A165627](https://oeis.org/A165627)).
+- The extremal graphs at n = 13 are not classified here. 126 classes are known
+  (`tanik/n13_m39_iyi_altsinir.g6`); 3 of them are the joins K_2 v H
+  (`tanik/birlesim_n13_m39.g6`).
 
 **Shared parts.** Methods (a) and (b) share the Hamiltonian-cycle routine of `e585.c`. For n <= 8,
 that routine is checked against `e585_ref.py`.
@@ -171,6 +271,10 @@ that routine is checked against `e585_ref.py`.
 | live OEIS (browser, 2026-11-28) | 0,1,3,6,9,12,16,19,23,27 | no match; closest A220657 differs in one term |
 | web (Exa) | "Erdős 585 small values" | **erdosproblemaday.com/report/585: a(1..10) published, a(11) >= 30** |
 | erdosproblems.ai/problems/585 | page | no exact values |
+| erdosproblemaday.com/report/585 | structure: "Petersen", "girth", "join", "universal", "A006856", general constructions | none of these; the only general bound is 3n - 6 (add vertices of degree 3); G_7 is described as K_7 minus a 5-cycle |
+| arXiv 2404.07190, arXiv 2410.02437 (Janzer–Steiner–Sudakov) | small cases, join constructions | asymptotic results only |
+| web (Exa) | "two universal vertices joined to a girth five graph", "K_2 join Petersen", same-vertex-set cycles | no match |
+| local OEIS snapshot | 0,1,2,3,5,6,8,10,12,15,16,18,21,23 and 1,1,1,2,1,2,1,1,1,1,3,7,1,4,1,22 | A006856 and A159847 (used above) |
 
 ## Known bounds
 
@@ -195,6 +299,10 @@ nauty-geng -q -d5 11 32:32 | ./e585 check -q        # graphs=2173681 good=0 -> a
 python3 e585_ref.py < tanik/uc_n11_m31.g6           # same, independent checker (about 1 min per graph)
 nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertifika_dogrula.py m32.g6   # valid=2173681 errors=0 missing=0
 ./yontem_b.sh /tmp/ladder 11 30 && cat /tmp/ladder/yontem_b.log
+./yontem_c.sh /tmp/c12 "1:0 2:1 3:2 4:4 5:6 6:9 7:12 8:16 9:20 10:25 11:30 12:35"   # a(12) = 36, about 3 min
+./yontem_d.sh /tmp/d13 /tmp/c12/L12.g6        # a(13) <= 39, about 20 min with 3 jobs
+python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n - 2)
+./birlesim.sh /tmp/join                       # joins K_2 v H for k <= 14, about 2 min
 ```
 
 ## Files
@@ -204,10 +312,17 @@ nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertif
 - `sertifika_dogrula.py`: independent certificate verifier.
 - `e585_ref2.py`: second independent checker (DFS enumeration of Hamiltonian cycles).
 - `yontem_c.sh`: method (c), the certified ladder.
+- `yontem_d.sh`: method (d), a(13) <= 39.
+- `yapi.py`: join form of the extremal graphs; `--join` builds K_2 v H.
+- `birlesim.sh`: computer checks of the lemma.
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
 - `yontem_b.sh`: method (b).
 - `run.sh`: runs everything.
-- `tanik/uc_n<n>_m<a(n)>.g6`: all extremal graphs (canonical graph6).
+- `tanik/uc_n<n>_m<a(n)>.g6`: all extremal graphs (canonical graph6), n <= 12.
+- `tanik/birlesim_n<n>_m<m>.g6`: the joins K_2 v H for the extremal H on n - 2 vertices, n = 13..16
+  (and n = 18: the 3 joins with 61 edges).
+- `tanik/birlesim_n17_m56.g6`: K_2 v (H - e) for the extremal H on 15 vertices, one graph per edge orbit.
+- `tanik/birlesim_n17_m57_kotu.txt`: certificate that the 57-edge join at n = 17 is bad.
 - `out/`: logs.
 - `oeis_draft.txt`: OEIS draft.

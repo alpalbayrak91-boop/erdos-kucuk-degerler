@@ -1,0 +1,3 @@
+extensions of L12 (d = 4, 5): candidates=10093 graphs=10093 good=0 bad=10093 certificates=10093 valid=10093 errors=0 missing=0
+minimum degree 6 (d = 6): parts=256 candidates=23489426 graphs=23489426 good=0 bad=23489426 certificates=23489426 valid=23489426 errors=0 missing=0
+cross-check of nauty-geng with degree bounds: nauty-geng -d6 -D6 13 39:39 gives 367860 graphs (the known number of 6-regular graphs on 13 vertices)
