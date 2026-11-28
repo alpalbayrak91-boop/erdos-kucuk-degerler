@@ -25,8 +25,9 @@ independent code. **New in this work:**
   for n = 25..32. So the identity above fails at n = 14;**
 - **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
   proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
-- **a fourth construction, the cubic family (section "Cubic family"), checked by computer for
-  m <= 18 and not proved: a(4m + 3) >= 17m + 2, for example a(39) >= 155 and a(59) >= 240;**
+- **a fourth construction, the cubic family (section "Theorem (cubic family)"), with a
+  computer-assisted proof for every m >= 9: a(4m + 3) >= 17m + 2, so a(n) >= 4.25 n - 13 for
+  n >= 36; for example a(39) >= 155 and a(59) >= 240;**
 - a second construction, K_2 joined with the incidence graph of a linear triple system, gives
   a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157 (useful for moderate n only: for large n the
   known bound c n log log n is larger).
@@ -279,12 +280,12 @@ G(C_b, C_b(3)) and of G(C_b, C_b(3) minus the edge {b_0, b_3}).
 - After canonical labelling, the search witnesses for n = 17 and n = 19..24 and one of the two for
   n = 16 are members of this family.
 
-## Cubic family (checked by computer, no proof)
+## Theorem (cubic family)
 
 In the search witness for n = 31 (121 edges) the graph R = G - {u1, u2} has the same shape as in
 the cycle family, except that B carries a cubic graph of girth 5 instead of a cycle. The following
-explicit family was obtained by Claude from that observation; it is **verified by integer
-programming for the listed m only**, and there is no proof for general m.
+explicit family was obtained by Claude from that observation. The proof is computer-assisted: two
+lemmas proved by hand and a finite computation. It is in [`kubik_kaniti.md`](kubik_kaniti.md).
 
 **Definition.** Let B = GP(m, 2) be the generalized Petersen graph: outer vertices x_i with the
 cycle x_i x_{i+1}, inner vertices y_i with the edges y_i y_{i+2}, and the spokes x_i y_i (indices
@@ -293,25 +294,53 @@ is built as in the cycle family: one vertex a_e for each edge e of F_k, adjacent
 e and to w, u1, u2; w adjacent only to the a_e and to u1; u1 universal; u2 adjacent to everything
 except w. It has n = 4m + 3 vertices and 17m + 2 edges, that is 4.25 n - 10.75.
 
-**Computation (`kubik_aile.py`, `out/kubik_aile.log`).**
-- k = 3: no 4-regular subgraph for m = 7 and for every m with 9 <= m <= 18 (n = 31, 39, 43, ..., 75).
-  Cross-check with two other solvers (`capraz_denetim.py`, `out/capraz_kubik.log`): CP-SAT agrees for
-  all of these m; CBC agrees for m = 7, 9, 10, 11, 12, 14, 15 and reaches its 150 s limit without an
-  answer for m = 13, 16, 17, 18. All three solvers find the 4-regular subgraphs for m = 6 and m = 8.
-- k = 4: no 4-regular subgraph for 9 <= m <= 14.
-- k = 2: a 4-regular subgraph exists for m = 9, 10, 11, 12.
+**Theorem.** For m = 7 and for every m >= 9, G(GP(m, 2), F_3) has no nonempty 4-regular subgraph.
+Hence a(4m + 3) >= r(4m + 3) >= 17m + 2 for these m, and a(n) >= 4.25 n - 13 for every n >= 36
+(delete vertices a_e; each deletion removes 5 edges).
+
+*Proof idea.* (1) Counting at w, u1, u2 shows that a 4-regular subgraph H would be small: the
+vertices of H in B, and the ends of the chords belonging to its vertices a_e, use at most 12
+different indices. (2) The family is invariant under shifting the indices, and every edge of B or
+F joins indices that differ by at most 3. So H can be moved, piece by piece, into any member with
+at least 34 indices: gaps of size at most 3 between the indices used are kept and larger gaps are
+shrunk. (3) So a 4-regular subgraph in some member with m >= 37 would give one in the member
+m = 34, and it is enough to check m = 7 and 9 <= m <= 36 by computer.
+
+**Computation.**
+- `out/kubik_tam.log` (0/1 program, HiGHS): no 4-regular subgraph for m = 7 and for every m with
+  9 <= m <= 70 except m = 59, where the run reached its 1500 s limit without an answer (m >= 37 is
+  not needed for the proof).
+- `out/kubik_cpsat.log` (CP-SAT): no 4-regular subgraph for m = 7 and for every m with
+  9 <= m <= 36, and for m = 40. For m = 52 CP-SAT reached its 900 s limit without an answer.
+- CBC agrees for m = 7, 9, 10, 11, 12, 14, 15 (`out/capraz_kubik.log`).
+- `kubik_tasima_sina.py`, `out/kubik_tasima.log`: a randomized test of the map in step (2)
+  (21,000 index sets, about 1.2 million edges, 0 errors).
+- The solvers give no machine-checkable certificate of infeasibility; the statement rests on two
+  independent solvers agreeing on the whole range that the proof uses.
+
+**Review.** The proof was read by a second model instructed to look for errors (no mathematical
+error found; two corrections to the text were made) and tested numerically on graphs where
+4-regular subgraphs exist. A council of open-weight models was also asked to find errors; the one
+objection raised turned out to be a step that was correct but too terse, and it is now written out.
+
+**What fails, and the limit of this template.**
+- k = 2: every member has a 4-regular subgraph on six vertices (u1, u2, one a_e, x_i, y_i, y_{i+2}).
+  k = 4: no 4-regular subgraph for 9 <= m <= 14 (computation only).
 - m = 6 and m = 8 fail for k = 3: GP(6, 2) has triangles and GP(8, 2) has 4-cycles on the inner
   vertices, and a 4-cycle in R - w together with u1, u2 is a 4-regular subgraph on 6 vertices.
-- Adding a third chord at every outer vertex (F with 3m edges; nine choices of the three steps were
-  tried for m = 9 and m = 11) always produced a 4-regular subgraph. These trials are not in the log.
+- If a vertex b of B lies on three chords e1, e2, e3, then u1, u2, w, b and the three vertices
+  a_{ei} carry a 4-regular subgraph (edges w a_{ei}, u1 a_{ei}, u2 a_{ei}, b a_{ei}, u1 w, u2 b).
+  So in this template F has maximum degree at most 2, and with a cubic B the family above has the
+  largest possible number of edges, 4.25 n - 10.75. The search graphs with more edges
+  (n = 26, 30, 32) are not of this form.
 
-So a(4m + 3) >= r(4m + 3) >= 17m + 2 for m = 7 and 9 <= m <= 18. At n = 31 this gives 121 (the
-search later found 122); together with the two simple steps below the table it gives the best bound
-known here for 35 <= n <= 71 (the triple systems of the Proposition give the same value at n = 72
-and more from n = 73 on). Witnesses: `tanik/kubik_m<m>_n<n>_e<edges>.g6`.
+At n = 31 the family gives 121 (the search later found 122); together with the two simple steps
+below the table it gives the best bound known here for 35 <= n <= 71 (the triple systems of the
+Proposition give the same value at n = 72 and more from n = 73 on).
+Witnesses: `tanik/kubik_m<m>_n<n>_e<edges>.g6`.
 
-**Open.** A proof for all m >= 9; a description of which cubic graphs B and which 2-regular F work;
-whether a denser F can work.
+**Open.** A proof without computation; which cubic graphs B and which 2-regular F work; an
+explicit family with more than 4.25 n edges.
 
 **Best lower bounds known here.**
 
@@ -322,8 +351,7 @@ whether a denser F can work.
 The value for n = 14 is exact (section "a(14) = 44"). The values for n = 15..32 come from the search below (n = 15
 is also given by the join construction).
 For n >= 33 there are no search witnesses yet, and the values come from the cubic family (section
-"Cubic family", checked by computer for m <= 18, no proof): a(4m + 3) >= 17m + 2 for m = 7 and
-9 <= m <= 18, so a(39) >= 155, a(43) >= 172, a(47) >= 189, a(51) >= 206, a(55) >= 223,
+"Theorem (cubic family)"): a(4m + 3) >= 17m + 2 for m = 7 and every m >= 9, so a(39) >= 155, a(43) >= 172, a(47) >= 189, a(51) >= 206, a(55) >= 223,
 a(59) >= 240, ..., a(71) >= 291. Two simple steps fill the gaps: deleting j of the vertices a_e
 gives a(4m + 3 - j) >= 17m + 2 - 5j, and adding a vertex of degree 3 to a good graph keeps it good
 (a vertex on two edge-disjoint cycles has degree at least 4), so a(n + 1) >= a(n) + 3. In the table,
@@ -635,7 +663,8 @@ python3 kubik_aile.py 6 18 | grep -v '^#' | python3 dort_duzenli.py   # cubic fa
 - `birlesim.sh`: computer checks of the lemma.
 - `dort_duzenli.py`: looks for a 4-regular subgraph by integer programming (needs scipy).
 - `aile.py`: the cycle family G(C_b, F) (graph6).
-- `kubik_aile.py`: the cubic family G(GP(m,2), F_k) (graph6); log in `out/kubik_aile.log`.
+- `kubik_aile.py`: the cubic family G(GP(m,2), F_k) (graph6); logs `out/kubik_aile.log`, `out/kubik_tam.log`.
+- `kubik_kaniti.md`: proof of the Theorem (cubic family); `kubik_tasima_sina.py`: test of its Lemma 2.
 - `capraz_denetim.py`: the same test with CP-SAT and CBC (independent of scipy/HiGHS).
 - `aile_kaniti.md`: full proof of the Theorem (cycle family).
 - `yontem_a.sh`: method (a) for n <= 10.

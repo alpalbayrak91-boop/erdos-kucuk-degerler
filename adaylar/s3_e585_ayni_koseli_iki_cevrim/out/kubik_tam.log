@@ -1,0 +1,68 @@
+# kubik_aile.py M M 3 | dort_duzenli.py (scipy 1.17.1, HiGHS), one member at a time, 28 Nov 2026
+# m = 6..18: copied from out/kubik_aile.log (k = 3)
+m=6 k=3 n=21 edges=74 n=21 m=74 four_regular_subgraph=1 S=0,1,15,17,19
+m=7 k=3 n=31 edges=121 n=31 m=121 four_regular_subgraph=0
+m=8 k=3 n=35 edges=138 n=35 m=138 four_regular_subgraph=1 S=0,1,27,29,31,33
+m=9 k=3 n=39 edges=155 n=39 m=155 four_regular_subgraph=0
+m=10 k=3 n=43 edges=172 n=43 m=172 four_regular_subgraph=0
+m=11 k=3 n=47 edges=189 n=47 m=189 four_regular_subgraph=0
+m=12 k=3 n=51 edges=206 n=51 m=206 four_regular_subgraph=0
+m=13 k=3 n=55 edges=223 n=55 m=223 four_regular_subgraph=0
+m=14 k=3 n=59 edges=240 n=59 m=240 four_regular_subgraph=0
+m=15 k=3 n=63 edges=257 n=63 m=257 four_regular_subgraph=0
+m=16 k=3 n=67 edges=274 n=67 m=274 four_regular_subgraph=0
+m=17 k=3 n=71 edges=291 n=71 m=291 four_regular_subgraph=0
+m=18 k=3 n=75 edges=308 n=75 m=308 four_regular_subgraph=0
+# m = 19..70 (sure = wall time of the call)
+m=19 n=79 m=325 four_regular_subgraph=0 sure=10.7s
+m=20 n=83 m=342 four_regular_subgraph=0 sure=9.9s
+m=21 n=87 m=359 four_regular_subgraph=0 sure=5.7s
+m=22 n=91 m=376 four_regular_subgraph=0 sure=5.9s
+m=23 n=95 m=393 four_regular_subgraph=0 sure=14.7s
+m=24 n=99 m=410 four_regular_subgraph=0 sure=13.9s
+m=25 n=103 m=427 four_regular_subgraph=0 sure=9.4s
+m=26 n=107 m=444 four_regular_subgraph=0 sure=9.3s
+m=27 n=111 m=461 four_regular_subgraph=0 sure=8.7s
+m=28 n=115 m=478 four_regular_subgraph=0 sure=15.1s
+m=29 n=119 m=495 four_regular_subgraph=0 sure=13.4s
+m=30 n=123 m=512 four_regular_subgraph=0 sure=17.9s
+m=31 n=127 m=529 four_regular_subgraph=0 sure=17.9s
+m=32 n=131 m=546 four_regular_subgraph=0 sure=14.7s
+m=33 n=135 m=563 four_regular_subgraph=0 sure=17.1s
+m=34 n=139 m=580 four_regular_subgraph=0 sure=12.8s
+m=35 n=143 m=597 four_regular_subgraph=0 sure=13.7s
+m=36 n=147 m=614 four_regular_subgraph=0 sure=11.8s
+m=37 n=151 m=631 four_regular_subgraph=0 sure=18.2s
+m=38 n=155 m=648 four_regular_subgraph=0 sure=17.0s
+m=39 n=159 m=665 four_regular_subgraph=0 sure=37.1s
+m=40 n=163 m=682 four_regular_subgraph=0 sure=30.2s
+m=41 n=167 m=699 four_regular_subgraph=0 sure=35.9s
+m=42 n=171 m=716 four_regular_subgraph=0 sure=28.6s
+m=43 n=175 m=733 four_regular_subgraph=0 sure=52.8s
+m=44 n=179 m=750 four_regular_subgraph=0 sure=20.2s
+m=45 n=183 m=767 four_regular_subgraph=0 sure=73.6s
+m=46 n=187 m=784 four_regular_subgraph=0 sure=28.0s
+m=47 n=191 m=801 four_regular_subgraph=0 sure=26.8s
+m=48 n=195 m=818 four_regular_subgraph=0 sure=47.2s
+m=49 n=199 m=835 four_regular_subgraph=0 sure=43.1s
+m=50 n=203 m=852 four_regular_subgraph=0 sure=43.0s
+m=51 n=207 m=869 four_regular_subgraph=0 sure=38.2s
+m=52 n=211 m=886 four_regular_subgraph=0 sure=48.5s
+m=53 n=215 m=903 four_regular_subgraph=0 sure=61.6s
+m=54 n=219 m=920 four_regular_subgraph=0 sure=49.4s
+m=55 n=223 m=937 four_regular_subgraph=0 sure=78.5s
+m=56 n=227 m=954 four_regular_subgraph=0 sure=121.3s
+m=57 n=231 m=971 four_regular_subgraph=0 sure=122.0s
+m=58 n=235 m=988 four_regular_subgraph=0 sure=57.0s
+m=59 n=239 m=1005 TIME LIMIT (1500 s), no answer
+m=60 n=243 m=1022 four_regular_subgraph=0 sure=93.9s
+m=61 n=247 m=1039 four_regular_subgraph=0 sure=33.9s
+m=62 n=251 m=1056 four_regular_subgraph=0 sure=52.3s
+m=63 n=255 m=1073 four_regular_subgraph=0 sure=175.9s
+m=64 n=259 m=1090 four_regular_subgraph=0 sure=128.9s
+m=65 n=263 m=1107 four_regular_subgraph=0 sure=150.5s
+m=66 n=267 m=1124 four_regular_subgraph=0 sure=77.9s
+m=67 n=271 m=1141 four_regular_subgraph=0 sure=122.7s
+m=68 n=275 m=1158 four_regular_subgraph=0 sure=86.4s
+m=69 n=279 m=1175 four_regular_subgraph=0 sure=101.0s
+m=70 n=283 m=1192 four_regular_subgraph=0 sure=127.9s
