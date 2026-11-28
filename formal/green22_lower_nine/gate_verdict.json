@@ -1,0 +1,21 @@
+{
+ "hukum": "GECTI",
+ "sinif": "",
+ "durum": "KABUL_GERCEK_TRUST0",
+ "cikis_kodu": 0,
+ "aksiyomlar": {
+  "Green22.green_22.variants.lower_nine": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "notlar": [
+  "IFADE_DENETIMI:upstream_imza_uyumlu"
+ ],
+ "ortam": "lean_sandbox_v437",
+ "sure_sn": 147.9,
+ "teoremler": [
+  "Green22.green_22.variants.lower_nine"
+ ]
+}
