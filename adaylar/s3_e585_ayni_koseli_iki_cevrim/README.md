@@ -6,8 +6,9 @@
 the working report "Erdős Problem #585: Same-vertex-set cycles — working report"
 (https://erdosproblemaday.com/report/585, 2026-07-28; built by Patrick White with Claude). That
 report also gives the lower bound a(11) >= 30. Here those ten values were recomputed with
-independent code. **New in this work:** a(11) = 31, computed by two methods, and the number of
-extremal graphs (isomorphism classes) for n <= 11.
+independent code. **New in this work:** a(11) = 31, computed by two methods; a(12) = 36 and 39 <= a(13) <= 40, both
+from the certified ladder (method (c)); and the number of extremal graphs (isomorphism classes) for
+n <= 12.
 
 ## Definition
 
@@ -40,6 +41,10 @@ Some easy facts:
 | 9 | 23 | 10120 / 8 | 5995 / 0 | 23 | 8 |
 | 10 | 27 | 596191 / 7 | 395166 / 0 | 27 | 7 |
 | 11 | **31** | 27749332 (min degree >= 4) / 8 | 2173681 (min degree >= 5) / 0 | 31 | 8 |
+| 12 | **36** | – | – | 36 (method (c)) | 1 (method (c)) |
+| 13 | **39 or 40** | – | – | 40 is an upper bound only; 39 is reached | ? |
+
+The n = 12 and n = 13 rows come only from method (c).
 
 - Method (a) scans every graph with the given number of edges.
 - Method (b) builds every good graph above a threshold, so it gives the maximum edge count directly.
@@ -120,6 +125,36 @@ geng.
 - The lower bounds rest on explicit good graphs in `tanik/`. Their goodness is confirmed by
   `e585_ref.py`.
 
+**Method (c): certified ladder, n <= 13 (`yontem_c.sh`).** This is method (b) run in a form in
+which no "bad" verdict is trusted.
+- Every candidate is generated with `e585 extend -a`, which outputs all candidates and does no test.
+- Every candidate is then classified with `check -C -l`.
+  - A good candidate goes into L_n.
+  - A bad candidate gets a certificate: two edge-disjoint cycles on one vertex set. Each certificate
+    is checked by `sertifika_dogrula.py`.
+  - So L_n is complete given L_{n-1}.
+  - A wrong "good" verdict can only make L_n larger. It cannot break an upper bound.
+- **n = 12.** The chain uses the thresholds t = 0, 1, 2, 4, 6, 9, 12, 16, 20, 25, 30, 35 for
+  n = 1..12 (`out/yontem_c_n12_t35.log`).
+  - Each step satisfies t_{n-1} <= t_n - floor(2 t_n / n); the script checks this.
+  - All 445150 certificates are valid and there are 0 errors.
+  - L_11(30) is reproduced (1780 + 8 classes). This classification is now certified as well, and no
+    longer depends on the 68M-graph `-d3` scan.
+  - L_12(35) has 28 classes with 35 edges and 1 class with 36 edges. So **a(12) = 36**, with one
+    extremal graph, `tanik/uc_n12_m36.g6`.
+- **n = 13.** Extending L_12(35) with t_13 = 41 (41 - floor(82/13) = 35) gives 792 candidates.
+  All 792 are certified bad, so a(13) <= 40 (`out/yontem_c_n13_t41.log`).
+  - Lower bound: extending L_12 to 39 edges gives 126 good classes,
+    `tanik/n13_m39_iyi_altsinir.g6`. These are witnesses only, not a classification.
+  - Deciding 40 needs the full L_12(34) and so the chain t_13 = 39 (or 40). That chain needs
+    L_10(23) (1083603 classes) and L_11(28) (22009718 candidates). It was stopped to stay within
+    the time budget. a(13) is open between 39 and 40.
+- **Independent check of the lower bounds.** `e585_ref2.py` is pure Python: it does a DFS
+  enumeration of all Hamiltonian cycles per vertex set and tests every pair.
+  - It agrees with `e585.c` on all graphs with n <= 8.
+  - It confirms the 8 extremal graphs at n = 11, the extremal graph at n = 12 and all 126 39-edge
+    witnesses at n = 13 (`out/ref2.txt`).
+
 **Shared parts.** Methods (a) and (b) share the Hamiltonian-cycle routine of `e585.c`. For n <= 8,
 that routine is checked against `e585_ref.py`.
 
@@ -167,6 +202,8 @@ nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertif
 - `e585.c`: checker and extension (`check`, `extend`).
 - `e585_ref.py`: independent reference checker.
 - `sertifika_dogrula.py`: independent certificate verifier.
+- `e585_ref2.py`: second independent checker (DFS enumeration of Hamiltonian cycles).
+- `yontem_c.sh`: method (c), the certified ladder.
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
 - `yontem_b.sh`: method (b).

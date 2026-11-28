@@ -1,0 +1,5 @@
+# e585_ref2.py (independent Python) on witnesses
+tanik/uc_n11_m31.g6: 8 x iyi=1 kenar=31
+tanik/uc_n12_m36.g6: 1 x iyi=1 kenar=36 (4 s)
+tanik/n13_m39_iyi_altsinir.g6: 126 x iyi=1 kenar=39 (460 s)
+agreement with e585.c on all graphs n=5..8: diff 0
