@@ -1,0 +1,14 @@
+n=1 t=0 candidates=1 good=1 certificates=0 valid=0 errors=0 missing=0 classes=1 edges:count=[ 0:1 ] sec=0 parca=8
+n=2 t=1 candidates=1 good=1 certificates=0 valid=0 errors=0 missing=0 classes=1 edges:count=[ 1:1 ] sec=5 parca=8
+n=3 t=2 candidates=3 good=3 certificates=0 valid=0 errors=0 missing=0 classes=2 edges:count=[ 2:1 3:1 ] sec=5 parca=8
+n=4 t=4 candidates=8 good=8 certificates=0 valid=0 errors=0 missing=0 classes=4 edges:count=[ 4:2 5:1 6:1 ] sec=5 parca=8
+n=5 t=6 candidates=37 good=36 certificates=1 valid=1 errors=0 missing=0 classes=13 edges:count=[ 6:6 7:4 8:2 9:1 ] sec=5 parca=8
+n=6 t=9 candidates=122 good=118 certificates=4 valid=4 errors=0 missing=0 classes=46 edges:count=[ 9:21 10:14 11:8 12:3 ] sec=5 parca=8
+n=7 t=12 candidates=897 good=860 certificates=37 valid=37 errors=0 missing=0 classes=287 edges:count=[ 12:126 13:89 14:50 15:21 16:1 ] sec=5 parca=8
+n=8 t=15 candidates=9855 good=9189 certificates=666 valid=666 errors=0 missing=0 classes=3585 edges:count=[ 15:1470 16:1138 17:695 18:270 19:12 ] sec=5 parca=8
+n=9 t=19 candidates=132986 good=116700 certificates=16286 valid=16286 errors=0 missing=0 classes=52116 edges:count=[ 19:26718 20:17745 21:7168 22:477 23:8 ] sec=6 parca=8
+n=10 t=23 candidates=2908529 good=2236614 certificates=671915 valid=671915 errors=0 missing=0 classes=1083603 edges:count=[ 23:738518 24:315106 25:29144 26:828 27:7 ] sec=17 parca=8
+n=11 t=28 candidates=22009718 good=5550341 certificates=16459377 valid=16459377 errors=0 missing=0 classes=2531034 edges:count=[ 28:2421833 29:107413 30:1780 31:8 ] sec=468 parca=8
+n=12 t=33 candidates=21404966 good=1446272 certificates=19958694 valid=19958694 errors=0 missing=0 classes=476615 edges:count=[ 33:470702 34:5884 35:28 36:1 ] sec=1975 parca=8
+n=13 t=38 candidates=5557097 good=113438 certificates=5443659 valid=5443659 errors=0 missing=0 classes=36943 edges:count=[ 38:36779 39:164 ] sec=3352 parca=8
+n=14 t=44 candidates=88395 good=13 certificates=88382 valid=88382 errors=0 missing=0 classes=3 edges:count=[ 44:3 ] sec=184 parca=8
