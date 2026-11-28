@@ -330,7 +330,7 @@ gives a(4m + 3 - j) >= 17m + 2 - 5j, and adding a vertex of degree 3 to a good g
 n = 33, 34 use the second step from the n = 32 witness, n = 35..38 the first step with m = 9,
 n = 40 the second, n = 41, 42 the first with m = 10. In this range these values are larger than the
 cycle family (4n - 10 or 4n - 11) and the triple-system bound. None of these is known to be the
-exact value, except a(14) = 44 (below).
+exact value, except a(14) = 44 (below); for n = 15 the value is 48 or 49.
 
 ## Search (28 Nov 2026)
 
@@ -510,6 +510,17 @@ afterwards, on another machine, from the level files:
 - the 3 graphs of L14 are the 3 classes found independently by the search, and each has no
   4-regular subgraph (`dort_duzenli.py`);
 - the numbers of extremal graphs for n <= 12 agree with methods (a), (b), (c).
+
+**Consequence for n = 15: 48 <= a(15) <= 49** (`out/a15_ust_sinir.log`). Each of the three extremal
+graphs for n = 14 has degree sequence 13, 12, 6, 6, 6, 5 (nine times).
+- A good graph G with 50 edges on 15 vertices would have a vertex v of degree at most 6, and G - v
+  has at most a(14) = 44 edges, so deg(v) = 6, every vertex of G has degree at least 6, and G - v is
+  one of the three graphs. Then v would be adjacent to all nine vertices of degree 5. So
+  a(15) <= 49 (the averaging bound gives only 50).
+- If a good graph with 49 edges on 15 vertices has minimum degree 5, deleting such a vertex leaves
+  one of the three graphs. All 3 * C(14,5) = 6006 such extensions were tested: each contains two
+  edge-disjoint cycles on a common vertex set (6006 certificates, all valid). So a good graph with
+  49 edges on 15 vertices, if there is one, has minimum degree 6.
 
 **Method (c): certified ladder, n <= 13 (`yontem_c.sh`).** This is method (b) run in a form in
 which no "bad" verdict is trusted.

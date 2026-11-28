@@ -1,0 +1,6 @@
+# a(15) <= 49 and the minimum-degree-5 case of 49 edges, 28 Nov 2026 (input: a14_merdiven/L14.g6, the 3 extremal graphs on 14 vertices)
+# degree sequence of each of the 3 graphs: 13, 12, 6, 6, 6, 5 (nine times)
+$ e585 extend 50 -a < a14_merdiven/L14.g6 | wc -l
+0   (graphs=0: a vertex of degree 6 cannot be adjacent to all nine vertices of degree 5)
+$ e585 extend 49 -a < a14_merdiven/L14.g6 | e585 check -C -l | (certificates to sertifika_dogrula.py)
+extend: graphs=6006   check: graphs=6006 good=0 bad=6006   verifier: certificates=6006 valid=6006 errors=0
