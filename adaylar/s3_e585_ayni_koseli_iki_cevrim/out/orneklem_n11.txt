@@ -1,0 +1,5 @@
+# n=11 sample: 20000 graphs from 'nauty-geng -q -d4 11 31:31 | shuf -n 20000 --random-source=<(yes 585)' plus tanik/uc_n11_m31.g6
+# C (e585.c) vs Python (e585_ref.py), per-graph 'iyi kenar' lines: diff empty
+lines=20008 diff_lines=0
+  20000 iyi=0 kenar=31
+      8 iyi=1 kenar=31

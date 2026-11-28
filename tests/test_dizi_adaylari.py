@@ -62,3 +62,50 @@ def test_raw_outputs_agree_with_drafts() -> None:
     for name in ("method_B1_onepoint_m7_8.txt", "method_B2_twopoint_m7_8.txt"):
         found = dict(re.findall(r"^([78]) (\d+)$", (S2 / "out" / name).read_text(encoding="utf-8"), re.M))
         assert int(found["7"]) == s2[6] and int(found["8"]) == s2[7]
+
+
+S3 = ROOT / "adaylar" / "s3_e585_ayni_koseli_iki_cevrim"
+
+
+def _e585_good(n: int, edges: set) -> bool:
+    """True if no vertex set spans two edge-disjoint Hamiltonian cycles (brute force)."""
+    from itertools import permutations
+
+    for size in range(5, n + 1):
+        for S in combinations(range(n), size):
+            cycles = []
+            for perm in permutations(S[1:]):
+                cyc = (S[0],) + perm
+                es = frozenset(tuple(sorted(p)) for p in zip(cyc, cyc[1:] + (S[0],)))
+                if es <= edges:
+                    cycles.append(es)
+            if any(not (a & b) for a, b in combinations(cycles, 2)):
+                return False
+    return True
+
+
+def test_s3_small_terms() -> None:
+    data = _data(S3 / "oeis_draft.txt")
+    pairs5 = list(combinations(range(5), 2))
+    best = max(
+        bin(mask).count("1")
+        for mask in range(1 << 10)
+        if _e585_good(5, {p for i, p in enumerate(pairs5) if mask >> i & 1})
+    )
+    assert data[:5] == [0, 1, 3, 6, best] == [0, 1, 3, 6, 9]
+
+
+def test_s3_logs_agree_with_draft() -> None:
+    data = _data(S3 / "oeis_draft.txt")
+    good = {}
+    for line in (S3 / "out" / "yontem_a.log").read_text(encoding="utf-8").splitlines():
+        n, m = map(int, line.split()[:2])
+        good[(n, m)] = int(re.search(r"good=(\d+)", line).group(1))
+    for n in range(5, 11):
+        assert good[(n, data[n - 1])] > 0 and good[(n, data[n - 1] + 1)] == 0
+    f11 = (S3 / "out" / "f11_tarama.log").read_text(encoding="utf-8")
+    assert re.search(r"11 32:32\): graphs=2173681 good=0", f11)
+    assert re.search(r"11 31:31\): graphs=27749332 good=8", f11)
+    assert data[10] == 31
+    for n in range(1, 12):
+        assert (S3 / "tanik" / f"uc_n{n}_m{data[n - 1]}.g6").exists()
