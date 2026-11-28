@@ -23,6 +23,8 @@ independent code. **New in this work:**
   for n = 25..32. So the identity above fails at n = 14, and a(14) is 44 or 45;**
 - **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
   proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
+- **a fourth construction, the cubic family (section "Cubic family"), checked by computer for
+  m <= 18 and not proved: a(4m + 3) >= 17m + 2, for example a(39) >= 155 and a(59) >= 240;**
 - a second construction, K_2 joined with the incidence graph of a linear triple system, gives
   a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157 (useful for moderate n only: for large n the
   known bound c n log log n is larger).
@@ -274,19 +276,54 @@ G(C_b, C_b(3)) and of G(C_b, C_b(3) minus the edge {b_0, b_3}).
 - After canonical labelling, the search witnesses for n = 17 and n = 19..24 and one of the two for
   n = 16 are members of this family.
 
+## Cubic family (checked by computer, no proof)
+
+In the search witness for n = 31 (121 edges) the graph R = G - {u1, u2} has the same shape as in
+the cycle family, except that B carries a cubic graph of girth 5 instead of a cycle. The following
+explicit family was obtained by Claude from that observation; it is **verified by integer
+programming for the listed m only**, and there is no proof for general m.
+
+**Definition.** Let B = GP(m, 2) be the generalized Petersen graph: outer vertices x_i with the
+cycle x_i x_{i+1}, inner vertices y_i with the edges y_i y_{i+2}, and the spokes x_i y_i (indices
+mod m). Let F_k = { x_i y_{i+k}, x_i y_{i-k} }, a 2-regular graph on V(B) with 2m edges. G(B, F_k)
+is built as in the cycle family: one vertex a_e for each edge e of F_k, adjacent to the two ends of
+e and to w, u1, u2; w adjacent only to the a_e and to u1; u1 universal; u2 adjacent to everything
+except w. It has n = 4m + 3 vertices and 17m + 2 edges, that is 4.25 n - 10.75.
+
+**Computation (`kubik_aile.py`, `out/kubik_aile.log`).**
+- k = 3: no 4-regular subgraph for m = 7 and for every m with 9 <= m <= 18 (n = 31, 39, 43, ..., 75).
+- k = 4: no 4-regular subgraph for 9 <= m <= 14.
+- k = 2: a 4-regular subgraph exists for m = 9, 10, 11, 12.
+- m = 6 and m = 8 fail for k = 3: GP(6, 2) has triangles and GP(8, 2) has 4-cycles on the inner
+  vertices, and a 4-cycle in R - w together with u1, u2 is a 4-regular subgraph on 6 vertices.
+- Adding a third chord at every outer vertex (F with 3m edges; nine choices of the three steps were
+  tried for m = 9 and m = 11) always produced a 4-regular subgraph. These trials are not in the log.
+
+So a(4m + 3) >= r(4m + 3) >= 17m + 2 for m = 7 and 9 <= m <= 18. At n = 31 this equals the value
+found by the search; together with the two simple steps below the table it gives the best bound
+known here for 35 <= n <= 71 (the triple systems of the Proposition give the same value at n = 72
+and more from n = 73 on). Witnesses: `tanik/kubik_m<m>_n<n>_e<edges>.g6`.
+
+**Open.** A proof for all m >= 9; a description of which cubic graphs B and which 2-regular F work;
+whether a denser F can work.
+
 **Best lower bounds known here.**
 
-| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 128 | 131 | 134 | 137 | 140 | 143 | 147 | 152 | 157 |
+| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 128 | 131 | 135 | 140 | 145 | 150 | 155 | 158 | 162 | 167 | 172 |
 
 The values for n = 14 and 16..32 come from the search below; n = 15 from the join construction.
-For n >= 33 there are no search witnesses yet. Adding a vertex of degree 3 to a good graph keeps it
-good (a vertex on two edge-disjoint cycles has degree at least 4), so a(n + 1) >= a(n) + 3; this
-gives 125 + 3(n - 32) for n = 33..38, more than the cycle family (4n - 10 or 4n - 11) in this range.
-The values for n = 39, 40, 41 come from the triple systems on 13 points (n = 41: STS(13)). For larger
-n the bound is the largest of the three. None of these is known to be the exact value.
-a(14) <= 45 (below).
+For n >= 33 there are no search witnesses yet, and the values come from the cubic family (section
+"Cubic family", checked by computer for m <= 18, no proof): a(4m + 3) >= 17m + 2 for m = 7 and
+9 <= m <= 18, so a(39) >= 155, a(43) >= 172, a(47) >= 189, a(51) >= 206, a(55) >= 223,
+a(59) >= 240, ..., a(71) >= 291. Two simple steps fill the gaps: deleting j of the vertices a_e
+gives a(4m + 3 - j) >= 17m + 2 - 5j, and adding a vertex of degree 3 to a good graph keeps it good
+(a vertex on two edge-disjoint cycles has degree at least 4), so a(n + 1) >= a(n) + 3. In the table,
+n = 33, 34 use the second step from the n = 32 witness, n = 35..38 the first step with m = 9,
+n = 40 the second, n = 41, 42 the first with m = 10. In this range these values are larger than the
+cycle family (4n - 10 or 4n - 11) and the triple-system bound. None of these is known to be the
+exact value. a(14) <= 45 (below).
 
 ## Search (28 Nov 2026)
 
@@ -511,6 +548,7 @@ python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n
 ./birlesim.sh /tmp/join                       # joins K_2 v H for k <= 14, about 2 min
 python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph=0 (needs scipy)
 python3 aile.py 5 20 | grep -v '^#' | python3 dort_duzenli.py   # cycle family: 1 for b = 5, 0 for b = 6..20
+python3 kubik_aile.py 6 18 | grep -v '^#' | python3 dort_duzenli.py   # cubic family, k = 3: 1 for m = 6, 8; 0 for m = 7, 9..18
 ```
 
 ## Files
@@ -525,6 +563,7 @@ python3 aile.py 5 20 | grep -v '^#' | python3 dort_duzenli.py   # cycle family: 
 - `birlesim.sh`: computer checks of the lemma.
 - `dort_duzenli.py`: looks for a 4-regular subgraph by integer programming (needs scipy).
 - `aile.py`: the cycle family G(C_b, F) (graph6).
+- `kubik_aile.py`: the cubic family G(GP(m,2), F_k) (graph6); log in `out/kubik_aile.log`.
 - `aile_kaniti.md`: full proof of the Theorem (cycle family).
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.

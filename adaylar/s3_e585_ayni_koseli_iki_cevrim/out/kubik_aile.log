@@ -1,0 +1,26 @@
+# kubik_aile.py 6 18 (k = 3) | dort_duzenli.py   -- 2026-11-28T12:10Z, scipy 1.17.1
+# m=6 k=3 n=21 edges=74 n=21 m=74 four_regular_subgraph=1 S=0,1,15,17,19
+# m=7 k=3 n=31 edges=121 n=31 m=121 four_regular_subgraph=0
+# m=8 k=3 n=35 edges=138 n=35 m=138 four_regular_subgraph=1 S=0,1,27,29,31,33
+# m=9 k=3 n=39 edges=155 n=39 m=155 four_regular_subgraph=0
+# m=10 k=3 n=43 edges=172 n=43 m=172 four_regular_subgraph=0
+# m=11 k=3 n=47 edges=189 n=47 m=189 four_regular_subgraph=0
+# m=12 k=3 n=51 edges=206 n=51 m=206 four_regular_subgraph=0
+# m=13 k=3 n=55 edges=223 n=55 m=223 four_regular_subgraph=0
+# m=14 k=3 n=59 edges=240 n=59 m=240 four_regular_subgraph=0
+# m=15 k=3 n=63 edges=257 n=63 m=257 four_regular_subgraph=0
+# m=16 k=3 n=67 edges=274 n=67 m=274 four_regular_subgraph=0
+# m=17 k=3 n=71 edges=291 n=71 m=291 four_regular_subgraph=0
+# m=18 k=3 n=75 edges=308 n=75 m=308 four_regular_subgraph=0
+# kubik_aile.py 9 14 4 (k = 4) | dort_duzenli.py
+# m=9 k=4 n=39 edges=155 n=39 m=155 four_regular_subgraph=0
+# m=10 k=4 n=43 edges=172 n=43 m=172 four_regular_subgraph=0
+# m=11 k=4 n=47 edges=189 n=47 m=189 four_regular_subgraph=0
+# m=12 k=4 n=51 edges=206 n=51 m=206 four_regular_subgraph=0
+# m=13 k=4 n=55 edges=223 n=55 m=223 four_regular_subgraph=0
+# m=14 k=4 n=59 edges=240 n=59 m=240 four_regular_subgraph=0
+# kubik_aile.py 9 12 2 (k = 2) | dort_duzenli.py
+# m=9 k=2 n=39 edges=155 n=39 m=155 four_regular_subgraph=1 S=0,1,20,29,36,38
+# m=10 k=2 n=43 edges=172 n=43 m=172 four_regular_subgraph=1 S=0,1,13,28,36,38
+# m=11 k=2 n=47 edges=189 n=47 m=189 four_regular_subgraph=1 S=0,1,14,30,41,43
+# m=12 k=2 n=51 edges=206 n=51 m=206 four_regular_subgraph=1 S=0,1,14,32,44,46
