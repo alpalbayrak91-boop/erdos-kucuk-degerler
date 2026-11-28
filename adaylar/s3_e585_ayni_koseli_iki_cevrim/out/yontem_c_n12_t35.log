@@ -1,0 +1,12 @@
+n=1 t=0 candidates=1 good=1 certificates=0 valid=0 errors=0 missing=0 classes=1 edges:count=[ 0:1 ] sec=0
+n=2 t=1 candidates=1 good=1 certificates=0 valid=0 errors=0 missing=0 classes=1 edges:count=[ 1:1 ] sec=0
+n=3 t=2 candidates=3 good=3 certificates=0 valid=0 errors=0 missing=0 classes=2 edges:count=[ 2:1 3:1 ] sec=0
+n=4 t=4 candidates=8 good=8 certificates=0 valid=0 errors=0 missing=0 classes=4 edges:count=[ 4:2 5:1 6:1 ] sec=0
+n=5 t=6 candidates=37 good=36 certificates=1 valid=1 errors=0 missing=0 classes=13 edges:count=[ 6:6 7:4 8:2 9:1 ] sec=0
+n=6 t=9 candidates=122 good=118 certificates=4 valid=4 errors=0 missing=0 classes=46 edges:count=[ 9:21 10:14 11:8 12:3 ] sec=0
+n=7 t=12 candidates=897 good=860 certificates=37 valid=37 errors=0 missing=0 classes=287 edges:count=[ 12:126 13:89 14:50 15:21 16:1 ] sec=0
+n=8 t=16 candidates=6329 good=5663 certificates=666 valid=666 errors=0 missing=0 classes=2115 edges:count=[ 16:1138 17:695 18:270 19:12 ] sec=0
+n=9 t=20 candidates=74071 good=58420 certificates=15651 valid=15651 errors=0 missing=0 classes=25398 edges:count=[ 20:17745 21:7168 22:477 23:8 ] sec=1
+n=10 t=25 candidates=344209 good=75625 certificates=268584 valid=268584 errors=0 missing=0 classes=29979 edges:count=[ 25:29144 26:828 27:7 ] sec=31
+n=11 t=30 candidates=145568 good=7186 certificates=138382 valid=138382 errors=0 missing=0 classes=1788 edges:count=[ 30:1780 31:8 ] sec=125
+n=12 t=35 candidates=21924 good=99 certificates=21825 valid=21825 errors=0 missing=0 classes=29 edges:count=[ 35:28 36:1 ] sec=131

@@ -109,3 +109,18 @@ def test_s3_logs_agree_with_draft() -> None:
     assert data[10] == 31
     for n in range(1, 12):
         assert (S3 / "tanik" / f"uc_n{n}_m{data[n - 1]}.g6").exists()
+
+
+def test_s3_certified_ladder_logs() -> None:
+    data = _data(S3 / "oeis_draft.txt")
+    lines = (S3 / "out" / "yontem_c_n12_t35.log").read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        assert "errors=0" in line
+        v = dict(re.findall(r"(\w+)=(\d+)", line))
+        assert int(v["certificates"]) == int(v["valid"])
+        assert int(v["candidates"]) == int(v["good"]) + int(v["certificates"])
+    top = {int(re.search(r"^n=(\d+)", l).group(1)): max(int(k) for k in re.findall(r"(\d+):\d+", l.split("[")[1]))
+           for l in lines}
+    assert [top[n] for n in range(5, 13)] == data[4:12]
+    n13 = (S3 / "out" / "yontem_c_n13_t41.log").read_text(encoding="utf-8")
+    assert "candidates=792 good=0 certificates=792 valid=792 errors=0" in n13

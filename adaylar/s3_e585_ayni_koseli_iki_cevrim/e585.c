@@ -16,14 +16,17 @@
  *       -q  no per-graph output; summary only (stderr)
  *       -c  certificate: for each BAD graph one line "graph6 S C1 C2"
  *           (checkable by sertifika_dogrula.py without this program)
+ *       -C  like -c, and additionally each GOOD graph as a line with its graph6 only
  *       -l  only test sets S containing the last vertex n-1 (sound only if
  *           G - (n-1) is known to be good; used by the extension ladder)
- *   e585 extend M
+ *   e585 extend M [-a]
  *       input: good graphs on n-1 vertices.  For each one, add a vertex v
  *       with every neighbourhood N such that the new graph has >= M edges
  *       and v has minimum degree in it; output (graph6) the new graphs that
  *       are good.  Output is NOT isomorphism-reduced (pipe through
  *       nauty-labelg | sort -u).
+ *       -a  output ALL candidates (no goodness test); pipe into 'check -C'
+ *           to get certificates for the rejected ones.
  *
  * Algorithm for one set S: only sets in which every vertex has >= 4
  * neighbours inside S can carry two edge-disjoint Hamiltonian cycles,
@@ -199,6 +202,7 @@ int main(int argc, char **argv) {
             else if (!strcmp(argv[i], "-b")) mode = 2;
             else if (!strcmp(argv[i], "-q")) mode = 3;
             else if (!strcmp(argv[i], "-c")) mode = 4;
+            else if (!strcmp(argv[i], "-C")) mode = 5;
             else if (!strcmp(argv[i], "-l")) lastonly = 1;
             else { fprintf(stderr, "bad option %s\n", argv[i]); return 2; }
         }
@@ -215,11 +219,13 @@ int main(int argc, char **argv) {
                 printf("\n");
             } else if (mode == 1 && g) puts(line);
             else if (mode == 2 && !g) puts(line);
-            else if (mode == 4 && !g) { fputs(line, stdout); print_witness(stdout); putchar('\n'); }
+            else if (mode == 5 && g) puts(line);
+            else if (mode >= 4 && !g) { fputs(line, stdout); print_witness(stdout); putchar('\n'); }
         }
     } else if (!strcmp(argv[1], "extend")) {
         if (argc < 3) return 2;
         int M = atoi(argv[2]);
+        int all = (argc > 3 && !strcmp(argv[3], "-a"));
         while (fgets(line, sizeof line, stdin)) {
             line[strcspn(line, "\r\n")] = 0;
             if (!line[0]) continue;
@@ -238,7 +244,7 @@ int main(int argc, char **argv) {
                 for (int u = 0; u < n0; u++) adj[u] = base[u] | (((N >> u) & 1) ? (1u << n0) : 0);
                 adj[n0] = N;
                 ng++;
-                if (is_good(1)) { ngood++; write_g6(n, adj, stdout); } else nbad++;
+                if (all || is_good(1)) { ngood++; write_g6(n, adj, stdout); } else nbad++;
             }
         }
     } else { fprintf(stderr, "unknown mode\n"); return 2; }

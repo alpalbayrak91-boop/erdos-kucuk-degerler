@@ -27,4 +27,8 @@ for spec in "10 28:28" "-d5 11 32:32"; do
   nauty-geng -q $spec > "$W/cert.g6"
   ./e585 check -c < "$W/cert.g6" | python3 sertifika_dogrula.py "$W/cert.g6"
 done
+# method (c): certified ladder to n = 12, then n = 13 above 40 edges
+./yontem_c.sh "$W/c12" "1:0 2:1 3:2 4:4 5:6 6:9 7:12 8:16 9:20 10:25 11:30 12:35"
+mkdir -p "$W/c13" && cp "$W/c12/L12.g6" "$W/c13/" && ./yontem_c.sh "$W/c13" "12:35 13:41"
+cat "$W/c12/yontem_c.log" "$W/c13/yontem_c.log"
 cat out/yontem_a.log out/f11_tarama.log out/yontem_b_n11_t30.log
