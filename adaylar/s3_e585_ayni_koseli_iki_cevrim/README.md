@@ -318,6 +318,11 @@ m = 34, and it is enough to check m = 7 and 9 <= m <= 36 by computer.
 - The solvers give no machine-checkable certificate of infeasibility; the statement rests on two
   independent solvers agreeing on the whole range that the proof uses.
 
+**Formal check of the counting.** The arithmetic core of Lemma 1 (from the three counting
+identities to |Q| <= 12, and the bounds |S_B| <= 8 in Cases 2 and 3a) is proved in Lean 4 without
+Mathlib: [`formal/e585_kubik_sayma.lean`](../../formal/e585_kubik_sayma.lean) (`lean --trust=0`;
+axioms: propext, Quot.sound). This covers the arithmetic only, not the graph-theoretic steps.
+
 **Review.** The proof was read by a second model instructed to look for errors (no mathematical
 error found; two corrections to the text were made) and tested numerically on graphs where
 4-regular subgraphs exist. A council of open-weight models was also asked to find errors; the one

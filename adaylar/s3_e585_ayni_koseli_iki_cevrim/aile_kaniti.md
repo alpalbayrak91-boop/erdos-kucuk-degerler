@@ -204,14 +204,17 @@ with 0 <= i < j <= s - 1 and j - i ≡ ±3 (mod b).
 equality: t_2w = 0, t_2b = 0, e12 = 0 and D_B = 4. Then (E3) gives t_1 = 4 - d_top(w) ∈ {3, 4}, and
 (E5) gives |S_B| = t_1 ∈ {3, 4}.
 
-Equality in (E6) means equality for every x ∈ S_B in the bound used for (E6), that is
-e_H(x, S_A) = 2 for every x ∈ S_B. Since t_2 = 0, S_A = A_1, and every edge of H between S_A and
+(E6) was obtained by summing, over x ∈ S_B, the inequalities
+d_top(x) >= 2 - deg_{H[S_B]}(x), each of which comes from e_H(x, S_A) <= 2. The differences
+2 - e_H(x, S_A) are nonnegative and now add up to 0, so each of them is 0: e_H(x, S_A) = 2 for
+every x ∈ S_B. Since t_2 = 0, S_A = A_1, and every edge of H between S_A and
 S_B comes from some a ∈ A_1, which is joined to both ends of its edge of F. So the edges
 F_1 = {N_B(a) : a ∈ A_1} form a subgraph of F[S_B] ⊆ C_b(3) in which every vertex of S_B has
 degree 2: a 2-regular simple graph on 3 or 4 vertices, that is a 3-cycle or a 4-cycle.
 
-C_b(3) is 2-regular, so a 2-regular subgraph of it is a union of components, which are cycles of
-length L = b / gcd(b, 3). A union of such cycles on 3 or 4 vertices is a single 3-cycle (L = 3) or a
+C_b(3) is 2-regular. In F_1 every vertex of S_B has degree 2, so F_1 contains both edges of
+C_b(3) at each of its vertices; hence F_1 is a union of whole components of C_b(3), which are
+cycles of length L = b / gcd(b, 3). A union of such cycles on 3 or 4 vertices is a single 3-cycle (L = 3) or a
 single 4-cycle (L = 4).
 
 - If 3 ∤ b, then L = b >= 7 > 4: no such cycle.
