@@ -1,0 +1,14 @@
+k=3 n=5 H: all girth >= 5, graphs=3 good=3 bad=0
+k=4 n=6 H: all girth >= 5, graphs=6 good=6 bad=0
+k=5 n=7 H: all girth >= 5, graphs=11 good=11 bad=0
+k=6 n=8 H: all girth >= 5, graphs=23 good=23 bad=0
+k=7 n=9 H: all girth >= 5, graphs=48 good=48 bad=0
+k=8 n=10 H: all girth >= 5, graphs=114 good=114 bad=0
+k=9 n=11 H: all girth >= 5, graphs=293 good=293 bad=0
+k=10 n=12 H: all girth >= 5, graphs=869 good=869 bad=0
+k=11 n=13 H: all girth >= 5, graphs=2963 good=2963 bad=0
+k=12 n=14 H: extremal (18 edges), graphs=7 good=7 bad=0
+k=13 n=15 H: extremal (21 edges), graphs=1 good=1 bad=0
+k=14 n=16 H: extremal (23 edges), graphs=4 good=4 bad=0
+k=15 n=17 H: extremal (26 edges), graphs=1 good=0 bad=1 certificates=1 valid=1 errors=0 missing=0   (tanik/birlesim_n17_m57_kotu.txt)
+k=15 n=17 H: extremal minus one edge (25 edges, 9 classes), graphs=9 good=9 bad=0   (tanik/birlesim_n17_m56.g6)
