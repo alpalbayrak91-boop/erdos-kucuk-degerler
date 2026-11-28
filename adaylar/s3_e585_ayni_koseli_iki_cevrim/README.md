@@ -276,14 +276,17 @@ G(C_b, C_b(3)) and of G(C_b, C_b(3) minus the edge {b_0, b_3}).
 
 **Best lower bounds known here.**
 
-| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 41 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 122 | 125 | 130 | 133 | 138 | 157 |
+| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 128 | 131 | 134 | 137 | 140 | 143 | 147 | 152 | 157 |
 
-The values for n = 14 and 16..32 come from the search below; n = 15 from the join construction;
-n = 33..37 from the cycle family (at n = 34 the triple systems give the same 125); n = 41 from
-STS(13). For other n >= 33 the bound is the larger of the cycle family (4n - 10 or 4n - 11) and the
-triple-system bound. None of these is known to be the exact value. a(14) <= 45 (below).
+The values for n = 14 and 16..32 come from the search below; n = 15 from the join construction.
+For n >= 33 there are no search witnesses yet. Adding a vertex of degree 3 to a good graph keeps it
+good (a vertex on two edge-disjoint cycles has degree at least 4), so a(n + 1) >= a(n) + 3; this
+gives 125 + 3(n - 32) for n = 33..38, more than the cycle family (4n - 10 or 4n - 11) in this range.
+The values for n = 39, 40, 41 come from the triple systems on 13 points (n = 41: STS(13)). For larger
+n the bound is the largest of the three. None of these is known to be the exact value.
+a(14) <= 45 (below).
 
 ## Search (28 Nov 2026)
 
