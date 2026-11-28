@@ -21,8 +21,9 @@ independent code. **New in this work:**
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
   maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 14);
 - **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, a(18) >= 62,
-  a(n) >= 66, 70, 74, 77, 82, 88 for n = 19..24, and a(n) >= 94, 99, 103, 108, 112, 117, 122, 126
-  for n = 25..32. So the identity above fails at n = 14;**
+  a(n) >= 66, 71, 75, 80, 84, 89 for n = 19..24, and a(n) >= 94, 99, 103, 108, 112, 117, 122, 126
+  for n = 25..32, and a(n) >= 130, 135, 140, 145, 149, 154, 158, 163 for n = 33..40 (from the fourth
+  round, with a(41) >= 166, a(42) >= 169, a(43) >= 172 by the +3 step). So the identity above fails at n = 14;**
 - **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
   proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
 - **a fourth construction, the cubic family (section "Theorem (cubic family)"), with a
@@ -346,18 +347,19 @@ explicit family with more than 4.25 n edges.
 
 | n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | **44** | 48 | 53 | 58 | 62 | 66 | 70 | 74 | 77 | 82 | 88 | 94 | 99 | 103 | 108 | 112 | 117 | 122 | 126 | 129 | 132 | 135 | 140 | 145 | 150 | 155 | 158 | 162 | 167 | 172 |
+| a(n) >= | **44** | 48 | 53 | 58 | 62 | 66 | 71 | 75 | 80 | 84 | 89 | 94 | 99 | 103 | 108 | 112 | 117 | 122 | 126 | 130 | 135 | 140 | 145 | 149 | 154 | 158 | 163 | 166 | 169 | 172 |
 
-The value for n = 14 is exact (section "a(14) = 44"). The values for n = 15..32 come from the search below (n = 15
-is also given by the join construction).
-For n >= 33 there are no search witnesses yet, and the values come from the cubic family (section
-"Theorem (cubic family)"): a(4m + 3) >= 17m + 2 for m = 7 and every m >= 9, so a(39) >= 155, a(43) >= 172, a(47) >= 189, a(51) >= 206, a(55) >= 223,
-a(59) >= 240, ..., a(71) >= 291. Two simple steps fill the gaps: deleting j of the vertices a_e
-gives a(4m + 3 - j) >= 17m + 2 - 5j, and adding a vertex of degree 3 to a good graph keeps it good
-(a vertex on two edge-disjoint cycles has degree at least 4), so a(n + 1) >= a(n) + 3. In the table,
-n = 33, 34 use the second step from the n = 32 witness, n = 35..38 the first step with m = 9,
-n = 40 the second, n = 41, 42 the first with m = 10. In this range these values are larger than the
-cycle family (4n - 10 or 4n - 11) and the triple-system bound. None of these is known to be the
+The value for n = 14 is exact (section "a(14) = 44"). The values for n = 15..40 come from the search below
+(n = 15 is also given by the join construction): n = 15..32 from the first three rounds, n = 33..40 from the
+fourth round. The values for n = 41, 42, 43 are not search witnesses. They come from the step a(n + 1) >= a(n) + 3
+(adding a vertex of degree 3 to a good graph keeps it good, since a vertex on two edge-disjoint cycles has
+degree at least 4): a(41) >= 163 + 3 = 166 and a(42) >= 166 + 3 = 169 from the n = 40 witness, and
+a(43) >= 169 + 3 = 172, which equals the cubic family value a(43) >= 172. The cubic family (section
+"Theorem (cubic family)") gives a(4m + 3) >= 17m + 2 for m = 7 and every m >= 9, so a(39) >= 155, a(43) >= 172,
+a(47) >= 189, a(51) >= 206, a(55) >= 223, a(59) >= 240, ..., a(71) >= 291; deleting j of the vertices a_e gives
+a(4m + 3 - j) >= 17m + 2 - 5j. For n = 41, 42, 43 the cubic family (162, 167, 172) is not larger than the
++3 rule, and for n = 15..40 the search values are at least as large as the cycle family (4n - 10 or 4n - 11),
+the cubic family and the triple-system bound. None of these is known to be the
 exact value, except a(14) = 44 (below); for n = 15 the value is 48 or 49.
 
 ## Search (28 Nov 2026)
@@ -395,6 +397,15 @@ new witness graphs (these, and five classes with 48 edges for n = 15) were check
 `dort_duzenli.py` and with `capraz_denetim.py` (CP-SAT: all; CBC: all but one, which reached the
 time limit); none has a 4-regular subgraph. The tables above show the first two rounds; the table
 "Best lower bounds known here" has the current values.
+
+**Fourth round (28 Nov, night).** The search kept running against the table. New values:
+n = 20: 71, n = 21: 75, n = 22: 80, n = 23: 84, n = 24: 89, and for n = 33..40 the first search
+witnesses: n = 33: 130, n = 34: 135, n = 35: 140, n = 36: 145, n = 37: 149, n = 38: 154, n = 39: 158,
+n = 40: 163 (before: 129, 132, 135, 140, 145, 150, 155, 158 from the cubic family and the +3 step).
+The 23 new witness graphs (13 values of n; for n = 20, 23, 24, 36..39 several graphs per value, not necessarily non-isomorphic) were
+checked with `dort_duzenli.py` (all: no 4-regular subgraph) and with `capraz_denetim.py` (CP-SAT: all
+`YOK`; CBC: `YOK` for n <= 34 and `BILINMIYOR` at the 120 s limit for n = 35..40). Logs:
+`out/dort_duzenli.log`, `out/capraz_arama4.log`. The values for n = 41, 42, 43 follow by the +3 step.
 
 - **The identity a(n) = 2n - 3 + A006856(n - 2) fails at n = 14.** It holds for 2 <= n <= 13.
 - **a(14) = 44** (section "a(14) = 44" below). The averaging bound alone gives a(14) <= 45: every
