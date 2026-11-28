@@ -1,0 +1,17 @@
+# (D~{ ; D~w ; kubik_aile.py 6 18) | capraz_denetim.py 150   -- ortools 9.15.6755, pulp 3.3.2 (CBC), 2026-11-28
+# first two lines: K5 (VAR expected), K5 minus an edge (YOK expected); then m = 6..18, k = 3
+n=5 m=10 cpsat=VAR (0.0 s) cbc=VAR (0.0 s)
+n=5 m=9 cpsat=YOK (0.0 s) cbc=YOK (0.0 s)
+n=21 m=74 cpsat=VAR (0.0 s) cbc=VAR (0.2 s)
+n=31 m=121 cpsat=YOK (2.2 s) cbc=YOK (21.0 s)
+n=35 m=138 cpsat=VAR (0.0 s) cbc=VAR (38.3 s)
+n=39 m=155 cpsat=YOK (2.0 s) cbc=YOK (105.1 s)
+n=43 m=172 cpsat=YOK (2.6 s) cbc=YOK (57.9 s)
+n=47 m=189 cpsat=YOK (3.9 s) cbc=YOK (65.7 s)
+n=51 m=206 cpsat=YOK (4.9 s) cbc=YOK (62.9 s)
+n=55 m=223 cpsat=YOK (5.3 s) cbc=BILINMIYOR(Not Solved) (150.1 s)
+n=59 m=240 cpsat=YOK (7.1 s) cbc=YOK (148.6 s)
+n=63 m=257 cpsat=YOK (6.5 s) cbc=YOK (133.7 s)
+n=67 m=274 cpsat=YOK (8.3 s) cbc=BILINMIYOR(Not Solved) (150.2 s)
+n=71 m=291 cpsat=YOK (16.8 s) cbc=BILINMIYOR(Not Solved) (150.1 s)
+n=75 m=308 cpsat=YOK (28.8 s) cbc=BILINMIYOR(Not Solved) (150.1 s)
