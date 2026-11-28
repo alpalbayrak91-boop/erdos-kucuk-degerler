@@ -340,8 +340,9 @@ objection raised turned out to be a step that was correct but too terse, and it 
   largest possible number of edges, 4.25 n - 10.75. The search graphs with more edges
   (n = 26, 30, 32) are not of this form.
 
-At n = 31 the family gives 121 (the search later found 122); together with the two simple steps
-below the table it gives the best bound known here for 35 <= n <= 71 (the triple systems of the
+At n = 31 the family gives 121 (the search later found 122). For n <= 43 the search values in the
+table below are at least as large as the family; together with the two simple steps below the
+table the family gives the best bound known here for 44 <= n <= 71 (the triple systems of the
 Proposition give the same value at n = 72 and more from n = 73 on).
 Witnesses: `tanik/kubik_m<m>_n<n>_e<edges>.g6`.
 
