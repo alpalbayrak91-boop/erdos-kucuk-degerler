@@ -1,0 +1,10 @@
+n=1 t=0 classes=1 edges:count=[ 0:1 ] sec=0
+n=2 t=1 classes=1 edges:count=[ 1:1 ] sec=0
+n=3 t=3 classes=1 edges:count=[ 3:1 ] sec=0
+n=4 t=5 classes=2 edges:count=[ 5:1 6:1 ] sec=0
+n=5 t=7 classes=7 edges:count=[ 7:4 8:2 9:1 ] sec=0
+n=6 t=10 classes=25 edges:count=[ 10:14 11:8 12:3 ] sec=0
+n=7 t=14 classes=72 edges:count=[ 14:50 15:21 16:1 ] sec=0
+n=8 t=18 classes=282 edges:count=[ 18:270 19:12 ] sec=0
+n=9 t=23 classes=8 edges:count=[ 23:8 ] sec=0
+n=10 t=28 classes=0 edges:count=[ ] sec=0

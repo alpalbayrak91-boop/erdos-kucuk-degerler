@@ -1,0 +1,17 @@
+1 0 opts=[] graphs=1 good=1 sec=0
+1 1 opts=[] graphs=0 good=0 sec=0
+2 1 opts=[] graphs=1 good=1 sec=0
+3 3 opts=[] graphs=1 good=1 sec=0
+4 6 opts=[] graphs=1 good=1 sec=0
+5 9 opts=[] graphs=1 good=1 sec=0
+5 10 opts=[] graphs=1 good=0 sec=0
+6 12 opts=[] graphs=5 good=3 sec=0
+6 13 opts=[] graphs=2 good=0 sec=0
+7 16 opts=[] graphs=21 good=1 sec=0
+7 17 opts=[] graphs=10 good=0 sec=0
+8 19 opts=[] graphs=402 good=12 sec=0
+8 20 opts=[] graphs=221 good=0 sec=0
+9 23 opts=[] graphs=10120 good=8 sec=0
+9 24 opts=[] graphs=5995 good=0 sec=0
+10 27 opts=[] graphs=596191 good=7 sec=3
+10 28 opts=[] graphs=395166 good=0 sec=2
