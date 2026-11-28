@@ -1,0 +1,21 @@
+# Review of the a(14) ladder run, 28 Nov 2026 (made from the level files L1..L14 of the run, on another machine).
+# sayim = candidate count of 'e585 extend t -a' on L_{n-1} (extend_satir) against the run log (beklenen); esit=EVET means equal.
+# duzey14 = level 14 run again in one process; cikis_kodlari = exit statuses; L14_ayni=EVET means identical to L14.g6.
+# 'L_n -> L_{n-1}': vertex-deleted subgraphs with at least t_{n-1} edges; EKSIK = number not found in L_{n-1}.
+L14.g6 -> L13.g6 (t=38): alt cizge uretilen=36 okunan=36 labelg_cikis=0 L_alt_sinif=36943 EKSIK=0 []
+L13.g6 -> L12.g6 (t=33): alt cizge uretilen=333258 okunan=333258 labelg_cikis=0 L_alt_sinif=476615 EKSIK=0 []
+sayim n=14 t=44 extend_satir=88395 beklenen=88395 esit=EVET extend_cikis=0 graphs=88395 good=88395 bad=0
+sayim n=13 t=38 extend_satir=5557097 beklenen=5557097 esit=EVET extend_cikis=0 graphs=5557097 good=5557097 bad=0
+sayim n=12 t=33 extend_satir=21404966 beklenen=21404966 esit=EVET extend_cikis=0 graphs=21404966 good=21404966 bad=0
+sayim n=11 t=28 extend_satir=22009718 beklenen=22009718 esit=EVET extend_cikis=0 graphs=22009718 good=22009718 bad=0
+duzey14 cikis_kodlari=0 0 iyi=13 sertifika=88382 dogrulayici=[certificates=88382 valid=88382 errors=0 missing=0] sinif=3 L14_ayni=EVET graphs=88395 good=13 bad=88382
+L12.g6 -> L11.g6 (t=28): alt cizge uretilen=3932147 okunan=3932147 labelg_cikis=0 L_alt_sinif=2531034 EKSIK=0 []
+sayim n=2 t=1 extend_satir=1 beklenen=1 esit=EVET
+sayim n=3 t=2 extend_satir=3 beklenen=3 esit=EVET
+sayim n=4 t=4 extend_satir=8 beklenen=8 esit=EVET
+sayim n=5 t=6 extend_satir=37 beklenen=37 esit=EVET
+sayim n=6 t=9 extend_satir=122 beklenen=122 esit=EVET
+sayim n=7 t=12 extend_satir=897 beklenen=897 esit=EVET
+sayim n=8 t=15 extend_satir=9855 beklenen=9855 esit=EVET
+sayim n=9 t=19 extend_satir=132986 beklenen=132986 esit=EVET
+sayim n=10 t=23 extend_satir=2908529 beklenen=2908529 esit=EVET

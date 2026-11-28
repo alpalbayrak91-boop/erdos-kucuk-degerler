@@ -14,9 +14,18 @@ writes a certificate (a pair of edge-disjoint cycles on the same vertex set) for
 | 14 | 44 | 88,395 | 88,382 | 3 | 44 (3) |
 
 Result: no good graph on 14 vertices has 45 or more edges, and exactly three isomorphism classes reach 44
-(`L14.g6`). Each of the three was also checked with `../dort_duzenli.py` (integer programming, shares no code with
-the search): `four_regular_subgraph=0`, m = 44. With the averaging upper bound a(14) <= 45 this gives
-**a(14) = 44**, provided the ladder thresholds are valid lower bounds for the vertex-deletion step (see the
-derivation in the parent README). Independent review of that step is pending.
+(`L14.g6`). So **a(14) = 44**. (The ladder adds every neighbourhood that reaches the threshold, with no upper limit
+on the number of edges, so the averaging bound a(14) <= 45 is not needed.) Each of the three graphs was also checked
+with `../dort_duzenli.py` (integer programming, shares no code with the search): `four_regular_subgraph=0`, m = 44.
 
-Files: `L14.g6` (the three extremal graphs), `L13.g6.gz` (36,943 classes), `yontem_c.log`, source.
+The thresholds are valid: if G is good on n vertices with e >= t_n edges and v has minimum degree, then G - v is good
+with at least e - floor(2e/n) >= t_n - floor(2 t_n / n) >= t_{n-1} edges (the last inequality holds, with equality,
+for every n = 2..14). Details and the review of the run are in the parent README, section "a(14) = 44".
+
+Review (`hakem.log`, 28 Nov 2026, on another machine, from the level files): the candidate counts of
+`e585 extend t_n -a` were recomputed for every n = 2..14 and equal the log; level 14 was run again in one process with
+exit statuses checked and gave the same 3 classes; every vertex-deleted subgraph with at least t_{n-1} edges of a
+graph in L_14, L_13, L_12 is in the level below (36, 333,258 and 3,932,147 graphs, none missing). The run script
+itself does not check the exit status of its parallel parts; these checks were made because of that.
+
+Files: `L14.g6` (the three extremal graphs), `L13.g6.gz` (36,943 classes), `yontem_c.log`, `hakem.log`, source.

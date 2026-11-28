@@ -11,16 +11,18 @@ independent code. **New in this work:**
 - a(11) = 31, computed by two methods;
 - a(12) = 36, from the certified ladder (method (c));
 - a(13) = 39: the upper bound is method (d), the lower bound is the construction below;
-- the number of extremal graphs (isomorphism classes) for n <= 12;
+- **a(14) = 44, with exactly 3 extremal graphs, and 164 extremal graphs for n = 13: full certified
+  ladder to n = 14 (section "a(14) = 44", folder `a14_merdiven/`);**
+- the number of extremal graphs (isomorphism classes) for n <= 14;
 - the structure of the extremal graphs: for 2 <= n <= 13, a(n) = 2n - 3 + A006856(n - 2), and the
   join of K_2 with an extremal graph of girth >= 5 is extremal (section "Structure");
 - lower bounds from that construction: a(14) >= 43, a(15) >= 48, a(16) >= 52, a(17) >= 56,
   a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17;
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
-  maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 13);
+  maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 14);
 - **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, a(18) >= 62,
   a(n) >= 66, 69, 74, 77, 82, 85 for n = 19..24, and a(n) >= 94, 98, 103, 107, 112, 116, 121, 125
-  for n = 25..32. So the identity above fails at n = 14, and a(14) is 44 or 45;**
+  for n = 25..32. So the identity above fails at n = 14;**
 - **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
   proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
 - **a fourth construction, the cubic family (section "Cubic family"), checked by computer for
@@ -61,10 +63,11 @@ Some easy facts:
 | 10 | 27 | 596191 / 7 | 395166 / 0 | 27 | 7 |
 | 11 | **31** | 27749332 (min degree >= 4) / 8 | 2173681 (min degree >= 5) / 0 | 31 | 8 |
 | 12 | **36** | – | – | 36 (method (c)) | 1 (method (c)) |
-| 13 | **39** | – | – | 39: reached by K_2 v H (section "Structure"); 40 edges excluded by method (d) | not classified; at least 126 |
+| 13 | **39** | – | – | 39: reached by K_2 v H (section "Structure"); 40 edges excluded by method (d) and again by the ladder to n = 14 | 164 (ladder to n = 14) |
+| 14 | **44** | – | – | 44 (ladder to n = 14, section "a(14) = 44") | 3 (ladder to n = 14) |
 
-The n = 12 row comes only from method (c). The n = 13 row comes from method (d) and the join
-construction.
+The n = 12 row comes from method (c). The n = 13 row comes from method (d), the join construction
+and the ladder to n = 14; the n = 14 row comes only from that ladder.
 
 - Method (a) scans every graph with the given number of edges.
 - Method (b) builds every good graph above a threshold, so it gives the maximum edge count directly.
@@ -159,7 +162,7 @@ of edges of a graph on n vertices with no 4-regular subgraph. Then:
 - r(n) <= a(n) for every n, because the union of two edge-disjoint cycles on the same vertex set
   is 4-regular;
 - every lower bound in this section is a lower bound for r(n);
-- r(n) = a(n) for n <= 13.
+- r(n) = a(n) for n <= 14 (for n = 14: the three extremal graphs have no 4-regular subgraph).
 
 `dort_duzenli.py` looks for a 4-regular subgraph by integer programming. It shares nothing with
 `e585.c`. Results (`out/dort_duzenli.log`):
@@ -326,7 +329,7 @@ gives a(4m + 3 - j) >= 17m + 2 - 5j, and adding a vertex of degree 3 to a good g
 n = 33, 34 use the second step from the n = 32 witness, n = 35..38 the first step with m = 9,
 n = 40 the second, n = 41, 42 the first with m = 10. In this range these values are larger than the
 cycle family (4n - 10 or 4n - 11) and the triple-system bound. None of these is known to be the
-exact value. a(14) <= 45 (below).
+exact value, except a(14) = 44 (below).
 
 ## Search (28 Nov 2026)
 
@@ -358,8 +361,11 @@ classes after canonical labelling.
 Witnesses: `tanik/arama_n<n>_m<m>.g6`.
 
 - **The identity a(n) = 2n - 3 + A006856(n - 2) fails at n = 14.** It holds for 2 <= n <= 13.
-- **a(14) is 44 or 45.** Upper bound: every 13 vertices span at most a(13) = 39 edges, and every
-  edge lies in 12 of the 14 such sets, so 12 a(14) <= 14 * 39, hence a(14) <= 45.
+- **a(14) = 44** (section "a(14) = 44" below). The averaging bound alone gives a(14) <= 45: every
+  13 vertices span at most a(13) = 39 edges, and every edge lies in 12 of the 14 such sets, so
+  12 a(14) <= 14 * 39. The certified ladder then shows that no good graph on 14 vertices has 45
+  edges, and that the graphs with 44 edges form exactly 3 isomorphism classes; these are the 3
+  classes that the search had submitted for n = 14.
 - The independent runs converged: the 8 valid graphs submitted for n = 14 fall into 2 classes,
   the 9 for n = 16 into 2 classes, the 5 for n = 17 into 1 class.
 - **Structure of the new graphs.** One universal vertex u1; one vertex u2 joined to everything
@@ -452,6 +458,49 @@ geng.
   can be regenerated in a few minutes.
 - The lower bounds rest on explicit good graphs in `tanik/`. Their goodness is confirmed by
   `e585_ref.py`.
+
+## a(14) = 44
+
+**Result.** a(14) = 44. There are exactly 3 good graphs with 44 edges on 14 vertices up to
+isomorphism (`a14_merdiven/L14.g6`), and none with 45 or more. For n = 13 there are 164 good graphs
+with 39 edges and 36,779 with 38 edges (`a14_merdiven/L13.g6.gz`); this also proves a(13) <= 39
+again, without nauty-geng.
+
+**Method.** The certified ladder of method (c), run to n = 14 with the thresholds
+t_n = 0, 1, 2, 4, 6, 9, 12, 15, 19, 23, 28, 33, 38, 44 (n = 1..14). Level L_n is the list of all good
+graphs on n vertices with at least t_n edges, up to isomorphism. L_n is obtained from L_{n-1} by
+adding a vertex v with every neighbourhood for which the new graph has at least t_n edges and v has
+minimum degree in it (no upper limit on the number of edges). Every rejected candidate comes with
+two edge-disjoint cycles on the same vertex set, checked by `sertifika_dogrula.py`.
+
+*Why the thresholds are enough.* Let G be good on n vertices with e >= t_n edges and let v have
+minimum degree, so deg(v) <= floor(2e/n). G - v is good and has at least e - floor(2e/n) edges. The
+function e - floor(2e/n) does not decrease when e grows by 1, so G - v has at least
+t_n - floor(2 t_n / n) edges. The thresholds satisfy t_{n-1} <= t_n - floor(2 t_n / n) for every
+n = 2..14 (with equality each time), so G - v is in L_{n-1} and G is among the candidates.
+
+**Run** (`a14_merdiven/yontem_c.log`; 8 cores, 10,798 s).
+
+| n | t_n | candidates | certificates (all valid) | classes kept | edges: classes |
+|---|---|---|---|---|---|
+| 11 | 28 | 22,009,718 | 16,459,377 | 2,531,034 | 28..31; 31: 8 |
+| 12 | 33 | 21,404,966 | 19,958,694 | 476,615 | 33..36; 36: 1 |
+| 13 | 38 | 5,557,097 | 5,443,659 | 36,943 | 38: 36,779; 39: 164 |
+| 14 | 44 | 88,395 | 88,382 | 3 | 44: 3 |
+
+**Review of the run** (`a14_merdiven/hakem.log`). The run script does not check the exit status of
+its parallel parts, so a part that died would have lost candidates silently. This was checked
+afterwards, on another machine, from the level files:
+- for every n = 2..14 the number of candidates printed by `e585 extend t_n -a` on L_{n-1} was
+  counted again; it equals the number in the log (good + certificates) at every level;
+- level 14 was run again in one process with the exit status of every stage checked: 88,395
+  candidates, 88,382 certificates (all valid), 13 good graphs, 3 classes, identical to `L14.g6`;
+- closure under deleting a vertex: every graph G - v with G in L_n and at least t_{n-1} edges must
+  be in L_{n-1}. All 36 such graphs for n = 14, all 333,258 for n = 13 and all 3,932,147 for
+  n = 12 are in the lists;
+- the 3 graphs of L14 are the 3 classes found independently by the search, and each has no
+  4-regular subgraph (`dort_duzenli.py`);
+- the numbers of extremal graphs for n <= 12 agree with methods (a), (b), (c).
 
 **Method (c): certified ladder, n <= 13 (`yontem_c.sh`).** This is method (b) run in a form in
 which no "bad" verdict is trusted.
