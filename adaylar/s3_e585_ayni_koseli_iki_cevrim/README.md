@@ -18,6 +18,9 @@ independent code. **New in this work:**
   a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17;
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
   maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 13);
+- **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, and
+  a(n) >= 66, 69, 74, 77, 82, 85 for n = 19..24. So the identity above fails at n = 14, and
+  a(14) is 44 or 45;**
 - a second construction, K_2 joined with the incidence graph of a linear triple system, gives
   a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157 (useful for moderate n only: for large n the
   known bound c n log log n is larger).
@@ -139,8 +142,8 @@ this contradicts the hypothesis. If t <= 3, then |S| = 5, so U = K_5 and T spans
   - if T is all of H, at least 2t - 2j = 32 - 2j edges of U lie inside T, and H has only 28 edges.
     So j = 2 and U contains all 28 edges of H. Then x has degree >= 5 in U.
 - The equality cannot continue for large n: A006856(k) grows like k^(3/2), while
-  a(n) <= n (log n)^O(1) by Chakraborti, Janzer, Methuku and Montgomery. Whether equality holds
-  for n = 14, 15, 16 is not known. At n = 17 the construction is one short of the formula.
+  a(n) <= n (log n)^O(1) by Chakraborti, Janzer, Methuku and Montgomery. The equality already
+  fails at n = 14: a search found good graphs with 44 edges (section "Search").
 
 **No 4-regular subgraph.** The proof of the Lemma uses only that U is 4-regular. So under the
 hypothesis of the Lemma, K_2 v H has no 4-regular subgraph at all. Write r(n) for the maximum number
@@ -199,13 +202,45 @@ m >= 2(a + b) - 2j >= 2a + 2b - 4. Every edge of U inside T joins A to B.
 - Leaves of degree 4 do not work in general: for the projective plane of order 3 minus two lines,
   the join has a 4-regular subgraph.
 
-**Best lower bounds from these constructions.**
+**Best lower bounds known here.**
 
-| n | 14 | 15 | 16 | 17 | 18 | 19 <= n <= 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | 43 | 48 | 52 | 56 | 61 | 4n - 12 | 125 | 128 | 132 | 137 | 142 | 147 | 152 | 157 |
+| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 <= n <= 33 | 34 | 37 | 41 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a(n) >= | 44 | 48 | 53 | 58 | 61 | 66 | 69 | 74 | 77 | 82 | 85 | 4n - 12 | 125 | 137 | 157 |
 
-None of these is known to be the exact value.
+The values for n = 14, 16, 17 and 19..24 come from the search below; the others from the two
+constructions. None of these is known to be the exact value. a(14) <= 45 (below).
+
+## Search (28 Nov 2026)
+
+After the table of lower bounds from the two constructions was fixed, it was given to AI agents
+(Gemini, in the lab's own fleet) as a target: find a graph with no 4-regular subgraph and more
+edges. Two sessions each started 10 subagents (local search, annealing, genetic search, constraint
+solving), about 10 minutes of computation each, with `dort_duzenli.py` as the acceptance test.
+Every submitted graph was checked again here: 37 graphs were submitted, 36 are valid and 1 has a
+4-regular subgraph. The valid ones were checked by `dort_duzenli.py` (all) and by `e585 check`
+(all with n <= 17).
+
+| n | 14 | 16 | 17 | 19 | 20 | 21 | 22 | 23 | 24 |
+|---|---|---|---|---|---|---|---|---|---|
+| bound from the constructions | 43 | 52 | 56 | 64 | 68 | 72 | 76 | 80 | 84 |
+| found by search | 44 | 53 | 58 | 66 | 69 | 74 | 77 | 82 | 85 |
+| classes submitted (after canonical labelling) | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+
+Witnesses: `tanik/arama_n<n>_m<m>.g6`.
+
+- **The identity a(n) = 2n - 3 + A006856(n - 2) fails at n = 14.** It holds for 2 <= n <= 13.
+- **a(14) is 44 or 45.** Upper bound: every 13 vertices span at most a(13) = 39 edges, and every
+  edge lies in 12 of the 14 such sets, so 12 a(14) <= 14 * 39, hence a(14) <= 45.
+- The independent runs converged: the 8 valid graphs submitted for n = 14 fall into 2 classes,
+  the 9 for n = 16 into 2 classes, the 5 for n = 17 into 1 class.
+- **Structure of the new graphs.** One universal vertex u1; one vertex u2 joined to everything
+  except a single vertex w; u1 and u2 adjacent. The rest of the graph is triangle-free, has 2 more
+  edges than A006856 allows (20, 25, 28 edges on 12, 14, 15 vertices) and contains a few 4-cycles
+  (4 to 7). So giving up the single edge u2 w buys two edges elsewhere.
+- For n = 17..24 the searchers reported a family with 4n - 10 edges for odd n and 4n - 11 for even
+  n. The witnesses above confirm these values for 17 <= n <= 24. There is no proof for general n.
+- No graph beating 48 at n = 15 or 61 at n = 18 was submitted.
 
 **Computer checks of the lemma (`birlesim.sh`, `out/birlesim.log`).**
 - k = 3..11: K_2 v H is good for every graph H of girth >= 5 (3, 6, 11, 23, 48, 114, 293, 869 and
@@ -401,6 +436,7 @@ python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph
   (and n = 18: the 3 joins with 61 edges).
 - `tanik/birlesim_n17_m56.g6`: K_2 v (H - e) for the extremal H on 15 vertices, one graph per edge orbit.
 - `tanik/birlesim_n17_m57_kotu.txt`: certificate that the 57-edge join at n = 17 is bad.
+- `tanik/arama_n<n>_m<m>.g6`: graphs found by search on 28 Nov (canonical graph6).
 - `tanik/uclu_*.g6`: K_2 v (incidence graph) for the Fano plane, STS(9), STS(13) and STS(19).
 - `out/`: logs.
 - `oeis_draft.txt`: OEIS draft.
