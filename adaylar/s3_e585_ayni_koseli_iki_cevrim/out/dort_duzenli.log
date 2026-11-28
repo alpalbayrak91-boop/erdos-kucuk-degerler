@@ -29,3 +29,13 @@ n=16 m=50 four_regular_subgraph=0
 n=23 m=79 four_regular_subgraph=0
 n=41 m=157 four_regular_subgraph=0
 n=78 m=324 four_regular_subgraph=0
+## search witnesses, n = 18 and n = 25..32 (file: count, result)
+arama_n18_m62.g6:       5 n=18 m=62 four_regular_subgraph=0
+arama_n25_m94.g6:       1 n=25 m=94 four_regular_subgraph=0
+arama_n26_m98.g6:       1 n=26 m=98 four_regular_subgraph=0
+arama_n27_m103.g6:       1 n=27 m=103 four_regular_subgraph=0
+arama_n28_m107.g6:       1 n=28 m=107 four_regular_subgraph=0
+arama_n29_m112.g6:       2 n=29 m=112 four_regular_subgraph=0
+arama_n30_m116.g6:       3 n=30 m=116 four_regular_subgraph=0
+arama_n31_m121.g6:       3 n=31 m=121 four_regular_subgraph=0
+arama_n32_m125.g6:       3 n=32 m=125 four_regular_subgraph=0
