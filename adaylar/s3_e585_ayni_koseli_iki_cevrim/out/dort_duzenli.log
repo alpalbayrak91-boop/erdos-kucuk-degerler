@@ -1,0 +1,31 @@
+# dort_duzenli.py (integer programming): four_regular_subgraph=1 means a 4-regular subgraph exists
+## leak tests: K5, K5 minus an edge
+n=5 m=10 four_regular_subgraph=1 S=0,1,2,3,4
+n=5 m=9 four_regular_subgraph=0
+## 57-edge join at n = 17 (bad)
+n=17 m=57 four_regular_subgraph=1 S=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+## joins K_2 v H, n = 13..18 (count, result)
+      3 n=13 m=39 four_regular_subgraph=0
+      7 n=14 m=43 four_regular_subgraph=0
+      1 n=15 m=48 four_regular_subgraph=0
+      4 n=16 m=52 four_regular_subgraph=0
+      9 n=17 m=56 four_regular_subgraph=0
+      3 n=18 m=61 four_regular_subgraph=0
+## extremal graphs, n = 1..12 (file: count, result)
+uc_n1_m0.g6:       1 four_regular_subgraph=0 
+uc_n2_m1.g6:       1 four_regular_subgraph=0 
+uc_n3_m3.g6:       1 four_regular_subgraph=0 
+uc_n4_m6.g6:       1 four_regular_subgraph=0 
+uc_n5_m9.g6:       1 four_regular_subgraph=0 
+uc_n6_m12.g6:       3 four_regular_subgraph=0 
+uc_n7_m16.g6:       1 four_regular_subgraph=0 
+uc_n8_m19.g6:      12 four_regular_subgraph=0 
+uc_n9_m23.g6:       8 four_regular_subgraph=0 
+uc_n10_m27.g6:       7 four_regular_subgraph=0 
+uc_n11_m31.g6:       8 four_regular_subgraph=0 
+uc_n12_m36.g6:       1 four_regular_subgraph=0 
+## triple systems: Fano (n = 16), STS(9), STS(13), STS(19)
+n=16 m=50 four_regular_subgraph=0
+n=23 m=79 four_regular_subgraph=0
+n=41 m=157 four_regular_subgraph=0
+n=78 m=324 four_regular_subgraph=0

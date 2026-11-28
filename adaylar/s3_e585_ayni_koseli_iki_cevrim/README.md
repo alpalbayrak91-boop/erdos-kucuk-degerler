@@ -15,7 +15,11 @@ independent code. **New in this work:**
 - the structure of the extremal graphs: for 2 <= n <= 13, a(n) = 2n - 3 + A006856(n - 2), and the
   join of K_2 with an extremal graph of girth >= 5 is extremal (section "Structure");
 - lower bounds from that construction: a(14) >= 43, a(15) >= 48, a(16) >= 52, a(17) >= 56,
-  a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17.
+  a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17;
+- these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
+  maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 13);
+- a second construction, K_2 joined with the incidence graph of a linear triple system, gives
+  a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157.
 
 ## Definition
 
@@ -131,6 +135,69 @@ this contradicts the hypothesis. If t <= 3, then |S| = 5, so U = K_5 and T spans
 - The equality cannot continue for large n: A006856(k) grows like k^(3/2), while
   a(n) <= n (log n)^O(1) by Chakraborti, Janzer, Methuku and Montgomery. Whether equality holds
   for n = 14, 15, 16 is not known. At n = 17 the construction is one short of the formula.
+
+**No 4-regular subgraph.** The proof of the Lemma uses only that U is 4-regular. So under the
+hypothesis of the Lemma, K_2 v H has no 4-regular subgraph at all. Write r(n) for the maximum number
+of edges of a graph on n vertices with no 4-regular subgraph. Then:
+- r(n) <= a(n) for every n, because the union of two edge-disjoint cycles on the same vertex set
+  is 4-regular;
+- every lower bound in this section is a lower bound for r(n);
+- r(n) = a(n) for n <= 13.
+
+`dort_duzenli.py` looks for a 4-regular subgraph by integer programming. It shares nothing with
+`e585.c`. Results (`out/dort_duzenli.log`):
+- none in the 45 extremal graphs for n <= 12 (so for n <= 12 the two problems have the same
+  extremal graphs);
+- none in the joins behind the bounds for n = 13..18;
+- one in the 57-edge join at n = 17 (all 17 vertices).
+
+**Proposition (triple systems).** Let H be a bipartite graph with parts A and B and no 4-cycle, in
+which every vertex of B has degree at most 3. The degrees in A are arbitrary. (H is the incidence
+graph of a linear hypergraph with edges of size at most 3: A is the set of points, B the set of
+edges.) Then K_2 v H has no 4-regular subgraph. In particular it is good.
+
+*Proof.* Let U be a 4-regular subgraph with vertex set S. Put T = S \ {u, v}, a = |T ∩ A|,
+b = |T ∩ B| and j = |S ∩ {u, v}|, and let m be the number of edges of U inside T. As in the Lemma,
+m >= 2(a + b) - 2j >= 2a + 2b - 4. Every edge of U inside T joins A to B.
+1. Every vertex of T ∩ A has degree 4 in U, so m <= 4a. Hence b <= a + 2.
+2. For x in T ∩ B let d(x) <= 3 be the number of its U-neighbours in A. Let p be the number of x
+   with d(x) = 3 and r the number of x with d(x) <= 1. Then m <= 3p + 2(b - p - r) + r, so
+   p >= 2a - 4 + r.
+3. m <= 3b gives b >= 2a - 4. With step 1, a <= 6.
+4. The p vertices with d(x) = 3 give p triples of points of T ∩ A, and two of them share at most
+   one point, because H has no 4-cycle. On a = 3, 4, 5, 6 points there are at most 1, 1, 2, 4 such
+   triples, fewer than 2a - 4 = 2, 4, 6, 8. So a <= 2 and p = 0.
+5. a = 2: by step 2, r = 0, so every x in T ∩ B is joined to both points of T ∩ A. There is at
+   most one such x, as H has no 4-cycle. So |S| <= 5, U = K_5, and the two points of T ∩ A would be
+   adjacent. a = 1: every x has d(x) <= 1, so b = r <= 2 by step 2; then |S| <= 5, U = K_5, and two
+   vertices of B would be adjacent. a = 0: m = 0, so b <= j <= 2 and |S| <= 4. Each case is
+   impossible. ∎
+
+**Consequences.**
+- If there is a linear triple system with a points and b triples, then for n = a + b + 2
+
+      a(n) >= r(n) >= 2a + 5b + 1.
+
+  The largest b is the packing number D(a) = 0, 0, 0, 1, 1, 2, 4, 7, 8, 12, 13, 17, 20, 26, ...
+  for a = 0, 1, 2, ... ([OEIS A001839](https://oeis.org/A001839)); for a Steiner triple system
+  b = a(a - 1)/6.
+- For every n, taking the least a with a + D(a) >= n - 2 gives a(n) >= 5n - 9 - 3a, which is
+  5n - O(sqrt(n)).
+- This is better than 4n - 12 for n = 34 and for every n >= 37 (equal for n = 30, 33, 36).
+  Examples: a(41) >= 157 from STS(13) and a(78) >= 324 from STS(19).
+- Checks: `e585` finds the joins good for the largest packings on 3..7 points (n <= 16) and for 75
+  random linear systems with edges of size 2 and 3; `dort_duzenli.py` finds no 4-regular subgraph
+  in the joins of the Fano plane, STS(9), STS(13) and STS(19) (`tanik/uclu_*.g6`).
+- Leaves of degree 4 do not work in general: for the projective plane of order 3 minus two lines,
+  the join has a 4-regular subgraph.
+
+**Best lower bounds from these constructions.**
+
+| n | 14 | 15 | 16 | 17 | 18 | 19 <= n <= 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a(n) >= | 43 | 48 | 52 | 56 | 61 | 4n - 12 | 125 | 128 | 132 | 137 | 142 | 147 | 152 | 157 |
+
+None of these is known to be the exact value.
 
 **Computer checks of the lemma (`birlesim.sh`, `out/birlesim.log`).**
 - k = 3..11: K_2 v H is good for every graph H of girth >= 5 (3, 6, 11, 23, 48, 114, 293, 869 and
@@ -303,6 +370,7 @@ nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertif
 ./yontem_d.sh /tmp/d13 /tmp/c12/L12.g6        # a(13) <= 39, about 20 min with 3 jobs
 python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n - 2)
 ./birlesim.sh /tmp/join                       # joins K_2 v H for k <= 14, about 2 min
+python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph=0 (needs scipy)
 ```
 
 ## Files
@@ -315,6 +383,7 @@ python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n
 - `yontem_d.sh`: method (d), a(13) <= 39.
 - `yapi.py`: join form of the extremal graphs; `--join` builds K_2 v H.
 - `birlesim.sh`: computer checks of the lemma.
+- `dort_duzenli.py`: looks for a 4-regular subgraph by integer programming (needs scipy).
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
 - `yontem_b.sh`: method (b).
@@ -324,5 +393,6 @@ python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n
   (and n = 18: the 3 joins with 61 edges).
 - `tanik/birlesim_n17_m56.g6`: K_2 v (H - e) for the extremal H on 15 vertices, one graph per edge orbit.
 - `tanik/birlesim_n17_m57_kotu.txt`: certificate that the 57-edge join at n = 17 is bad.
+- `tanik/uclu_*.g6`: K_2 v (incidence graph) for the Fano plane, STS(9), STS(13) and STS(19).
 - `out/`: logs.
 - `oeis_draft.txt`: OEIS draft.
