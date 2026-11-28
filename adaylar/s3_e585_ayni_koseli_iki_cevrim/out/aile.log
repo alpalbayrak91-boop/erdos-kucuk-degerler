@@ -1,0 +1,34 @@
+# aile.py 5 20 | grep -v '^#' | dort_duzenli.py  (four_regular_subgraph=1 means a 4-regular subgraph exists)
+# columns: aile.py header | dort_duzenli.py result | m - (4n-10) for F=C3, m - (4n-11) for F=C3-e
+b=5 F=C3 n=13 m=42 |E(F)|=5 n=13 m=42 four_regular_subgraph=1 S=0,1,3,6,7,9 excess=0
+b=5 F=C3-e n=12 m=37 |E(F)|=4 n=12 m=37 four_regular_subgraph=1 S=0,1,2,3,4,5,7,8,9,10,11 excess=0
+b=6 F=C3 n=12 m=35 |E(F)|=3 n=12 m=35 four_regular_subgraph=0 excess=-3
+b=6 F=C3-e n=11 m=30 |E(F)|=2 n=11 m=30 four_regular_subgraph=0 excess=-3
+b=7 F=C3 n=17 m=58 |E(F)|=7 n=17 m=58 four_regular_subgraph=0 excess=0
+b=7 F=C3-e n=16 m=53 |E(F)|=6 n=16 m=53 four_regular_subgraph=0 excess=0
+b=8 F=C3 n=19 m=66 |E(F)|=8 n=19 m=66 four_regular_subgraph=0 excess=0
+b=8 F=C3-e n=18 m=61 |E(F)|=7 n=18 m=61 four_regular_subgraph=0 excess=0
+b=9 F=C3 n=21 m=74 |E(F)|=9 n=21 m=74 four_regular_subgraph=0 excess=0
+b=9 F=C3-e n=20 m=69 |E(F)|=8 n=20 m=69 four_regular_subgraph=0 excess=0
+b=10 F=C3 n=23 m=82 |E(F)|=10 n=23 m=82 four_regular_subgraph=0 excess=0
+b=10 F=C3-e n=22 m=77 |E(F)|=9 n=22 m=77 four_regular_subgraph=0 excess=0
+b=11 F=C3 n=25 m=90 |E(F)|=11 n=25 m=90 four_regular_subgraph=0 excess=0
+b=11 F=C3-e n=24 m=85 |E(F)|=10 n=24 m=85 four_regular_subgraph=0 excess=0
+b=12 F=C3 n=27 m=98 |E(F)|=12 n=27 m=98 four_regular_subgraph=0 excess=0
+b=12 F=C3-e n=26 m=93 |E(F)|=11 n=26 m=93 four_regular_subgraph=0 excess=0
+b=13 F=C3 n=29 m=106 |E(F)|=13 n=29 m=106 four_regular_subgraph=0 excess=0
+b=13 F=C3-e n=28 m=101 |E(F)|=12 n=28 m=101 four_regular_subgraph=0 excess=0
+b=14 F=C3 n=31 m=114 |E(F)|=14 n=31 m=114 four_regular_subgraph=0 excess=0
+b=14 F=C3-e n=30 m=109 |E(F)|=13 n=30 m=109 four_regular_subgraph=0 excess=0
+b=15 F=C3 n=33 m=122 |E(F)|=15 n=33 m=122 four_regular_subgraph=0 excess=0
+b=15 F=C3-e n=32 m=117 |E(F)|=14 n=32 m=117 four_regular_subgraph=0 excess=0
+b=16 F=C3 n=35 m=130 |E(F)|=16 n=35 m=130 four_regular_subgraph=0 excess=0
+b=16 F=C3-e n=34 m=125 |E(F)|=15 n=34 m=125 four_regular_subgraph=0 excess=0
+b=17 F=C3 n=37 m=138 |E(F)|=17 n=37 m=138 four_regular_subgraph=0 excess=0
+b=17 F=C3-e n=36 m=133 |E(F)|=16 n=36 m=133 four_regular_subgraph=0 excess=0
+b=18 F=C3 n=39 m=146 |E(F)|=18 n=39 m=146 four_regular_subgraph=0 excess=0
+b=18 F=C3-e n=38 m=141 |E(F)|=17 n=38 m=141 four_regular_subgraph=0 excess=0
+b=19 F=C3 n=41 m=154 |E(F)|=19 n=41 m=154 four_regular_subgraph=0 excess=0
+b=19 F=C3-e n=40 m=149 |E(F)|=18 n=40 m=149 four_regular_subgraph=0 excess=0
+b=20 F=C3 n=43 m=162 |E(F)|=20 n=43 m=162 four_regular_subgraph=0 excess=0
+b=20 F=C3-e n=42 m=157 |E(F)|=19 n=42 m=157 four_regular_subgraph=0 excess=0

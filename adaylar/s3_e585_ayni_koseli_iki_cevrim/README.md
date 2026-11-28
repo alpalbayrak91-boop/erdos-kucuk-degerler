@@ -18,9 +18,11 @@ independent code. **New in this work:**
   a(18) >= 61, and a(n) >= 4n - 12 for every n >= 17;
 - these graphs have no 4-regular subgraph at all, so the same values and bounds hold for the
   maximum number of edges of a graph with no 4-regular subgraph (equal to a(n) for n <= 13);
-- **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, and
-  a(n) >= 66, 69, 74, 77, 82, 85 for n = 19..24. So the identity above fails at n = 14, and
-  a(14) is 44 or 45;**
+- **search results (28 Nov, section "Search"): a(14) >= 44, a(16) >= 53, a(17) >= 58, a(18) >= 62,
+  a(n) >= 66, 69, 74, 77, 82, 85 for n = 19..24, and a(n) >= 94, 98, 103, 107, 112, 116, 121, 125
+  for n = 25..32. So the identity above fails at n = 14, and a(14) is 44 or 45;**
+- **a third construction, the cycle family G(C_b, F) (section "Theorem (cycle family)"), with a
+  proof: a(n) >= 4n - 10 for odd n >= 17 and a(n) >= 4n - 11 for even n >= 16;**
 - a second construction, K_2 joined with the incidence graph of a linear triple system, gives
   a(n) >= 5n - O(sqrt(n)), for example a(41) >= 157 (useful for moderate n only: for large n the
   known bound c n log log n is larger).
@@ -107,6 +109,10 @@ set S, and let U be their union. U is 4-regular on S, so it has 2|S| edges and |
 T = S \ {u, v}, t = |T| and j = |S ∩ {u, v}|. At most 4j edges of U meet {u, v}. So at least
 2(t + j) - 4j = 2t - 2j >= 2t - 4 edges of U lie inside T, and these are edges of H. If t >= 4,
 this contradicts the hypothesis. If t <= 3, then |S| = 5, so U = K_5 and T spans a triangle of H. ∎
+
+The Lemma (in the form "K_2 v H has no 4-regular subgraph", see below) is also proved in Lean 4 with
+Mathlib: [`formal/e585_lemma.lean`](../../formal/e585_lemma.lean); `#print axioms` reports only
+`propext`, `Classical.choice` and `Quot.sound`.
 
 **Consequences.**
 - The case t = 4 of the hypothesis says that H has no 4-cycle. For 4 <= t <= 14 the values
@@ -202,14 +208,82 @@ m >= 2(a + b) - 2j >= 2a + 2b - 4. Every edge of U inside T joins A to B.
 - Leaves of degree 4 do not work in general: for the projective plane of order 3 minus two lines,
   the join has a 4-regular subgraph.
 
+## Theorem (cycle family)
+
+The family below and a proof sketch were found by an automated LLM agent search (Gemini). The proof
+was checked line by line by Claude, and the statement was confirmed for b = 7..20 by integer
+programming. The full proof is in [`aile_kaniti.md`](aile_kaniti.md).
+
+**Definition.** Let B = {b_0, ..., b_{b-1}} (indices mod b), let C_b be the cycle b_0 b_1 ... b_{b-1}
+and C_b(3) the graph of 3-step chords {b_i, b_{i+3}}. For a subgraph F of C_b(3), the graph
+G(C_b, F) has vertices u1, u2, w, the set B, and a set A with one vertex a_e for each edge e of F:
+- u1 is adjacent to every other vertex;
+- u2 is adjacent to every other vertex except w;
+- w is adjacent only to A and to u1;
+- B carries the cycle C_b;
+- A is independent, and a_e is adjacent to the two ends of e (and to w, u1, u2).
+
+It has n = |E(F)| + b + 3 vertices and 5|E(F)| + 3b + 2 edges.
+
+**Theorem.** If b >= 7 and F ⊆ C_b(3), then G(C_b, F) has no nonempty 4-regular subgraph. In
+particular it is good. With F = C_b(3) and with F = C_b(3) minus one edge,
+
+    a(2b + 3) >= 8b + 2   (4n - 10 for odd n >= 17),
+    a(2b + 2) >= 8b - 3   (4n - 11 for even n >= 16).
+
+The same bounds hold for r(n). They improve 4n - 12 by 2 (odd n) and 1 (even n).
+
+*Proof sketch.* Let H be 4-regular on a vertex set S, and put S_A = S ∩ A, S_B = S ∩ B. In
+R = G - {u1, u2} every vertex of A has degree 3, w is adjacent only to A, and B induces C_b.
+1. S ∩ {u1, u2} = ∅: the vertices of A have degree 3, then w and B lose all their neighbours.
+2. S ∩ {u1, u2} = {u}: S_A ≠ ∅, and each a ∈ S_A uses all four of its edges (u, w, two vertices of
+   B). Counting at w and at u gives |S_A| <= 4 and no H-edge from u to S_B. Counting at S_B gives
+   2|S_B| - e(S_B) = |S_A|. S_B = B would give b <= 4; otherwise H[S_B] is a forest of paths,
+   |S_B| <= 3, and the vertices of S_A are distinct edges of F inside S_B, too few.
+3. u1, u2 ∈ S: a handshake count on S \ {u1, u2} gives an exact identity (E0) between the number t_1
+   of vertices of S_A with one neighbour in {u1, u2}, the number t_2 with two, and e(S_B).
+   - w ∉ S: then 2|S_B| - e(S_B) = 4 - [u1 u2 ∈ H], which leaves three small configurations of S_B
+     (an edge, two non-adjacent vertices, three consecutive vertices of C_b). An edge or three
+     consecutive vertices span no 3-step chord, two vertices span at most one, and in each case
+     the 8 - 2 [u1 u2 ∈ H] edges to {u1, u2} cannot be placed.
+   - w ∈ S: identities (E1)–(E5) follow from counting at w and at {u1, u2}. S_B = B would give
+     b <= 6. Otherwise H[S_B] is a forest of paths with c components, and since F has maximum
+     degree 2, the vertices of S_B need at least 2c edges to {u1, u2} (E6); together with (E4)
+     this gives c <= 2 (E7). For c = 1, S_B is a run of at most 5 consecutive vertices, which spans
+     too few 3-step chords. For c = 2, all inequalities are tight and the vertices of S_A would form
+     a 3-cycle or a 4-cycle of C_b(3) on S_B; this needs b = 9 or b = 12, and then S_B is
+     independent in C_b, so c = 3 or 4.
+
+Notes on the hypotheses (details in `aile_kaniti.md`):
+- Cases 1 and 2 hold for every simple graph F on B and every b >= 5.
+- In Case 3 with w ∉ S, the configuration of three consecutive vertices needs 2 ≢ ±3 (mod b),
+  that is b ≠ 5.
+- The bound b >= 7 is used in Case 3 with w ∈ S and S_B = B (b <= 6 there).
+- The maximum degree 2 of F is used only in (E6).
+- In the subcase c = 2, b = 9 and b = 12 are treated separately: C_9(3) and C_12(3) have 3-cycles
+  and 4-cycles as components, but these are independent sets in C_b.
+
+**Checks (`aile.py`, `out/aile.log`).** `aile.py B_MIN B_MAX` prints, for each b, the graph6 of
+G(C_b, C_b(3)) and of G(C_b, C_b(3) minus the edge {b_0, b_3}).
+- b = 7..20: `dort_duzenli.py` finds no 4-regular subgraph in any of the 28 graphs (n = 16..43).
+  For n = 17, 19, 21, 23 the graphs have 58, 66, 74, 82 edges.
+- b = 5: both graphs have a 4-regular subgraph (n = 13 with 42 edges, n = 12 with 37 edges). So
+  the conclusion fails at b = 5.
+- b = 6: C_6(3) is a perfect matching (3 edges). Both graphs (n = 12 with 35 edges, n = 11 with 30
+  edges) have no 4-regular subgraph; they have 3 edges fewer than 4n - 10 and 4n - 11.
+- After canonical labelling, the search witnesses for n = 17 and n = 19..24 and one of the two for
+  n = 16 are members of this family.
+
 **Best lower bounds known here.**
 
-| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 <= n <= 33 | 34 | 37 | 41 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| a(n) >= | 44 | 48 | 53 | 58 | 61 | 66 | 69 | 74 | 77 | 82 | 85 | 4n - 12 | 125 | 137 | 157 |
+| n | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 41 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| a(n) >= | 44 | 48 | 53 | 58 | 62 | 66 | 69 | 74 | 77 | 82 | 85 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 | 122 | 125 | 130 | 133 | 138 | 157 |
 
-The values for n = 14, 16, 17 and 19..24 come from the search below; the others from the two
-constructions. None of these is known to be the exact value. a(14) <= 45 (below).
+The values for n = 14 and 16..32 come from the search below; n = 15 from the join construction;
+n = 33..37 from the cycle family (at n = 34 the triple systems give the same 125); n = 41 from
+STS(13). For other n >= 33 the bound is the larger of the cycle family (4n - 10 or 4n - 11) and the
+triple-system bound. None of these is known to be the exact value. a(14) <= 45 (below).
 
 ## Search (28 Nov 2026)
 
@@ -223,9 +297,20 @@ Every submitted graph was checked again here: 37 graphs were submitted, 36 are v
 
 | n | 14 | 16 | 17 | 19 | 20 | 21 | 22 | 23 | 24 |
 |---|---|---|---|---|---|---|---|---|---|
-| bound from the constructions | 43 | 52 | 56 | 64 | 68 | 72 | 76 | 80 | 84 |
+| bound from the join and triple-system constructions | 43 | 52 | 56 | 64 | 68 | 72 | 76 | 80 | 84 |
 | found by search | 44 | 53 | 58 | 66 | 69 | 74 | 77 | 82 | 85 |
 | classes submitted (after canonical labelling) | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+
+A later round of the same search submitted graphs for n = 18 and n = 25..32. All 20 were checked
+here by `dort_duzenli.py` (`out/dort_duzenli.log`); none has a 4-regular subgraph, and they are 20
+classes after canonical labelling.
+
+| n | 18 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 |
+|---|---|---|---|---|---|---|---|---|---|
+| bound from the join and triple-system constructions | 61 | 88 | 92 | 96 | 100 | 104 | 108 | 112 | 116 |
+| cycle family (Theorem) | 61 | 90 | 93 | 98 | 101 | 106 | 109 | 114 | 117 |
+| found by search | 62 | 94 | 98 | 103 | 107 | 112 | 116 | 121 | 125 |
+| classes submitted (after canonical labelling) | 5 | 1 | 1 | 1 | 1 | 2 | 3 | 3 | 3 |
 
 Witnesses: `tanik/arama_n<n>_m<m>.g6`.
 
@@ -239,8 +324,16 @@ Witnesses: `tanik/arama_n<n>_m<m>.g6`.
   edges than A006856 allows (20, 25, 28 edges on 12, 14, 15 vertices) and contains a few 4-cycles
   (4 to 7). So giving up the single edge u2 w buys two edges elsewhere.
 - For n = 17..24 the searchers reported a family with 4n - 10 edges for odd n and 4n - 11 for even
-  n. The witnesses above confirm these values for 17 <= n <= 24. There is no proof for general n.
-- No graph beating 48 at n = 15 or 61 at n = 18 was submitted.
+  n. This is the cycle family G(C_b, F); it is now proved for every b >= 7 (section "Theorem
+  (cycle family)").
+- No graph beating 48 at n = 15 was submitted. At n = 18 the later round gave 62, one more than the
+  joins and the cycle family.
+- **n = 25..32 (observation, not a proof).** In this range the witnesses have
+  4n - 8 + floor((n - 21)/2) edges, which is 4 to 8 more than the cycle family. They have the same
+  skeleton as the graphs above: u1 universal, u2 adjacent to everything except one vertex, and
+  R = G - {u1, u2} triangle-free with e(R) = 2|R| + 2, ..., 2|R| + 5 (it contains 11 to 15
+  4-cycles). The n = 18 witnesses have the same skeleton with e(R) = 2|R| - 2. No general
+  construction behind these values is known.
 
 **Computer checks of the lemma (`birlesim.sh`, `out/birlesim.log`).**
 - k = 3..11: K_2 v H is good for every graph H of girth >= 5 (3, 6, 11, 23, 48, 114, 293, 869 and
@@ -414,6 +507,7 @@ nauty-geng -q -d5 11 32:32 > m32.g6 && ./e585 check -c < m32.g6 | python3 sertif
 python3 yapi.py tanik/uc_n*_m*.g6             # join form and 2n - 3 + A006856(n - 2)
 ./birlesim.sh /tmp/join                       # joins K_2 v H for k <= 14, about 2 min
 python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph=0 (needs scipy)
+python3 aile.py 5 20 | grep -v '^#' | python3 dort_duzenli.py   # cycle family: 1 for b = 5, 0 for b = 6..20
 ```
 
 ## Files
@@ -427,6 +521,8 @@ python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph
 - `yapi.py`: join form of the extremal graphs; `--join` builds K_2 v H.
 - `birlesim.sh`: computer checks of the lemma.
 - `dort_duzenli.py`: looks for a 4-regular subgraph by integer programming (needs scipy).
+- `aile.py`: the cycle family G(C_b, F) (graph6).
+- `aile_kaniti.md`: full proof of the Theorem (cycle family).
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
 - `yontem_b.sh`: method (b).
@@ -438,5 +534,5 @@ python3 dort_duzenli.py < tanik/uclu_sts13_n41_m157.g6   # four_regular_subgraph
 - `tanik/birlesim_n17_m57_kotu.txt`: certificate that the 57-edge join at n = 17 is bad.
 - `tanik/arama_n<n>_m<m>.g6`: graphs found by search on 28 Nov (canonical graph6).
 - `tanik/uclu_*.g6`: K_2 v (incidence graph) for the Fano plane, STS(9), STS(13) and STS(19).
-- `out/`: logs.
+- `out/`: logs (`out/aile.log`: the cycle family; `out/dort_duzenli.log`: integer-programming checks).
 - `oeis_draft.txt`: OEIS draft.
