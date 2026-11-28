@@ -292,6 +292,9 @@ except w. It has n = 4m + 3 vertices and 17m + 2 edges, that is 4.25 n - 10.75.
 
 **Computation (`kubik_aile.py`, `out/kubik_aile.log`).**
 - k = 3: no 4-regular subgraph for m = 7 and for every m with 9 <= m <= 18 (n = 31, 39, 43, ..., 75).
+  Cross-check with two other solvers (`capraz_denetim.py`, `out/capraz_kubik.log`): CP-SAT agrees for
+  all of these m; CBC agrees for m = 7, 9, 10, 11, 12, 14, 15 and reaches its 150 s limit without an
+  answer for m = 13, 16, 17, 18. All three solvers find the 4-regular subgraphs for m = 6 and m = 8.
 - k = 4: no 4-regular subgraph for 9 <= m <= 14.
 - k = 2: a 4-regular subgraph exists for m = 9, 10, 11, 12.
 - m = 6 and m = 8 fail for k = 3: GP(6, 2) has triangles and GP(8, 2) has 4-cycles on the inner
@@ -564,6 +567,7 @@ python3 kubik_aile.py 6 18 | grep -v '^#' | python3 dort_duzenli.py   # cubic fa
 - `dort_duzenli.py`: looks for a 4-regular subgraph by integer programming (needs scipy).
 - `aile.py`: the cycle family G(C_b, F) (graph6).
 - `kubik_aile.py`: the cubic family G(GP(m,2), F_k) (graph6); log in `out/kubik_aile.log`.
+- `capraz_denetim.py`: the same test with CP-SAT and CBC (independent of scipy/HiGHS).
 - `aile_kaniti.md`: full proof of the Theorem (cycle family).
 - `yontem_a.sh`: method (a) for n <= 10.
 - `f11_tarama.sh`: method (a) for n = 11.
